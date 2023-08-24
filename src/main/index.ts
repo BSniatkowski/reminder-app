@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow } from './createWindow/createWindow'
 
@@ -17,7 +17,14 @@ app.whenReady().then(() => {
   })
 
   createWindow()
-  createWindow(true, '123')
+
+  ipcMain.on('create-popup', () => {
+    createWindow(true, `${Math.floor(Math.random() * 100)}`)
+  })
+
+  ipcMain.on('close-window', (event) => {
+    event.sender.close()
+  })
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

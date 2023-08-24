@@ -1,8 +1,16 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer, webFrame } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  createPopup: () => {
+    ipcRenderer.send('create-popup')
+  },
+  closeWindow: () => {
+    console.log(webFrame.routingId)
+    ipcRenderer.send('close-window')
+  }
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

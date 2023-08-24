@@ -15,7 +15,7 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
   }
 
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  const window = new BrowserWindow({
     ...(isPopup
       ? {
           ...popupPosition,
@@ -35,12 +35,12 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
     }
   })
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
-    mainWindow.webContents.openDevTools({ mode: isPopup ? 'detach' : 'right' })
+  window.on('ready-to-show', () => {
+    window.show()
+    window.webContents.openDevTools({ mode: isPopup ? 'detach' : 'right' })
   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  window.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
@@ -48,9 +48,9 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${isPopup ? `/popup/${id}` : ''}`)
+    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${isPopup ? `/popup/${id}` : ''}`)
   } else {
-    mainWindow.loadFile(
+    window.loadFile(
       join(__dirname, '../renderer/index.html'),
       isPopup
         ? {

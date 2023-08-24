@@ -14,6 +14,7 @@ module.exports = {
       }
     ],
     'react/prop-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'no-trailing-spaces': 'error',
     'no-multi-spaces': 'error'
   }

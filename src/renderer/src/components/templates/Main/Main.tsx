@@ -8,6 +8,13 @@ export const Main: React.FC = () => {
       <h5>Main</h5>
       <span>Main</span>
       <p>Main</p>
+      <span
+        onClick={() => {
+          window.api.createPopup()
+        }}
+      >
+        Click here to open new popup!
+      </span>
     </>
   )
 }
