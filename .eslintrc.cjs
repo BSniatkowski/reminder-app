@@ -5,5 +5,16 @@ module.exports = {
     'plugin:react/jsx-runtime',
     '@electron-toolkit/eslint-config-ts/recommended',
     '@electron-toolkit/eslint-config-prettier'
-  ]
+  ],
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto'
+      }
+    ],
+    'react/prop-types': 'off',
+    'no-trailing-spaces': 'error',
+    'no-multi-spaces': 'error'
+  }
 }
