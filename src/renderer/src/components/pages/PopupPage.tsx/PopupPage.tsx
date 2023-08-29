@@ -1,10 +1,36 @@
 import { Popup } from '@renderer/components/templates/Popup/Popup'
+import { removeReminder } from '@renderer/store/storeSlices/remindersSlice'
+import { selectReminderById } from '@renderer/store/storeSlices/remindersSlice.selectors'
+import { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 export const PopupPage: React.FC = () => {
   const { id } = useParams()
 
-  const title = `Reminder ${id}`
+  const dispatch = useDispatch()
 
-  return <Popup title={title} />
+  const onClose = useCallback(() => {
+    if (id) dispatch(removeReminder(id))
+    window.api.closeWindow()
+  }, [])
+
+  const popupData = useSelector(selectReminderById(id))
+
+  if (!popupData)
+    return (
+      <div onClick={onClose}>
+        <Popup />
+      </div>
+    )
+
+  const { title, description, date } = popupData
+
+  console.log(title, description, date)
+
+  return (
+    <div onClick={onClose}>
+      <Popup />
+    </div>
+  )
 }

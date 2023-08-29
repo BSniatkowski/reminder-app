@@ -4,7 +4,7 @@ declare global {
   interface Window {
     electron: ElectronAPI
     api: {
-      createPopup: () => void
+      createPopup: (id: string) => void
       closeWindow: () => void
     }
   }

@@ -10,7 +10,7 @@ export const Main: React.FC = () => {
       <p>Main</p>
       <span
         onClick={() => {
-          window.api.createPopup()
+          window.api.createPopup('0')
         }}
       >
         Click here to open new popup!

@@ -54,7 +54,7 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
       join(__dirname, '../renderer/index.html'),
       isPopup
         ? {
-            query: { isPopup: JSON.stringify(isPopup), id: JSON.stringify(id) }
+            query: { id: JSON.stringify(id) }
           }
         : {}
     )
