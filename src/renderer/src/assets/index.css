@@ -150,6 +150,7 @@ table {
 *, body, html {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
+    box-sizing: border-box;
 }
 
 
