@@ -18,8 +18,8 @@ app.whenReady().then(() => {
 
   createWindow()
 
-  ipcMain.on('create-popup', () => {
-    createWindow(true, `${Math.floor(Math.random() * 100)}`)
+  ipcMain.on('create-popup', (_, id) => {
+    createWindow(true, id)
   })
 
   ipcMain.on('close-window', (event) => {
