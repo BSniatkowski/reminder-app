@@ -1,7 +1,11 @@
 import { RemindersList } from '@renderer/components/organisms/RemindersList/RemindersList'
-import { IMain } from './Main.type'
+import { IMainProps } from './Main.type'
 
-export const Main: React.FC<IMain> = ({ reminders, onAddReminderClick, onEditReminderClick }) => {
+export const Main: React.FC<IMainProps> = ({
+  reminders,
+  onAddReminderClick,
+  onEditReminderClick
+}) => {
   return (
     <div
       style={{

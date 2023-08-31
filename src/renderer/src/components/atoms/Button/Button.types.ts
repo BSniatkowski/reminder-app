@@ -9,7 +9,7 @@ export enum EButtonSizes {
   full
 }
 
-export interface IButton {
+export interface IButtonProps {
   variant?: EButtonVariants
   size?: EButtonSizes
   disabled?: boolean
@@ -17,7 +17,7 @@ export interface IButton {
   onClick: () => void
 }
 
-export interface IButtonWrapper {
+export interface IButtonWrapperProps {
   $variant?: EButtonVariants
   $size?: EButtonSizes
   $disabled?: boolean

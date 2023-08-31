@@ -1,7 +1,7 @@
 import { css, styled } from 'styled-components'
-import { ETileContentDirections, ETileSizes, IITileWrapper } from './Tile.types'
+import { ETileContentDirections, ETileSizes, IITileWrapperProps } from './Tile.types'
 
-export const TileWrapper = styled.div<IITileWrapper>`
+export const TileWrapper = styled.div<IITileWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;

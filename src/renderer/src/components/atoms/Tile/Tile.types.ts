@@ -8,13 +8,13 @@ export enum ETileContentDirections {
   column
 }
 
-export interface ITile {
+export interface ITileProps {
   size?: ETileSizes
   contentDirection?: ETileContentDirections
   children: React.ReactNode
 }
 
-export interface IITileWrapper {
+export interface IITileWrapperProps {
   $size?: ETileSizes
   $contentDirection?: ETileContentDirections
 }

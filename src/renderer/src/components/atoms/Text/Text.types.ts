@@ -7,7 +7,7 @@ export enum ETextTags {
   h4 = 'h4'
 }
 
-export interface IText {
+export interface ITextProps {
   as?: ETextTags
   children: React.ReactNode
 }

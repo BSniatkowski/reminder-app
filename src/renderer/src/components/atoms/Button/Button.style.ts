@@ -1,7 +1,7 @@
 import { css, styled } from 'styled-components'
-import { EButtonSizes, EButtonVariants, IButtonWrapper } from './Button.types'
+import { EButtonSizes, EButtonVariants, IButtonWrapperProps } from './Button.types'
 
-export const ButtonWrapper = styled.div<IButtonWrapper>`
+export const ButtonWrapper = styled.div<IButtonWrapperProps>`
   cursor: pointer;
   display: flex;
   align-items: center;

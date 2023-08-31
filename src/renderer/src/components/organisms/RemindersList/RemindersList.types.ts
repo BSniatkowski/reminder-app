@@ -1,4 +1,4 @@
-export interface IRemindersList {
+export interface IRemindersListProps {
   reminders: Array<{
     id: string
     title: string

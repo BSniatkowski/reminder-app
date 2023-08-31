@@ -1,6 +1,6 @@
-import { ETextTags, IText } from './Text.types'
+import { ETextTags, ITextProps } from './Text.types'
 
-export const Text: React.FC<IText> = ({ as = ETextTags.span, children }) => {
+export const Text: React.FC<ITextProps> = ({ as = ETextTags.span, children }) => {
   const Component = as || ETextTags.span
 
   return <Component>{children}</Component>
