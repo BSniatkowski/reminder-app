@@ -14,7 +14,22 @@
     "paths": {
       "@renderer/*": [
         "src/renderer/src/*"
-      ]
+      ],
+      "@atoms/*": [
+        "src/renderer/src/components/atoms/*"
+      ],
+      "@molecules/*": [
+        "src/renderer/src/components/molecules/*"
+      ],
+      "@organisms/*": [
+        "src/renderer/src/components/organisms/*"
+      ],
+      "@templates/*": [
+        "src/renderer/src/components/templates/*"
+      ],
+      "@pages/*": [
+        "src/renderer/src/components/pages/*"
+      ],
     }
   }
 }

@@ -14,7 +14,12 @@ export const Main: React.FC = () => {
       }}
     >
       <RemindersList
-        reminders={[{ id: '0', title: 'Example 1' }]}
+        reminders={[
+          { id: '0', title: 'Example 1' },
+          { id: '1', title: 'Example 1' },
+          { id: '2', title: 'Example 1' },
+          { id: '3', title: 'Example 1' }
+        ]}
         onAddNewReminderClick={() => {
           console.log('add')
         }}

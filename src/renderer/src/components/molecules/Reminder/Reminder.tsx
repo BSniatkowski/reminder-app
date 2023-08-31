@@ -1,13 +1,14 @@
-import { Tile } from '@renderer/components/atoms/Tile/Tile'
+import { Tile } from '@atoms/Tile/Tile'
 import { IReminder } from './Reminder.types'
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { ETileContentDirections } from '@renderer/components/atoms/Tile/Tile.types'
+import { Text } from '@renderer/components/atoms/Text/Text'
 
 export const Reminder: React.FC<IReminder> = ({ id, title, onReminderEditClick }) => {
   return (
     <Tile contentDirection={ETileContentDirections.column}>
-      <span>{title}</span>
+      <Text>{title}</Text>
       <Button
         variant={EButtonVariants.light}
         size={EButtonSizes.small}
