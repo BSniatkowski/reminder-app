@@ -1,7 +1,11 @@
+import {
+  TOnAddReminderClick,
+  TOnEditReminderClick
+} from '@renderer/components/pages/MainPage.tsx/MainPage.types'
 import { IReminderItem } from '@renderer/store/storeSlices/remindersSlice'
 
 export interface IMainProps {
   reminders: Array<IReminderItem>
-  onAddReminderClick: () => void
-  onEditReminderClick: (id: string) => void
+  onAddReminderClick: TOnAddReminderClick
+  onEditReminderClick: TOnEditReminderClick
 }
