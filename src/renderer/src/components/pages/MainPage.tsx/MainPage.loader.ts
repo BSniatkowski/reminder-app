@@ -3,13 +3,9 @@ import { redirect } from 'react-router-dom'
 export const loader: () => Response | null = () => {
   const searchParams = new URLSearchParams(location.search)
 
-  const isPopup = searchParams.get('isPopup') === 'true'
+  const popupId = searchParams.get('id')
 
-  if (isPopup) {
-    const id = searchParams.get('id')
-
-    return redirect(`/popup/:${id}`)
-  }
+  if (popupId) return redirect(`/popup/:${popupId}`)
 
   return null
 }

@@ -1,16 +1,9 @@
 import * as S from './Popup.styles'
 
-export const Popup: React.FC<{ title?: string }> = ({ title }) => {
+export const Popup: React.FC = () => {
   return (
     <S.PopupWrapper>
-      Popup content {title}
-      <span
-        onClick={() => {
-          window.api.closeWindow()
-        }}
-      >
-        Click here to close window!
-      </span>
+      <h1>content</h1>
     </S.PopupWrapper>
   )
 }

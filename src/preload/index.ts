@@ -3,8 +3,8 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  createPopup: () => {
-    ipcRenderer.send('create-popup')
+  createPopup: (id) => {
+    ipcRenderer.send('create-popup', id)
   },
   closeWindow: () => {
     console.log(webFrame.routingId)
