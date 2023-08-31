@@ -6,8 +6,8 @@ import { EListDirections } from '@renderer/components/molecules/List/List.types'
 
 export const RemindersList: React.FC<IRemindersList> = ({
   reminders,
-  onReminderEditClick,
-  onAddNewReminderClick
+  onAddReminderClick,
+  onReminderEditClick
 }) => {
   return (
     <List direction={EListDirections.column}>
@@ -15,7 +15,7 @@ export const RemindersList: React.FC<IRemindersList> = ({
         reminders.map(({ id, title }) => (
           <Reminder key={id} id={id} title={title} onReminderEditClick={onReminderEditClick} />
         ))}
-      <Button text="Add new reminder" onClick={onAddNewReminderClick} />
+      <Button text="Add new reminder" onClick={onAddReminderClick} />
     </List>
   )
 }

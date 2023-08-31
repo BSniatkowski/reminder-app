@@ -3,6 +3,6 @@ export interface IRemindersList {
     id: string
     title: string
   }>
+  onAddReminderClick: () => void
   onReminderEditClick: (id: string) => void
-  onAddNewReminderClick: () => void
 }

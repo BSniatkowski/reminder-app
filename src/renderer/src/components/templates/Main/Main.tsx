@@ -1,6 +1,7 @@
 import { RemindersList } from '@renderer/components/organisms/RemindersList/RemindersList'
+import { IMain } from './Main.type'
 
-export const Main: React.FC = () => {
+export const Main: React.FC<IMain> = ({ reminders, onAddReminderClick, onEditReminderClick }) => {
   return (
     <div
       style={{
@@ -14,18 +15,9 @@ export const Main: React.FC = () => {
       }}
     >
       <RemindersList
-        reminders={[
-          { id: '0', title: 'Example 1' },
-          { id: '1', title: 'Example 1' },
-          { id: '2', title: 'Example 1' },
-          { id: '3', title: 'Example 1' }
-        ]}
-        onAddNewReminderClick={() => {
-          console.log('add')
-        }}
-        onReminderEditClick={(id) => {
-          console.log('edit', id)
-        }}
+        reminders={reminders}
+        onAddReminderClick={onAddReminderClick}
+        onReminderEditClick={onEditReminderClick}
       />
     </div>
   )
