@@ -1,29 +1,36 @@
 import { Main } from '@renderer/components/templates/Main/Main'
-import { addReminder } from '@renderer/store/storeSlices/remindersSlice'
-import { selectAllReminders } from '@renderer/store/storeSlices/remindersSlice.selectors'
-import { useCallback } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
+import { useCallback, useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import { TOnAddReminderClick, TOnEditReminderClick } from './MainPage.types'
+import { textPreview } from '@renderer/utils/textPreview'
 
 export const MainPage: React.FC = () => {
   const reminders = useSelector(selectAllReminders)
 
-  const dispatch = useDispatch()
+  const formattedReminders = useMemo(() => {
+    return reminders.map(({ title, description, ...props }) => {
+      return {
+        title: textPreview({ text: title, maxLength: 25 }),
+        description: textPreview({ text: description, maxLength: 200 }),
+        ...props
+      }
+    })
+  }, [reminders])
 
-  const onAddReminderClick = useCallback(
-    () => dispatch(addReminder({ title: 'Example reminder', date: new Date().toString() })),
-    []
-  )
+  const onAddReminderClick: TOnAddReminderClick = useCallback(() => {
+    console.log('Show reminder add page')
+  }, [])
+
+  const onEditReminderClick: TOnEditReminderClick = useCallback(() => {
+    console.log('Show reminder edit page')
+  }, [])
 
   return (
-    <div onClick={onAddReminderClick}>
-      <Main />
-      <button
-        onClick={() => {
-          console.log(reminders)
-        }}
-      >
-        Refresh state
-      </button>
-    </div>
+    <Main
+      reminders={formattedReminders}
+      onAddReminderClick={onAddReminderClick}
+      onEditReminderClick={onEditReminderClick}
+    />
   )
 }

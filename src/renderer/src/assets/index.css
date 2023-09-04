@@ -149,20 +149,21 @@ table {
   
 *, body, html {
     font-family: 'Roboto', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 
 h1 {
-    font-size: 6.2rem;
+    font-size: 3.2rem;
 }
 
 h2 {
-    font-size: 4.8rem;
+    font-size: 2.8rem;
 }
 
 h3 {
-    font-size: 3.4rem;
+    font-size: 2.4rem;
 }
 
 h4 {
@@ -171,4 +172,8 @@ h4 {
 
 h5 {
     font-size: 1.6rem;
+}
+
+h6 {
+    font-size: 1.2rem;
 }
