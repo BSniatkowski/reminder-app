@@ -1,14 +1,24 @@
 import { css, styled } from 'styled-components'
-import { ETileContentDirections, ETileSizes, IITileWrapperProps } from './Tile.types'
+import { ETileContentDirections, ETileSizes, ITileWrapperProps } from './Tile.types'
 
-export const TileWrapper = styled.div<IITileWrapperProps>`
+export const TileWrapper = styled.div<ITileWrapperProps>`
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: ${({ $alignItems = 'center' }) => $alignItems};
+  justify-content: ${({ $justifyContent = 'center' }) => $justifyContent};
   flex-wrap: wrap;
   color: ${({ theme }) => theme.palette.font.primary};
-  background-color: ${({ theme }) => theme.palette.background.third};
-  box-shadow: ${({ theme }) => theme.boxShadow.heavy};
+  ${({ $transparent, theme }) =>
+    !$transparent &&
+    css`
+      background-color: ${theme.palette.white};
+    `};
+  ${({ $transparent, theme }) =>
+    !$transparent &&
+    css`
+      border: ${theme.border.primary};
+      box-shadow: ${theme.boxShadow.heavy};
+    `};
 
   flex-direction: ${({ $contentDirection }) =>
     $contentDirection === ETileContentDirections.column ? 'column' : 'row'};
@@ -23,6 +33,12 @@ export const TileWrapper = styled.div<IITileWrapperProps>`
       `,
       [ETileSizes.normal]: css`
         width: fit-content;
+        padding: ${theme.spacing.normal}rem;
+        gap: ${theme.spacing.normal}rem;
+        border-radius: ${theme.borderRadius.primary}rem;
+      `,
+      [ETileSizes.full]: css`
+        width: 100%;
         padding: ${theme.spacing.normal}rem;
         gap: ${theme.spacing.normal}rem;
         border-radius: ${theme.borderRadius.primary}rem;

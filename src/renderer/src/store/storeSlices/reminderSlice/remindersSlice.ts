@@ -17,7 +17,20 @@ export interface IRemindersState {
 }
 
 const initialState: IRemindersState = {
-  remindersList: []
+  remindersList: [
+    {
+      id: '0',
+      title: 'Example title 0',
+      description: 'Example description 0',
+      date: new Date().toString()
+    },
+    {
+      id: '1',
+      title: 'Example title 1',
+      description: 'Example description 1',
+      date: new Date().toString()
+    }
+  ]
 }
 
 export const remindersSlice = createSlice({

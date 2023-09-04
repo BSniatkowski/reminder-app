@@ -3,14 +3,13 @@ import { ThemeProvider as StyledThemeProvider, DefaultTheme } from 'styled-compo
 const theme: DefaultTheme = {
   palette: {
     background: {
-      primary: '#437F97',
-      secondary: '#01295F',
-      third: '#E2EFF3'
+      primary: '#14213d',
+      secondary: '#e5e5e5'
     },
     font: {
-      primary: '#01295F',
-      secondary: '#437F97',
-      link: '#28A470'
+      primary: '#14213d',
+      secondary: '#e5e5e5',
+      link: '#fca311'
     },
     white: '#fff',
     black: '#000',
@@ -22,9 +21,13 @@ const theme: DefaultTheme = {
     normal: 1,
     big: 1.25
   },
+  border: {
+    primary: '0.1rem solid #000',
+    secondary: '0.2rem solid #000'
+  },
   borderRadius: {
-    primary: 0.4,
-    secondary: 0.2
+    primary: 0.25,
+    secondary: 0.15
   },
   boxShadow: {
     light: '0.2rem 0.2rem 0.5rem lightgray',

@@ -30,6 +30,9 @@
       "@pages/*": [
         "src/renderer/src/components/pages/*"
       ],
+      "@icons/*": [
+        "src/renderer/src/assets/icons/*"
+      ],
     }
   }
 }

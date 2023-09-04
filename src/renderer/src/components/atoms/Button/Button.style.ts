@@ -2,11 +2,12 @@ import { css, styled } from 'styled-components'
 import { EButtonSizes, EButtonVariants, IButtonWrapperProps } from './Button.types'
 
 export const ButtonWrapper = styled.div<IButtonWrapperProps>`
+  position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.2rem solid ${({ theme }) => theme.palette.background.primary};
+  border: ${({ theme }) => theme.border.primary};
   user-select: none;
   transition-property: box-shadow, background-color, border-color, filter;
   transition-duration: 100ms;

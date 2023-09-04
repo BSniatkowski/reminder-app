@@ -1,5 +1,5 @@
 import { Main } from '@renderer/components/templates/Main/Main'
-import { selectAllReminders } from '@renderer/store/storeSlices/remindersSlice.selectors'
+import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { TOnAddReminderClick, TOnEditReminderClick } from './MainPage.types'

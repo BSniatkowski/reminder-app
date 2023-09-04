@@ -6,7 +6,6 @@ declare module 'styled-components' {
       background: {
         primary: string
         secondary: string
-        third: string
       }
       font: {
         primary: string
@@ -22,6 +21,10 @@ declare module 'styled-components' {
       small: number
       normal: number
       big: number
+    }
+    border: {
+      primary: string
+      secondary: string
     }
     borderRadius: {
       primary: number

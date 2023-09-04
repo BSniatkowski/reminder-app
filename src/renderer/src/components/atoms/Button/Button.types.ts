@@ -1,3 +1,5 @@
+import { EIconVariants } from '../Icon/Icon.types'
+
 export enum EButtonVariants {
   light,
   normal
@@ -13,7 +15,10 @@ export interface IButtonProps {
   variant?: EButtonVariants
   size?: EButtonSizes
   disabled?: boolean
-  text: string
+  text?: string
+  iconVariant?: EIconVariants
+  iconColor?: string
+  iconActiveColor?: string
   onClick: () => void
 }
 

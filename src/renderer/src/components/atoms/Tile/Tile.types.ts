@@ -1,6 +1,7 @@
 export enum ETileSizes {
   small,
-  normal
+  normal,
+  full
 }
 
 export enum ETileContentDirections {
@@ -9,12 +10,18 @@ export enum ETileContentDirections {
 }
 
 export interface ITileProps {
+  transparent?: boolean
   size?: ETileSizes
   contentDirection?: ETileContentDirections
+  justifyContent?: string
+  alignItems?: string
   children: React.ReactNode
 }
 
-export interface IITileWrapperProps {
+export interface ITileWrapperProps {
+  $transparent?: boolean
   $size?: ETileSizes
   $contentDirection?: ETileContentDirections
+  $justifyContent?: string
+  $alignItems?: string
 }

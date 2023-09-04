@@ -1,6 +1,6 @@
 import { Popup } from '@renderer/components/templates/Popup/Popup'
-import { removeReminder } from '@renderer/store/storeSlices/remindersSlice'
-import { selectReminderById } from '@renderer/store/storeSlices/remindersSlice.selectors'
+import { removeReminder } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
+import { selectReminderById } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
