@@ -8,6 +8,7 @@ export const Tile: React.FC<ITileProps> = ({
   contentDirection,
   justifyContent,
   alignItems,
+  nowrap,
   children
 }) => {
   return (
@@ -17,6 +18,7 @@ export const Tile: React.FC<ITileProps> = ({
       $contentDirection={contentDirection}
       $justifyContent={justifyContent}
       $alignItems={alignItems}
+      $nowrap={nowrap}
     >
       {!transparent && <Decoration />}
       {children}

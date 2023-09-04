@@ -15,6 +15,7 @@ export interface ITileProps {
   contentDirection?: ETileContentDirections
   justifyContent?: string
   alignItems?: string
+  nowrap?: boolean
   children: React.ReactNode
 }
 
@@ -24,4 +25,5 @@ export interface ITileWrapperProps {
   $contentDirection?: ETileContentDirections
   $justifyContent?: string
   $alignItems?: string
+  $nowrap?: boolean
 }

@@ -7,6 +7,8 @@ import { Text } from '@renderer/components/atoms/Text/Text'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
+import { BackgroundWrapper } from './Reminder.style'
+import { Icon } from '@renderer/components/atoms/Icon/Icon'
 
 export const Reminder: React.FC<IReminderProps> = ({
   id,
@@ -21,8 +23,18 @@ export const Reminder: React.FC<IReminderProps> = ({
   } = useTheme()
 
   return (
-    <Tile size={ETileSizes.full} contentDirection={ETileContentDirections.column}>
-      <Tile transparent size={ETileSizes.full} justifyContent="space-between">
+    <Tile
+      size={ETileSizes.full}
+      contentDirection={ETileContentDirections.column}
+      alignItems="flex-start"
+    >
+      <Tile
+        transparent
+        size={ETileSizes.full}
+        justifyContent="space-between"
+        alignItems="flex-start"
+        nowrap
+      >
         <Text as={ETextTags.h2}>{title}</Text>
         <Button
           variant={EButtonVariants.light}
@@ -33,7 +45,12 @@ export const Reminder: React.FC<IReminderProps> = ({
           onClick={() => onReminderEditClick(id)}
         />
       </Tile>
-      <Text as={ETextTags.p}>{description}</Text>
+      <Tile transparent size={ETileSizes.small}>
+        <Text as={ETextTags.p}>{description}</Text>
+      </Tile>
+      <BackgroundWrapper>
+        <Icon variant={EIconVariants.NOTIFICATION} color={primary} />
+      </BackgroundWrapper>
     </Tile>
   )
 }

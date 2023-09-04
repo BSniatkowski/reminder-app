@@ -34,6 +34,8 @@ const pulseBottomLeft = (theme: DefaultTheme) => keyframes`
 
 export const DecorationDiv = styled.div<IDecorationDivProps>`
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;

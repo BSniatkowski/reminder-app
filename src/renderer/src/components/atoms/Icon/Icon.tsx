@@ -11,12 +11,12 @@ const iconsMap = {
   [EIconVariants.NOTIFICATION]: NotificationIcon
 }
 
-export const Icon: React.FC<IIconProps> = ({ variant, height, isActive, color, activeColor }) => {
+export const Icon: React.FC<IIconProps> = ({ variant, size, isActive, color, activeColor }) => {
   const IconComponent = iconsMap[variant] || AddIcon
 
   return (
     <S.IconOverrideWrapper
-      $height={height}
+      $size={size}
       $isActive={isActive}
       $color={color}
       $activeColor={activeColor}

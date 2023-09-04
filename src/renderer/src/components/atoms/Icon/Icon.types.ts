@@ -6,14 +6,14 @@ export enum EIconVariants {
 
 export interface IIconProps {
   variant: EIconVariants
-  height?: string
+  size?: string
   isActive?: boolean
   color?: string
   activeColor?: string
 }
 
 export interface IconOverrideWrapperProps {
-  $height?: string
+  $size?: string
   $isActive?: boolean
   $color?: string
   $activeColor?: string
