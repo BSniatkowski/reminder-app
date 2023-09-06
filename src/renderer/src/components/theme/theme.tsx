@@ -1,4 +1,5 @@
 import { ThemeProvider as StyledThemeProvider, DefaultTheme } from 'styled-components'
+import { GlobalStyle } from './GlobalStyle/GlobalStyle'
 
 const theme: DefaultTheme = {
   palette: {
@@ -36,7 +37,10 @@ const theme: DefaultTheme = {
 }
 
 const ThemeProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+  <StyledThemeProvider theme={theme}>
+    <GlobalStyle />
+    {children}
+  </StyledThemeProvider>
 )
 
 export default ThemeProvider

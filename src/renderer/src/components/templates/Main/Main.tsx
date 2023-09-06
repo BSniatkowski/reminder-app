@@ -4,25 +4,17 @@ import { IMainProps } from './Main.type'
 export const Main: React.FC<IMainProps> = ({
   reminders,
   onAddReminderClick,
+  onPreviewReminderClick,
   onEditReminderClick
 }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        rowGap: '1rem',
-        minWidth: '300px',
-        padding: '6rem',
-        overflowX: 'hidden',
-        overflowY: 'auto'
-      }}
-    >
+    <>
       <RemindersList
         reminders={reminders}
         onAddReminderClick={onAddReminderClick}
+        onPreviewReminderClick={onPreviewReminderClick}
         onReminderEditClick={onEditReminderClick}
       />
-    </div>
+    </>
   )
 }

@@ -11,6 +11,7 @@ import { useTheme } from 'styled-components'
 export const RemindersList: React.FC<IRemindersListProps> = ({
   reminders,
   onAddReminderClick,
+  onPreviewReminderClick,
   onReminderEditClick
 }) => {
   const {
@@ -30,6 +31,7 @@ export const RemindersList: React.FC<IRemindersListProps> = ({
             title={title}
             description={description}
             date={date}
+            onPreviewReminderClick={onPreviewReminderClick}
             onReminderEditClick={onReminderEditClick}
           />
         ))}

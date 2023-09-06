@@ -4,31 +4,31 @@ import { DefaultTheme } from 'styled-components/dist/types'
 
 const pulseTopRight = (theme: DefaultTheme) => keyframes`
   0% {
-    top: ${theme.spacing.small * 0.5}rem;
-    left: ${theme.spacing.small * 0.5}rem;
+    top: ${theme.spacing.small * 0.25}rem;
+    left: ${theme.spacing.small * 0.25}rem;
   }
   50% {
-    top: ${theme.spacing.small}rem;
-    left: ${theme.spacing.small}rem;
+    top: ${theme.spacing.small * 0.75}rem;
+    left: ${theme.spacing.small * 0.75}rem;
   }
   100% {
-    top: ${theme.spacing.small * 0.5}rem;
-    left: ${theme.spacing.small * 0.5}rem;
+    top: ${theme.spacing.small * 0.25}rem;
+    left: ${theme.spacing.small * 0.25}rem;
   }
 `
 
 const pulseBottomLeft = (theme: DefaultTheme) => keyframes`
   0% {
-    bottom: ${theme.spacing.small * 0.5}rem;
-    right: ${theme.spacing.small * 0.5}rem;
+    bottom: ${theme.spacing.small * 0.25}rem;
+    right: ${theme.spacing.small * 0.25}rem;
   }
   50% {
-    bottom: ${theme.spacing.small}rem;
-    right: ${theme.spacing.small}rem;
+    bottom: ${theme.spacing.small * 0.75}rem;
+    right: ${theme.spacing.small * 0.75}rem;
   }
   100% {
-    bottom: ${theme.spacing.small * 0.5}rem;
-    right: ${theme.spacing.small * 0.5}rem;
+    bottom: ${theme.spacing.small * 0.25}rem;
+    right: ${theme.spacing.small * 0.25}rem;
   }
 `
 
@@ -73,7 +73,7 @@ export const DecorationDiv = styled.div<IDecorationDivProps>`
     ${({ $animate, theme }) =>
       $animate &&
       css`
-        animation: 1s ${pulseTopRight(theme)} linear infinite;
+        animation: 0.75s ${pulseTopRight(theme)} linear infinite;
       `}
   }
 
@@ -87,7 +87,7 @@ export const DecorationDiv = styled.div<IDecorationDivProps>`
     ${({ $animate, theme }) =>
       $animate &&
       css`
-        animation: 1s ${pulseBottomLeft(theme)} linear infinite;
+        animation: 0.75s ${pulseBottomLeft(theme)} linear infinite;
       `}
   }
 `

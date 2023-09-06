@@ -2,7 +2,11 @@ import { Main } from '@renderer/components/templates/Main/Main'
 import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
 import { useCallback, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { TOnAddReminderClick, TOnEditReminderClick } from './MainPage.types'
+import {
+  TOnAddReminderClick,
+  TOnEditReminderClick,
+  TOnPreviewReminderClick
+} from './MainPage.types'
 import { textPreview } from '@renderer/utils/textPreview'
 
 export const MainPage: React.FC = () => {
@@ -22,6 +26,10 @@ export const MainPage: React.FC = () => {
     console.log('Show reminder add page')
   }, [])
 
+  const onPreviewReminderClick: TOnPreviewReminderClick = useCallback(() => {
+    console.log('Show reminder preview')
+  }, [])
+
   const onEditReminderClick: TOnEditReminderClick = useCallback(() => {
     console.log('Show reminder edit page')
   }, [])
@@ -29,6 +37,7 @@ export const MainPage: React.FC = () => {
   return (
     <Main
       reminders={formattedReminders}
+      onPreviewReminderClick={onPreviewReminderClick}
       onAddReminderClick={onAddReminderClick}
       onEditReminderClick={onEditReminderClick}
     />

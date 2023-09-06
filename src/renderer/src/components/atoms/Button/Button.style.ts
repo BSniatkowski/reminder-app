@@ -7,9 +7,10 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  column-gap: 1rem;
   border: ${({ theme }) => theme.border.primary};
   user-select: none;
-  transition-property: box-shadow, background-color, border-color, filter;
+  transition-property: box-shadow, background-color, color, border-color, filter;
   transition-duration: 100ms;
 
   & > * {
@@ -20,7 +21,7 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
     $disabled &&
     css`
       pointer-events: none;
-      filter: grayscale(0.75);
+      opacity: 0.25;
     `}
 
   ${({ $variant = EButtonVariants.normal, theme }) =>
@@ -31,6 +32,7 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
         box-shadow: ${theme.boxShadow.heavy};
 
         &:hover {
+          color: ${theme.palette.background.primary};
           background-color: ${theme.palette.background.secondary};
           border-color: ${theme.palette.background.secondary};
           box-shadow: 0 0 0 lightgray;

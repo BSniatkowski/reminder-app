@@ -1,7 +1,13 @@
 export enum EIconVariants {
   ADD = 'add',
   EDIT = 'edit',
-  NOTIFICATION = 'notification'
+  NOTIFICATION = 'notification',
+  HOME = 'home',
+  CALENDAR = 'calendar',
+  STATS = 'stats',
+  SETTINGS = 'settings',
+  INFO = 'info',
+  PREVIEW = 'preview'
 }
 
 export interface IIconProps {
