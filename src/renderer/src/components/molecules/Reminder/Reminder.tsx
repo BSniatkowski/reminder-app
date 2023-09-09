@@ -14,12 +14,11 @@ export const Reminder: React.FC<IReminderProps> = ({
   id,
   title,
   description,
+  onPreviewReminderClick,
   onReminderEditClick
 }) => {
   const {
-    palette: {
-      background: { primary, secondary }
-    }
+    palette: { primary, secondary }
   } = useTheme()
 
   return (
@@ -36,14 +35,24 @@ export const Reminder: React.FC<IReminderProps> = ({
         nowrap
       >
         <Text as={ETextTags.h2}>{title}</Text>
-        <Button
-          variant={EButtonVariants.light}
-          size={EButtonSizes.small}
-          iconVariant={EIconVariants.EDIT}
-          iconColor={primary}
-          iconActiveColor={secondary}
-          onClick={() => onReminderEditClick(id)}
-        />
+        <Tile transparent size={ETileSizes.small} nowrap>
+          <Button
+            variant={EButtonVariants.light}
+            size={EButtonSizes.small}
+            iconVariant={EIconVariants.PREVIEW}
+            iconColor={primary}
+            iconActiveColor={secondary}
+            onClick={() => onPreviewReminderClick(id)}
+          />
+          <Button
+            variant={EButtonVariants.light}
+            size={EButtonSizes.small}
+            iconVariant={EIconVariants.EDIT}
+            iconColor={primary}
+            iconActiveColor={secondary}
+            onClick={() => onReminderEditClick(id)}
+          />
+        </Tile>
       </Tile>
       <Tile transparent size={ETileSizes.small}>
         <Text as={ETextTags.p}>{description}</Text>

@@ -11,13 +11,11 @@ import { useTheme } from 'styled-components'
 export const RemindersList: React.FC<IRemindersListProps> = ({
   reminders,
   onAddReminderClick,
+  onPreviewReminderClick,
   onReminderEditClick
 }) => {
   const {
-    palette: {
-      background: { primary },
-      white
-    }
+    palette: { primary, white }
   } = useTheme()
 
   return (
@@ -30,6 +28,7 @@ export const RemindersList: React.FC<IRemindersListProps> = ({
             title={title}
             description={description}
             date={date}
+            onPreviewReminderClick={onPreviewReminderClick}
             onReminderEditClick={onReminderEditClick}
           />
         ))}

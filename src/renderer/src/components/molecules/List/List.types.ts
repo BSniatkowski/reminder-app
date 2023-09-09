@@ -4,6 +4,7 @@ export enum EListDirections {
 }
 
 export interface IList {
+  as?: 'nav'
   direction?: EListDirections
   wrap?: boolean
   children: React.ReactNode

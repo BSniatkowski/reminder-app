@@ -7,7 +7,7 @@ export const TileWrapper = styled.div<ITileWrapperProps>`
   align-items: ${({ $alignItems = 'center' }) => $alignItems};
   justify-content: ${({ $justifyContent = 'center' }) => $justifyContent};
   flex-wrap: ${({ $nowrap }) => ($nowrap ? 'nowrap' : 'wrap')};
-  color: ${({ theme }) => theme.palette.font.primary};
+  color: ${({ theme }) => theme.palette.primary};
   ${({ $transparent, theme }) =>
     !$transparent &&
     css`

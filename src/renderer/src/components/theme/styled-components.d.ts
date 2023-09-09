@@ -3,15 +3,9 @@ import 'styled-components'
 declare module 'styled-components' {
   export interface DefaultTheme {
     palette: {
-      background: {
-        primary: string
-        secondary: string
-      }
-      font: {
-        primary: string
-        secondary: string
-        link: string
-      }
+      primary: string
+      secondary: string
+      link: string
       white: string
       black: string
       warning: string

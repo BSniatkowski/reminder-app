@@ -1,16 +1,11 @@
 import { ThemeProvider as StyledThemeProvider, DefaultTheme } from 'styled-components'
+import { GlobalStyle } from './GlobalStyle/GlobalStyle'
 
 const theme: DefaultTheme = {
   palette: {
-    background: {
-      primary: '#14213d',
-      secondary: '#e5e5e5'
-    },
-    font: {
-      primary: '#14213d',
-      secondary: '#e5e5e5',
-      link: '#fca311'
-    },
+    primary: '#14213d',
+    secondary: '#e5e5e5',
+    link: '#fca311',
     white: '#fff',
     black: '#000',
     warning: '#ECA72C',
@@ -36,7 +31,10 @@ const theme: DefaultTheme = {
 }
 
 const ThemeProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+  <StyledThemeProvider theme={theme}>
+    <GlobalStyle />
+    {children}
+  </StyledThemeProvider>
 )
 
 export default ThemeProvider
