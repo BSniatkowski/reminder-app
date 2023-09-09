@@ -13,7 +13,7 @@ export const Main: React.FC<IMainProps> = ({
         reminders={reminders}
         onAddReminderClick={onAddReminderClick}
         onPreviewReminderClick={onPreviewReminderClick}
-        onReminderEditClick={onEditReminderClick}
+        onEditReminderClick={onEditReminderClick}
       />
     </>
   )

@@ -8,6 +8,7 @@ import {
   TOnPreviewReminderClick
 } from './MainPage.types'
 import { textPreview } from '@renderer/utils/textPreview'
+import { useNavigate } from 'react-router-dom'
 
 export const MainPage: React.FC = () => {
   const reminders = useSelector(selectAllReminders)
@@ -22,16 +23,18 @@ export const MainPage: React.FC = () => {
     })
   }, [reminders])
 
+  const navigate = useNavigate()
+
   const onAddReminderClick: TOnAddReminderClick = useCallback(() => {
-    console.log('Show reminder add page')
+    navigate(`/reminder/new`)
   }, [])
 
-  const onPreviewReminderClick: TOnPreviewReminderClick = useCallback(() => {
-    console.log('Show reminder preview')
+  const onPreviewReminderClick: TOnPreviewReminderClick = useCallback((id) => {
+    navigate(`/reminder/${id}`)
   }, [])
 
-  const onEditReminderClick: TOnEditReminderClick = useCallback(() => {
-    console.log('Show reminder edit page')
+  const onEditReminderClick: TOnEditReminderClick = useCallback((id) => {
+    navigate(`/reminder/${id}/edit`)
   }, [])
 
   return (

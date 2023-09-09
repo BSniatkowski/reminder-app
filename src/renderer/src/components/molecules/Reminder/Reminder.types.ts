@@ -6,5 +6,5 @@ import { IReminderItem } from '@renderer/store/storeSlices/reminderSlice/reminde
 
 export interface IReminderProps extends IReminderItem {
   onPreviewReminderClick: TOnPreviewReminderClick
-  onReminderEditClick: TOnEditReminderClick
+  onEditReminderClick: TOnEditReminderClick
 }

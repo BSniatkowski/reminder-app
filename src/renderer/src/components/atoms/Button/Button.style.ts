@@ -51,6 +51,7 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
   ${({ $size = EButtonSizes.normal, theme }) =>
     ({
       [EButtonSizes.small]: css`
+        height: fit-content;
         width: fit-content;
         padding: ${theme.spacing.small / 2}rem ${theme.spacing.small}rem;
         border-radius: ${theme.borderRadius.secondary}rem;

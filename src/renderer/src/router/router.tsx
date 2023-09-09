@@ -1,22 +1,38 @@
+import { createBrowserRouter } from 'react-router-dom'
+
 import { MainPage } from '@renderer/components/pages/MainPage.tsx/MainPage'
 import { PopupPage } from '@renderer/components/pages/PopupPage.tsx/PopupPage'
 import { Layout } from '@renderer/components/templates/Layout/Layout'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { EPaths } from './router.types'
+import { ReminderPage } from '@renderer/components/pages/ReminderPreviewPage/ReminderPreviewPage'
+import { ReminderEditPage } from '@renderer/components/pages/ReminderEditPage/ReminderEditPage'
+import { ReminderLoader } from '@renderer/components/pages/loaders/Reminder.loader'
 
-const Router = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<MainPage />} />
-        <Route path={EPaths.PLANNER} element={<MainPage />} />
-        <Route path={EPaths.STATS} element={<MainPage />} />
-        <Route path={EPaths.SETTINGS} element={<MainPage />} />
-        <Route path={EPaths.ABOUT} element={<MainPage />} />
-      </Route>
-      <Route path={EPaths.POPUP} element={<PopupPage />} />
-    </Routes>
-  </BrowserRouter>
-)
-
-export default Router
+export const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <MainPage />
+      },
+      {
+        path: '/reminder/:id',
+        element: <ReminderPage />,
+        loader: ReminderLoader
+      },
+      {
+        path: '/reminder/new',
+        element: <h1>New!</h1>
+      },
+      {
+        path: '/reminder/:id/edit',
+        element: <ReminderEditPage />,
+        loader: ReminderLoader
+      },
+      {
+        path: '/popup/:id',
+        element: <PopupPage />
+      }
+    ]
+  }
+])

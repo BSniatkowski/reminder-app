@@ -12,7 +12,7 @@ export const RemindersList: React.FC<IRemindersListProps> = ({
   reminders,
   onAddReminderClick,
   onPreviewReminderClick,
-  onReminderEditClick
+  onEditReminderClick
 }) => {
   const {
     palette: { primary, white }
@@ -29,7 +29,7 @@ export const RemindersList: React.FC<IRemindersListProps> = ({
             description={description}
             date={date}
             onPreviewReminderClick={onPreviewReminderClick}
-            onReminderEditClick={onReminderEditClick}
+            onEditReminderClick={onEditReminderClick}
           />
         ))}
       <Button
