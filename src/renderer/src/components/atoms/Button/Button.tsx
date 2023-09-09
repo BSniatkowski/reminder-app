@@ -17,9 +17,7 @@ export const Button: React.FC<IButtonProps> = ({
   onClick
 }) => {
   const {
-    palette: {
-      background: { primary }
-    }
+    palette: { primary }
   } = useTheme()
   const [isHovered, seIsHovered] = useState(false)
 

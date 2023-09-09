@@ -7,7 +7,9 @@ export enum EIconVariants {
   STATS = 'stats',
   SETTINGS = 'settings',
   INFO = 'info',
-  PREVIEW = 'preview'
+  PREVIEW = 'preview',
+  CODE = 'code',
+  GITHUB = 'github'
 }
 
 export interface IIconProps {

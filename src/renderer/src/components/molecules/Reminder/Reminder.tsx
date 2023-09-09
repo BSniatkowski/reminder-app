@@ -18,9 +18,7 @@ export const Reminder: React.FC<IReminderProps> = ({
   onReminderEditClick
 }) => {
   const {
-    palette: {
-      background: { primary, secondary }
-    }
+    palette: { primary, secondary }
   } = useTheme()
 
   return (

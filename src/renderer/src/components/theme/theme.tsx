@@ -3,15 +3,9 @@ import { GlobalStyle } from './GlobalStyle/GlobalStyle'
 
 const theme: DefaultTheme = {
   palette: {
-    background: {
-      primary: '#14213d',
-      secondary: '#e5e5e5'
-    },
-    font: {
-      primary: '#14213d',
-      secondary: '#e5e5e5',
-      link: '#fca311'
-    },
+    primary: '#14213d',
+    secondary: '#e5e5e5',
+    link: '#fca311',
     white: '#fff',
     black: '#000',
     warning: '#ECA72C',

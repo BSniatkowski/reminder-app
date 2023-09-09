@@ -15,10 +15,7 @@ export const RemindersList: React.FC<IRemindersListProps> = ({
   onReminderEditClick
 }) => {
   const {
-    palette: {
-      background: { primary },
-      white
-    }
+    palette: { primary, white }
   } = useTheme()
 
   return (

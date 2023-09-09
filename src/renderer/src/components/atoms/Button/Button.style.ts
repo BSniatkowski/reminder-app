@@ -28,22 +28,22 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
     ({
       [EButtonVariants.normal]: css`
         color: ${theme.palette.white};
-        background-color: ${theme.palette.background.primary};
+        background-color: ${theme.palette.primary};
         box-shadow: ${theme.boxShadow.heavy};
 
         &:hover {
-          color: ${theme.palette.background.primary};
-          background-color: ${theme.palette.background.secondary};
-          border-color: ${theme.palette.background.secondary};
+          color: ${theme.palette.primary};
+          background-color: ${theme.palette.secondary};
+          border-color: ${theme.palette.secondary};
           box-shadow: 0 0 0 lightgray;
         }
       `,
       [EButtonVariants.light]: css`
-        color: ${theme.palette.background.primary};
+        color: ${theme.palette.primary};
 
         &:hover {
-          color: ${theme.palette.background.secondary};
-          border-color: ${theme.palette.background.secondary};
+          color: ${theme.palette.secondary};
+          border-color: ${theme.palette.secondary};
         }
       `
     })[$variant]}

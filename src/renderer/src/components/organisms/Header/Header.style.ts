@@ -2,7 +2,7 @@ import { IconOverrideWrapper } from '@renderer/components/atoms/Icon/Icon.style'
 import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
 import { styled } from 'styled-components'
 
-export const NavigationWrapper = styled.nav`
+export const HeaderWrapper = styled.header`
   position: fixed;
   z-index: 9998;
   top: 0;
