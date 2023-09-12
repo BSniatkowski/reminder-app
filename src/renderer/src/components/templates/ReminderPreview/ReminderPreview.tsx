@@ -6,6 +6,8 @@ import { Button } from '@renderer/components/atoms/Button/Button'
 import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
+import { ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
+import { findAndReplaceLinks } from '@renderer/utils/findAndReplaceLinks'
 
 export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
   title,
@@ -18,9 +20,21 @@ export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
   } = useTheme()
 
   return (
-    <Tile transparent>
+    <Tile transparent justifyContent="flex-start">
       <Tile nowrap transparent alignItems="flext-start">
-        <Text as={ETextTags.h2}>{title}</Text>
+        <Tile
+          nowrap
+          transparent
+          size={ETileSizes.small}
+          justifyContent="flex-start"
+          alignItems="flex-start"
+        >
+          {/* TODO - style during date-fns introduce */}
+          <Tile>
+            <Text>{date}</Text>
+          </Tile>
+          <Text as={ETextTags.h2}>{title}</Text>
+        </Tile>
         <Button
           variant={EButtonVariants.light}
           size={EButtonSizes.small}
@@ -31,7 +45,9 @@ export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
         />
       </Tile>
       <Text as={ETextTags.p}>{description}</Text>
-      <Text>{date}</Text>
+      {findAndReplaceLinks({
+        text: 'Reprehenderit commodo veniam et eiusmod cupidatat https://www.regextester.com/96504# incididunt deserunt proident incididunt.'
+      })}
     </Tile>
   )
 }

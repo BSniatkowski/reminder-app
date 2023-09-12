@@ -14,6 +14,7 @@ export const Reminder: React.FC<IReminderProps> = ({
   id,
   title,
   description,
+  // date, TODO
   onPreviewReminderClick,
   onEditReminderClick
 }) => {
@@ -34,6 +35,8 @@ export const Reminder: React.FC<IReminderProps> = ({
         alignItems="flex-start"
         nowrap
       >
+        {/* TODO - style during date-fns introduce
+        <Text>{date}</Text> */}
         <Text as={ETextTags.h3}>{title}</Text>
         <Tile transparent size={ETileSizes.small} nowrap>
           <Button
