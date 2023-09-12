@@ -22,7 +22,7 @@ const initialState: IRemindersState = {
       id: '0',
       title: 'Pariatur Lorem ad voluptate aute Lorem.',
       description:
-        'Aute duis aliquip eiusmod id elit aliqua labore. Minim velit velit dolore voluptate sint irure id. Enim voluptate laboris do irure ex nisi laboris ipsum ullamco proident eiusmod. Consectetur ex veniam id aute laboris culpa. Non sit veniam minim dolor id magna est enim ex. Et ad id incididunt duis incididunt cillum fugiat officia anim labore aliqua elit veniam.',
+        'Aute duis aliquip eiusmod id elit aliqua labore. Minim velit https://www.youtube.com/ velit dolore voluptate sint irure id. Enim voluptate laboris do irure ex nisi laboris https://www.youtube.com/ ipsum ullamco proident eiusmod. Consectetur ex veniam id aute laboris culpa. Non sit veniam minim dolor id magna est enim ex. Et ad id incididunt duis incididunt cillum fugiat officia anim https://www.facebook.com/ labore aliqua elit veniam.',
       date: new Date().toString()
     },
     {
@@ -30,7 +30,7 @@ const initialState: IRemindersState = {
       title:
         'Non minim sint dolore consectetur proident veniam in ullamco fugiat reprehenderit dolore eiusmod dolor officia.',
       description:
-        'Et non adipisicing nostrud consectetur aliqua eu irure ea id proident aute adipisicing dolor velit. Reprehenderit enim in excepteur ullamco est velit occaecat et eu eiusmod pariatur eu et. Nostrud dolor ullamco ut enim aliquip duis labore duis officia culpa reprehenderit mollit veniam fugiat. Reprehenderit magna nostrud pariatur adipisicing non officia ad proident. Officia ad labore non occaecat non do dolor magna ullamco. Ex sunt in incididunt dolore ut aliquip.',
+        'Et non adipisicing https://www.youtube.com/ nostrud consectetur aliqua eu irure ea id proident aute https://www.youtube.com/ adipisicing dolor velit. Reprehenderit enim in excepteur ullamco est velit occaecat et eu eiusmod pariatur eu et. Nostrud dolor ullamco ut enim aliquip duis labore duis officia culpa reprehenderit mollit veniam fugiat. Reprehenderit magna nostrud pariatur adipisicing non officia ad proident. Officia ad labore non occaecat non do dolor magna https://www.facebook.com/ ullamco. Ex sunt in incididunt dolore ut aliquip.',
       date: new Date().toString()
     },
     {
@@ -43,7 +43,7 @@ const initialState: IRemindersState = {
       id: '3',
       title: 'Consectetur reprehenderit consequat in nisi commodo.',
       description:
-        'Consectetur aute et pariatur cupidatat excepteur in ex. Elit magna excepteur sint culpa. Duis dolore qui reprehenderit irure quis deserunt in commodo. Consectetur labore ex in reprehenderit nisi fugiat do. Ipsum velit consectetur do nisi cupidatat esse eiusmod fugiat ipsum ullamco veniam laboris. Eiusmod qui et ut aute eiusmod laboris velit laborum minim est fugiat. Eu aliquip consectetur pariatur ex amet commodo aute pariatur consectetur ipsum anim officia sit.',
+        'Consectetur aute et pariatur cupidatat excepteur https://electron-vite.org/ in ex. https://electron-vite.org/ Elit https://electron-vite.org/ magna excepteur sint culpa. Duis dolore qui reprehenderit irure quis deserunt in commodo. Consectetur labore ex in reprehenderit https://electron-vite.org/ nisi fugiat do. Ipsum velit consectetur do nisi cupidatat esse eiusmod fugiat ipsum ullamco veniam laboris. Eiusmod qui et ut aute eiusmod laboris velit laborum minim est fugiat. Eu https://electron-vite.org/ aliquip consectetur pariatur ex amet commodo aute pariatur https://electron-vite.org/ consectetur ipsum anim officia sit.',
       date: new Date().toString()
     }
   ]
