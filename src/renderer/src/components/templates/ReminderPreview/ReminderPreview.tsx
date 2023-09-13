@@ -21,6 +21,7 @@ export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
 
   return (
     <Tile
+      size={ETileSizes.full}
       contentDirection={ETileContentDirections.column}
       transparent
       justifyContent="flex-start"

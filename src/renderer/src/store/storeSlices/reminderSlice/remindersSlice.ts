@@ -65,7 +65,9 @@ export const remindersSlice = createSlice({
         (reminder) => reminder.id === action.payload.id
       )
 
-      if (foundReminderIndex) {
+      console.log(foundReminderIndex)
+
+      if (typeof foundReminderIndex === 'number') {
         state.remindersList = [
           ...state.remindersList.slice(0, foundReminderIndex),
           action.payload,
