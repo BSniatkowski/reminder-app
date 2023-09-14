@@ -1,17 +1,27 @@
-import { useForm } from 'react-hook-form'
+import { DefaultValues, FieldValues, useForm } from 'react-hook-form'
 import * as S from './Form.style'
 import { TextInput } from '@renderer/components/molecules/TextInput/TextInput'
 import { Textarea } from '@renderer/components/molecules/Textarea/Textarea'
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { Tile } from '@renderer/components/atoms/Tile/Tile'
+import { IFormProps } from './Form.types'
 
 const fieldsComponentsMap = {
   text: TextInput,
   textarea: Textarea
 }
 
-export const Form = ({ fields, defaultValues, onSubmit }) => {
-  const { control, reset, handleSubmit } = useForm({ defaultValues })
+export const Form = <FormValues extends FieldValues>({
+  fields,
+  onSubmit
+}: IFormProps<FormValues>): React.ReactNode => {
+  const defaultValues = Object.fromEntries(
+    fields.map(({ name, defaultValue }) => [name, defaultValue])
+  ) as DefaultValues<FormValues>
+
+  const { control, reset, handleSubmit } = useForm<FormValues>({
+    defaultValues
+  })
 
   return (
     <S.FormWrapper>

@@ -37,7 +37,7 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
 
   window.on('ready-to-show', () => {
     window.show()
-    window.webContents.openDevTools({ mode: isPopup ? 'detach' : 'right' })
+    if (import.meta.env.DEV) window.webContents.openDevTools({ mode: isPopup ? 'detach' : 'right' })
   })
 
   window.webContents.setWindowOpenHandler((details) => {

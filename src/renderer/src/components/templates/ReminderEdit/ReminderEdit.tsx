@@ -1,28 +1,19 @@
 import { Tile } from '@renderer/components/atoms/Tile/Tile'
-import { IReminderEditProps } from './Reminder.types'
+import { IReminderEditProps } from './ReminderEdit.types'
 import { Text } from '@renderer/components/atoms/Text/Text'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { Form } from '@renderer/components/organisms/Form/Form'
 import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
+import { FieldValues } from 'react-hook-form'
 
-export const ReminderEdit: React.FC<IReminderEditProps> = ({
-  title,
-  description,
-  date,
+export const ReminderEdit = <FormValues extends FieldValues>({
+  fields,
   onSubmit
-}) => {
-  const fields = [
-    { name: 'title', label: 'Title', type: 'text' },
-    { name: 'description', label: 'Description', type: 'textarea' },
-    { name: 'date', label: 'Date', type: 'date' }
-  ]
-
-  const defaultValues = { title, description, date }
-
+}: IReminderEditProps<FormValues>): React.ReactNode => {
   return (
     <Tile transparent contentDirection={ETileContentDirections.column} size={ETileSizes.full}>
       <Text as={ETextTags.h1}>Reminder edit</Text>
-      <Form fields={fields} defaultValues={defaultValues} onSubmit={onSubmit} />
+      <Form<FormValues> fields={fields} onSubmit={onSubmit} />
     </Tile>
   )
 }

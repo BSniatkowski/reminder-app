@@ -1,3 +1,4 @@
+import { IFieldItem, EFieldType, TOnSubmit } from '@renderer/components/organisms/Form/Form.types'
 import { ReminderEdit } from '@renderer/components/templates/ReminderEdit/ReminderEdit'
 import {
   IReminderItem,
@@ -15,10 +16,23 @@ export const ReminderEditPage = () => {
 
   const navigate = useNavigate()
 
-  const onSubmit = (formValues) => {
-    dispatch(updateReminder({ id, ...formValues }))
+  const onSubmit: TOnSubmit<IReminderItem> = (formValues) => {
+    const { title, description, date } = formValues
+
+    dispatch(updateReminder({ id, title, description, date }))
     navigate(`/reminder/${id}`)
   }
 
-  return <ReminderEdit title={title} description={description} date={date} onSubmit={onSubmit} />
+  const fields: Array<IFieldItem<IReminderItem>> = [
+    { name: 'title', label: 'Title', type: EFieldType.text, defaultValue: title },
+    {
+      name: 'description',
+      label: 'Description',
+      type: EFieldType.textarea,
+      defaultValue: description
+    },
+    { name: 'date', label: 'Date', type: EFieldType.date, defaultValue: date }
+  ]
+
+  return <ReminderEdit<IReminderItem> fields={fields} onSubmit={onSubmit} />
 }

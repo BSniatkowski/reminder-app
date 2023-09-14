@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 
 import { MainPage } from '@renderer/components/pages/MainPage.tsx/MainPage'
 import { PopupPage } from '@renderer/components/pages/PopupPage.tsx/PopupPage'
@@ -7,7 +7,7 @@ import { ReminderPage } from '@renderer/components/pages/ReminderPreviewPage/Rem
 import { ReminderEditPage } from '@renderer/components/pages/ReminderEditPage/ReminderEditPage'
 import { ReminderLoader } from '@renderer/components/pages/loaders/Reminder.loader'
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     element: <Layout />,
     children: [
