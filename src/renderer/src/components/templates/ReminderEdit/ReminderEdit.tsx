@@ -3,6 +3,7 @@ import { IReminderEditProps } from './Reminder.types'
 import { Text } from '@renderer/components/atoms/Text/Text'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { Form } from '@renderer/components/organisms/Form/Form'
+import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 
 export const ReminderEdit: React.FC<IReminderEditProps> = ({
   title,
@@ -19,7 +20,7 @@ export const ReminderEdit: React.FC<IReminderEditProps> = ({
   const defaultValues = { title, description, date }
 
   return (
-    <Tile transparent>
+    <Tile transparent contentDirection={ETileContentDirections.column} size={ETileSizes.full}>
       <Text as={ETextTags.h1}>Reminder edit</Text>
       <Form fields={fields} defaultValues={defaultValues} onSubmit={onSubmit} />
     </Tile>
