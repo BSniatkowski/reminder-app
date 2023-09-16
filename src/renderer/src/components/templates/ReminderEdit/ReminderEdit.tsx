@@ -5,7 +5,6 @@ import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { Form } from '@renderer/components/organisms/Form/Form'
 import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { FieldValues } from 'react-hook-form'
-import { Calendar } from '@renderer/components/organisms/Calendar/Calendar'
 
 export const ReminderEdit = <FormValues extends FieldValues>({
   fields,
@@ -15,7 +14,6 @@ export const ReminderEdit = <FormValues extends FieldValues>({
     <Tile transparent contentDirection={ETileContentDirections.column} size={ETileSizes.full}>
       <Text as={ETextTags.h1}>Reminder edit</Text>
       <Form<FormValues> fields={fields} onSubmit={onSubmit} />
-      <Calendar />
     </Tile>
   )
 }

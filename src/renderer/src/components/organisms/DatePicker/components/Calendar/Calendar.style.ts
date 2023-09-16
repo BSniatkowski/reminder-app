@@ -1,12 +1,5 @@
 import { ButtonWrapper } from '@renderer/components/atoms/Button/Button.style'
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { styled } from 'styled-components'
-
-export const CalendarWrapper = styled(TileWrapper).attrs({
-  $contentDirection: ETileContentDirections.column,
-  $size: ETileSizes.small
-})``
 
 export const DateWrapper = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { STextInput, TextInputWrapper } from '../TextInput/TextInput.style'
+import { STextInput, TextInputWrapper } from '../../molecules/TextInput/TextInput.style'
 import { ButtonWrapper } from '@renderer/components/atoms/Button/Button.style'
 
 export const DatePickerWrapper = styled(TextInputWrapper)``
