@@ -4,14 +4,16 @@ import { TextInput } from '@renderer/components/molecules/TextInput/TextInput'
 import { Textarea } from '@renderer/components/molecules/Textarea/Textarea'
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { Tile } from '@renderer/components/atoms/Tile/Tile'
-import { IFormProps } from './Form.types'
+import { EFieldType, IFormProps } from './Form.types'
+import { DatePicker } from '@renderer/components/molecules/DatePicker/DatePicker'
 
 const fieldsComponentsMap = {
-  text: TextInput,
-  textarea: Textarea
+  [EFieldType.text]: TextInput,
+  [EFieldType.textarea]: Textarea,
+  [EFieldType.date]: DatePicker
 }
 
-export const Form = <FormValues extends FieldValues>({
+export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
   fields,
   onSubmit
 }: IFormProps<FormValues>): React.ReactNode => {
@@ -28,7 +30,7 @@ export const Form = <FormValues extends FieldValues>({
       {fields.map(({ name, type, label }) => {
         const FieldComponent = fieldsComponentsMap[type] ?? TextInput
 
-        return <FieldComponent key={name} name={name} label={label} control={control} />
+        return <FieldComponent<FormValues> key={name} name={name} label={label} control={control} />
       })}
       <Tile transparent>
         <Button onClick={reset} text="Reset" />

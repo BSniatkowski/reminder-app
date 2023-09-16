@@ -24,30 +24,6 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
       opacity: 0.25;
     `}
 
-  ${({ $variant = EButtonVariants.normal, theme }) =>
-    ({
-      [EButtonVariants.normal]: css`
-        color: ${theme.palette.white};
-        background-color: ${theme.palette.primary};
-        box-shadow: ${theme.boxShadow.heavy};
-
-        &:hover {
-          color: ${theme.palette.primary};
-          background-color: ${theme.palette.secondary};
-          border-color: ${theme.palette.secondary};
-          box-shadow: 0 0 0 lightgray;
-        }
-      `,
-      [EButtonVariants.light]: css`
-        color: ${theme.palette.primary};
-
-        &:hover {
-          color: ${theme.palette.secondary};
-          border-color: ${theme.palette.secondary};
-        }
-      `
-    })[$variant]}
-
   ${({ $size = EButtonSizes.normal, theme }) =>
     ({
       [EButtonSizes.small]: css`
@@ -68,4 +44,39 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
         border-radius: ${theme.borderRadius.primary}rem;
       `
     })[$size]}
+
+  ${({ $variant = EButtonVariants.normal, theme }) =>
+    ({
+      [EButtonVariants.normal]: css`
+        color: ${theme.palette.white};
+        background-color: ${theme.palette.primary};
+        box-shadow: ${theme.boxShadow.heavy};
+
+        &:hover {
+          color: ${theme.palette.primary};
+          background-color: ${theme.palette.secondary};
+          border-color: ${theme.palette.secondary};
+          box-shadow: 0 0 0 lightgray;
+        }
+      `,
+      [EButtonVariants.light]: css`
+        color: ${theme.palette.primary};
+
+        &:hover {
+          color: ${theme.palette.white};
+          background-color: ${theme.palette.hover};
+        }
+      `,
+      [EButtonVariants.roundTransparent]: css`
+        background-color: transparent;
+        border-radius: 50%;
+        border: none;
+        padding: ${({ theme }) => theme.spacing.small}rem;
+
+        &:hover {
+          background-color: ${theme.palette.secondary}85;
+          box-shadow: 0 0 1rem 0.5rem ${theme.palette.secondary}85;
+        }
+      `
+    })[$variant]}
 `

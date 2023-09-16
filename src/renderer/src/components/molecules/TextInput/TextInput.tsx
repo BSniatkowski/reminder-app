@@ -1,9 +1,9 @@
-import { useController } from 'react-hook-form'
+import { FieldValues, useController } from 'react-hook-form'
 import * as S from './TextInput.style'
-import { TTextInput } from './TextInput.types'
+import { ITextInputProps } from './TextInput.types'
 import { Label } from '@renderer/components/atoms/Label/Label'
 
-export const TextInput: TTextInput = ({ label, ...props }) => {
+export const TextInput = <T extends FieldValues>({ label, ...props }: ITextInputProps<T>) => {
   const { field } = useController(props)
 
   return (

@@ -9,6 +9,9 @@ import { ReactComponent as InfoIcon } from '@icons/info.svg'
 import { ReactComponent as PreviewIcon } from '@icons/preview.svg'
 import { ReactComponent as CodeIcon } from '@icons/code.svg'
 import { ReactComponent as GithubIcon } from '@icons/github.svg'
+import { ReactComponent as ArrRightIcon } from '@icons/arr_right.svg'
+import { ReactComponent as ArrLeftIcon } from '@icons/arr_left.svg'
+import { ReactComponent as ClockIcon } from '@icons/clock.svg'
 
 import { EIconVariants, IIconProps } from './Icon.types'
 import * as S from './Icon.style'
@@ -24,7 +27,10 @@ const iconsMap = {
   [EIconVariants.INFO]: InfoIcon,
   [EIconVariants.PREVIEW]: PreviewIcon,
   [EIconVariants.CODE]: CodeIcon,
-  [EIconVariants.GITHUB]: GithubIcon
+  [EIconVariants.GITHUB]: GithubIcon,
+  [EIconVariants.ARR_RIGHT]: ArrRightIcon,
+  [EIconVariants.ARR_LEFT]: ArrLeftIcon,
+  [EIconVariants.CLOCK]: ClockIcon
 }
 
 export const Icon: React.FC<IIconProps> = ({ variant, size, isActive, color, activeColor }) => {

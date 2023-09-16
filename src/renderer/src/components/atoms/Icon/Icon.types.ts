@@ -9,7 +9,10 @@ export enum EIconVariants {
   INFO = 'info',
   PREVIEW = 'preview',
   CODE = 'code',
-  GITHUB = 'github'
+  GITHUB = 'github',
+  ARR_RIGHT = 'arr_right',
+  ARR_LEFT = 'arr_left',
+  CLOCK = 'clock'
 }
 
 export interface IIconProps {

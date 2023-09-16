@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler } from 'react-hook-form'
+import { FieldValues, Path, SubmitHandler } from 'react-hook-form'
 
 export enum EFieldType {
   text = 'text',
@@ -6,9 +6,12 @@ export enum EFieldType {
   date = 'date'
 }
 
-export interface IFieldItem<FormValues> {
-  name: keyof FormValues
+export interface IBasicFieldProps {
   label?: string
+}
+
+export interface IFieldItem<FormValues> extends IBasicFieldProps {
+  name: Path<FormValues>
   type: EFieldType
   defaultValue: unknown
 }

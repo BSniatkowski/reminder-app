@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
   palette: {
     primary,
     secondary,
+    hover: '#1E325C',
     link: '#fca311',
     white: '#fff',
     black: '#000',
