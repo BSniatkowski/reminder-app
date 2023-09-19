@@ -21,10 +21,6 @@ export const router = createHashRouter([
         loader: ReminderLoader
       },
       {
-        path: '/reminder/new',
-        element: <h1>New!</h1>
-      },
-      {
         path: '/reminder/:id/edit',
         element: <ReminderEditPage />,
         loader: ReminderLoader

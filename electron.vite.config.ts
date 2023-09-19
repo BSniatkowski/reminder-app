@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
+import eslint from 'vite-plugin-eslint'
 
 export default defineConfig({
   main: {
@@ -22,6 +23,6 @@ export default defineConfig({
         '@icons': resolve('src/renderer/src/assets/icons')
       }
     },
-    plugins: [react(), svgr()]
+    plugins: [react(), eslint(), svgr()]
   }
 })

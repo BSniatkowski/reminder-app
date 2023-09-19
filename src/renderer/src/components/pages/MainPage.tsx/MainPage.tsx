@@ -17,7 +17,7 @@ export const MainPage: React.FC = () => {
     return reminders.map(({ title, description, ...props }) => {
       return {
         title: textPreview({ text: title, maxLength: 25 }),
-        description: textPreview({ text: description, maxLength: 200 }),
+        description: textPreview({ text: description ?? '', maxLength: 200 }),
         ...props
       }
     })
@@ -26,16 +26,22 @@ export const MainPage: React.FC = () => {
   const navigate = useNavigate()
 
   const onAddReminderClick: TOnAddReminderClick = useCallback(() => {
-    navigate(`/reminder/new`)
-  }, [])
+    navigate(`/reminder/new/edit`)
+  }, [navigate])
 
-  const onPreviewReminderClick: TOnPreviewReminderClick = useCallback((id) => {
-    navigate(`/reminder/${id}`)
-  }, [])
+  const onPreviewReminderClick: TOnPreviewReminderClick = useCallback(
+    (id) => {
+      navigate(`/reminder/${id}`)
+    },
+    [navigate]
+  )
 
-  const onEditReminderClick: TOnEditReminderClick = useCallback((id) => {
-    navigate(`/reminder/${id}/edit`)
-  }, [])
+  const onEditReminderClick: TOnEditReminderClick = useCallback(
+    (id) => {
+      navigate(`/reminder/${id}/edit`)
+    },
+    [navigate]
+  )
 
   return (
     <Main

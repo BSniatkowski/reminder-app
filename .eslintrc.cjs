@@ -18,5 +18,10 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'no-trailing-spaces': 'error',
     'no-multi-spaces': 'error'
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 }

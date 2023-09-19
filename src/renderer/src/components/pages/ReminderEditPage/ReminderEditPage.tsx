@@ -2,6 +2,7 @@ import { IFieldItem, EFieldType, TOnSubmit } from '@renderer/components/organism
 import { ReminderEdit } from '@renderer/components/templates/ReminderEdit/ReminderEdit'
 import {
   IReminderItem,
+  addReminder,
   updateReminder
 } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 import { useDispatch } from 'react-redux'
@@ -19,8 +20,12 @@ export const ReminderEditPage = () => {
   const onSubmit: TOnSubmit<IReminderItem> = (formValues) => {
     const { title, description, date } = formValues
 
-    dispatch(updateReminder({ id, title, description, date }))
-    navigate(`/reminder/${id}`)
+    dispatch(
+      id
+        ? updateReminder({ id, title, description, date })
+        : addReminder({ title, description, date })
+    )
+    navigate(id ? `/reminder/${id}` : '/')
   }
 
   const fields: Array<IFieldItem<IReminderItem>> = [
