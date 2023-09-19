@@ -1,6 +1,6 @@
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import {
   format,
@@ -8,8 +8,11 @@ import {
   getDate,
   addMonths,
   isThisMonth as DFnsIsThisMonth,
-  setDate,
-  isSameMonth
+  isSameMonth,
+  set,
+  getHours,
+  getMinutes,
+  getSeconds
 } from 'date-fns'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
@@ -20,6 +23,7 @@ import * as SharedS from '../Shared.style'
 import * as S from './Calendar.style'
 import { IDateWidgetProps } from '../Shared.types'
 import { useFormContext } from 'react-hook-form'
+import { ETileContentDirections } from '@renderer/components/atoms/Tile/Tile.types'
 
 export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
   const { setValue } = useFormContext()
@@ -56,13 +60,29 @@ export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
 
   const updateSelectedDate = useCallback(
     (day: number) => {
-      setValue(name, twoWayDateFormat(setDate(currentDate, day)))
+      const actualTime = new Date()
+
+      const time =
+        day === actualDayInMonth
+          ? {
+              hours: getHours(actualTime),
+              minutes: getMinutes(actualTime),
+              seconds: getSeconds(actualTime)
+            }
+          : { hours: 12, minutes: 0, seconds: 0 }
+
+      const newDate = twoWayDateFormat(set(currentDate, { date: day, ...time }))
+
+      setValue(name, newDate)
     },
-    [name, currentDate, setValue]
+    [actualDayInMonth, currentDate, setValue, name]
   )
 
   return (
-    <SharedS.DateWidgetWrapper $isVisible={isVisible}>
+    <SharedS.DateWidgetWrapper
+      $contentDirection={ETileContentDirections.column}
+      $isVisible={isVisible}
+    >
       <S.DateWrapper>
         <Button
           size={EButtonSizes.small}
