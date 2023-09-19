@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Text } from '../Text/Text'
 import * as S from './Button.style'
-import { EButtonSizes, EButtonVariants, IButtonProps } from './Button.types'
+import { EButtonSizes, IButtonProps } from './Button.types'
 import { Decoration } from '../Decoration/Decoration'
 import { useTheme } from 'styled-components'
 import { Icon } from '../Icon/Icon'
@@ -10,6 +10,7 @@ export const Button: React.FC<IButtonProps> = ({
   variant,
   size,
   disabled,
+  withoutDecoration,
   text,
   iconVariant,
   iconColor,
@@ -35,7 +36,7 @@ export const Button: React.FC<IButtonProps> = ({
       }}
     >
       {text && <Text>{text}</Text>}
-      {isHovered && variant !== EButtonVariants.light && <Decoration animate color={primary} />}
+      {isHovered && !variant && !withoutDecoration && <Decoration animate color={primary} />}
       {iconVariant && (
         <Icon
           variant={iconVariant}

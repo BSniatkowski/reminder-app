@@ -5,6 +5,7 @@ declare module 'styled-components' {
     palette: {
       primary: string
       secondary: string
+      hover: string
       link: string
       white: string
       black: string

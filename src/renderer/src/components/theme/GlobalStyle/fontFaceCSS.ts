@@ -1,10 +1,23 @@
 import { css } from 'styled-components'
 
+import RobotoRegular from '@renderer/assets/font/Roboto-Regular.ttf'
+import RobotoItalic from '@renderer/assets/font/Roboto-Italic.ttf'
+import RobotoBold from '@renderer/assets/font/Roboto-Bold.ttf'
+import RobotoBoldItalic from '@renderer/assets/font/Roboto-BoldItalic.ttf'
+import RobotoLight from '@renderer/assets/font/Roboto-Light.ttf'
+import RobotoLightItalic from '@renderer/assets/font/Roboto-LightItalic.ttf'
+import RobotoMedium from '@renderer/assets/font/Roboto-Medium.ttf'
+import RobotoMediumItalic from '@renderer/assets/font/Roboto-MediumItalic.ttf'
+import RobotoThin from '@renderer/assets/font/Roboto-Thin.ttf'
+import RobotoThinItalic from '@renderer/assets/font/Roboto-ThinItalic.ttf'
+import RobotoBlack from '@renderer/assets/font/Roboto-Black.ttf'
+import RobotoBlackItalic from '@renderer/assets/font/Roboto-BlackItalic.ttf'
+
 export const fontFaceCSS = css`
   /* Roboto Regular */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Regular.ttf') format('truetype');
+    src: url(${RobotoRegular}) format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -12,7 +25,7 @@ export const fontFaceCSS = css`
   /* Roboto Italic */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Italic.ttf') format('truetype');
+    src: url(${RobotoItalic}) format('truetype');
     font-weight: normal;
     font-style: italic;
   }
@@ -20,7 +33,7 @@ export const fontFaceCSS = css`
   /* Roboto Bold */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Bold.ttf') format('truetype');
+    src: url(${RobotoBold}) format('truetype');
     font-weight: bold;
     font-style: normal;
   }
@@ -28,7 +41,7 @@ export const fontFaceCSS = css`
   /* Roboto Bold Italic */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-BoldItalic.ttf') format('truetype');
+    src: url(${RobotoBoldItalic}) format('truetype');
     font-weight: bold;
     font-style: italic;
   }
@@ -36,7 +49,7 @@ export const fontFaceCSS = css`
   /* Roboto Light */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Light.ttf') format('truetype');
+    src: url(${RobotoLight}) format('truetype');
     font-weight: 300;
     font-style: normal;
   }
@@ -44,7 +57,7 @@ export const fontFaceCSS = css`
   /* Roboto Light Italic */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-LightItalic.ttf') format('truetype');
+    src: url(${RobotoLightItalic}) format('truetype');
     font-weight: 300;
     font-style: italic;
   }
@@ -52,7 +65,7 @@ export const fontFaceCSS = css`
   /* Roboto Medium */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Medium.ttf') format('truetype');
+    src: url(${RobotoMedium}) format('truetype');
     font-weight: 500;
     font-style: normal;
   }
@@ -60,7 +73,7 @@ export const fontFaceCSS = css`
   /* Roboto Medium Italic */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-MediumItalic.ttf') format('truetype');
+    src: url(${RobotoMediumItalic}) format('truetype');
     font-weight: 500;
     font-style: italic;
   }
@@ -68,7 +81,7 @@ export const fontFaceCSS = css`
   /* Roboto Thin */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Thin.ttf') format('truetype');
+    src: url(${RobotoThin}) format('truetype');
     font-weight: 100;
     font-style: normal;
   }
@@ -76,7 +89,7 @@ export const fontFaceCSS = css`
   /* Roboto Thin Italic */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-ThinItalic.ttf') format('truetype');
+    src: url(${RobotoThinItalic}) format('truetype');
     font-weight: 100;
     font-style: italic;
   }
@@ -84,7 +97,7 @@ export const fontFaceCSS = css`
   /* Roboto Black */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-Black.ttf') format('truetype');
+    src: url(${RobotoBlack}) format('truetype');
     font-weight: 900;
     font-style: normal;
   }
@@ -92,7 +105,7 @@ export const fontFaceCSS = css`
   /* Roboto Black Italic */
   @font-face {
     font-family: 'Roboto';
-    src: url('./font/Roboto-BlackItalic.ttf') format('truetype');
+    src: url(${RobotoBlackItalic}) format('truetype');
     font-weight: 900;
     font-style: italic;
   }

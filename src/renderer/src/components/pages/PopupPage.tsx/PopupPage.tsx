@@ -13,7 +13,7 @@ export const PopupPage: React.FC = () => {
   const onClose = useCallback(() => {
     if (id) dispatch(removeReminder(id))
     window.api.closeWindow()
-  }, [])
+  }, [dispatch, id])
 
   const popupData = useSelector(selectReminderById(id))
 

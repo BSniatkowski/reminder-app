@@ -1,10 +1,14 @@
 import { ThemeProvider as StyledThemeProvider, DefaultTheme } from 'styled-components'
 import { GlobalStyle } from './GlobalStyle/GlobalStyle'
 
+const primary = '#14213d'
+const secondary = '#e5e5e5'
+
 const theme: DefaultTheme = {
   palette: {
-    primary: '#14213d',
-    secondary: '#e5e5e5',
+    primary,
+    secondary,
+    hover: '#1E325C',
     link: '#fca311',
     white: '#fff',
     black: '#000',
@@ -17,16 +21,16 @@ const theme: DefaultTheme = {
     big: 1.25
   },
   border: {
-    primary: '0.1rem solid #000',
-    secondary: '0.2rem solid #000'
+    primary: `0.1rem solid ${primary}`,
+    secondary: `0.2rem solid ${primary}`
   },
   borderRadius: {
     primary: 0.25,
     secondary: 0.15
   },
   boxShadow: {
-    light: '0.2rem 0.2rem 0.5rem lightgray',
-    heavy: '0.1rem 0.1rem 0.2rem lightgray'
+    light: `0.2rem 0.2rem 0.5rem ${secondary}`,
+    heavy: `0.1rem 0.1rem 0.2rem ${secondary}`
   }
 }
 
