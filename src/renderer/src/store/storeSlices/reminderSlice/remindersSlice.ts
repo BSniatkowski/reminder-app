@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { v4 as uuidv4 } from 'uuid'
 import { twoWayDateFormat } from '@renderer/utils/twoWayDateFormat'
+import { synchronizeStoreAtRenderer } from '@renderer/utils/synchronizeStoreAtRenderer'
+import { ipcRenderer } from 'electron'
 
 export interface IReminderItemBody {
   title: string
@@ -72,11 +74,17 @@ export const remindersSlice = createSlice({
           action.payload,
           ...state.remindersList.slice(foundReminderIndex + 1)
         ]
+
+        synchronizeStoreAtRenderer({ action: 'update', payload: state.remindersList })
       }
     }
   }
 })
 
 export const { addReminder, removeReminder, updateReminder } = remindersSlice.actions
+
+ipcRenderer.on('synchronize-reminders', (_, payload) => {
+  console.log(payload)
+})
 
 export const remindersReducer = remindersSlice.reducer

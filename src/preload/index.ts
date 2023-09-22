@@ -1,13 +1,15 @@
-import { contextBridge, ipcRenderer, webFrame } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  createPopup: (id) => {
-    ipcRenderer.send('create-popup', id)
+  openPopup: (id: string) => {
+    ipcRenderer.send('open-popup', id)
+  },
+  synchronizeReminders: (payload: unknown) => {
+    ipcRenderer.send('synchronize-reminders', payload)
   },
   closeWindow: () => {
-    console.log(webFrame.routingId)
     ipcRenderer.send('close-window')
   }
 }
