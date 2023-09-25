@@ -25,6 +25,7 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
           transparent: true
         }
       : {
+          minWidth: 350,
           height: 720,
           width: 1080
         }),
@@ -48,13 +49,13 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${isPopup ? `/popup/${id}` : ''}`)
+    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${isPopup ? `#/popup/${id}` : ''}`)
   } else {
     window.loadFile(
       join(__dirname, '../renderer/index.html'),
       isPopup
         ? {
-            query: { id: JSON.stringify(id) }
+            hash: `/popup/${JSON.stringify(id)}`
           }
         : {}
     )

@@ -1,9 +1,11 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
+import { IReminderItem } from '@globalTypes/reminders.types'
 
 import { ISyncMethodsArgs } from '@globalTypes/synchronization.types'
 
 declare global {
   interface Window {
+    storeFromMain?: Array<IReminderItem>
     electron: ElectronAPI
     api: {
       openPopup: (id: string) => void

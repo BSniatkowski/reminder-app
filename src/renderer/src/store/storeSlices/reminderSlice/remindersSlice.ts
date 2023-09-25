@@ -10,7 +10,7 @@ export interface IRemindersState {
 }
 
 const initialState: IRemindersState = {
-  remindersList: []
+  remindersList: window.storeFromMain || []
 }
 
 export const remindersSlice = createSlice({

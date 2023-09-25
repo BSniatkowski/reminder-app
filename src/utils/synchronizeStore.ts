@@ -13,6 +13,28 @@ const dbFileName = 'db.json'
 
 const fullDbPath = `${appDataPath}\\${dbFileName}`
 
+export const getStore: () => Array<IReminderItem> = () => {
+  try {
+    accessSync(appDataPath, constants.R_OK | constants.W_OK)
+  } catch (error) {
+    console.error(error)
+    try {
+      mkdirSync(appDataPath, { recursive: true })
+      appendFileSync(fullDbPath, JSON.stringify([]))
+    } catch (createError) {
+      console.error('createError:', createError)
+    }
+  }
+
+  const adapter = new JSONFileSync<Array<IReminderItem>>(fullDbPath)
+
+  const db = new LowSync<Array<IReminderItem>>(adapter, [])
+
+  db.read()
+
+  return db.data
+}
+
 export const synchronizeStoreAtMain = ({ action, payload }: TSyncMethodsArgs) => {
   try {
     accessSync(appDataPath, constants.R_OK | constants.W_OK)
