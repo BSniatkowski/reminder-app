@@ -20,7 +20,9 @@ export default defineConfig({
         '@organisms': resolve('src/renderer/src/components/organisms'),
         '@templates': resolve('src/renderer/src/components/templates'),
         '@pages': resolve('src/renderer/src/components/pages'),
-        '@icons': resolve('src/renderer/src/assets/icons')
+        '@icons': resolve('src/renderer/src/assets/icons'),
+        '@utils': resolve('src/utils'),
+        '@globalTypes': resolve('src/globalTypes')
       }
     },
     plugins: [react(), eslint(), svgr()]

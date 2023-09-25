@@ -1,13 +1,19 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { TSyncMethodsArgs } from '../globalTypes/synchronization.types'
 
 // Custom APIs for renderer
 const api = {
   openPopup: (id: string) => {
     ipcRenderer.send('open-popup', id)
   },
-  synchronizeReminders: (payload: unknown) => {
-    ipcRenderer.send('synchronize-reminders', payload)
+  synchronizeReminders: (args: TSyncMethodsArgs) => {
+    console.log(args)
+
+    ipcRenderer.send('synchronize-reminders', args)
+  },
+  handleSynchronizeReminders: (callback: (args: TSyncMethodsArgs) => void) => {
+    ipcRenderer.on('synchronize-reminders', (_, args) => callback(args))
   },
   closeWindow: () => {
     ipcRenderer.send('close-window')

@@ -5,7 +5,9 @@
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.tsx",
     "src/preload/*.d.ts",
-    "src/renderer/src/components/styled-components.d.ts"
+    "src/renderer/src/components/styled-components.d.ts",
+    "src/utils/basicArrayOperations.ts",
+    "src/globalTypes/*.ts"
   ],
   "compilerOptions": {
     "noImplicitAny": true,
@@ -34,6 +36,12 @@
       "@icons/*": [
         "src/renderer/src/assets/icons/*"
       ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@globalTypes/*": [
+        "src/globalTypes/*"
+      ]
     }
   }
 }

@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow } from './createWindow/createWindow'
-// import { synchronizeStoreAtMain } from '../utils/synchronizeStoreAtMain'
+import { synchronizeStoreAtMain } from '../utils/synchronizeStoreAtMain'
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -24,8 +24,7 @@ app.whenReady().then(() => {
   })
 
   ipcMain.on('synchronize-reminders', (_, payload) => {
-    console.log('Not implemented yet', JSON.stringify(payload))
-    // synchronizeStoreAtMain({})
+    synchronizeStoreAtMain(payload)
   })
 
   ipcMain.on('close-window', (event) => {
