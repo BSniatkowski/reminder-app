@@ -5,11 +5,11 @@ import { ESyncActions, TSyncMethodsArgs } from '../../globalTypes/synchronizatio
 import { twoWayDateFormat } from '../../utils/twoWayDateFormat'
 import { createWindow } from '../createWindow/createWindow'
 import { getStoreAtMain } from '../../utils/synchronizeStore'
+import { removeItem } from '../../utils/basicArrayOperations'
+import { IReminderTimeout, IState } from './remindersTimeoutsTracker.types'
 
 export const remindersTimeoutsTracker = () => {
-  const state: {
-    remindersTimeouts: Array<{ reminderId: string; timeoutId: ReturnType<typeof setTimeout> }>
-  } = {
+  const state: IState = {
     remindersTimeouts: []
   }
 
@@ -18,9 +18,7 @@ export const remindersTimeoutsTracker = () => {
 
     const timeoutId = setTimeout(() => createWindow(true, reminder.id), timeToPopup)
 
-    state.remindersTimeouts = [...state.remindersTimeouts, { reminderId: reminder.id, timeoutId }]
-
-    console.log('Setting reminder timeout', { reminderId: reminder.id, timeoutId })
+    state.remindersTimeouts = [...state.remindersTimeouts, { id: reminder.id, timeoutId }]
   }
 
   const clearRemindersTimeouts = () => {
@@ -65,17 +63,15 @@ export const remindersTimeoutsTracker = () => {
 
   const updateReminderTimeout = ({ action, payload }: TSyncMethodsArgs) => {
     if (action === ESyncActions.UPDATE || action === ESyncActions.ADD) {
-      clearTimeout(
-        state.remindersTimeouts.find((timeout) => timeout.reminderId === payload.id)?.timeoutId
-      )
+      clearTimeout(state.remindersTimeouts.find((timeout) => timeout.id === payload.id)?.timeoutId)
 
       setReminderTimeout(payload)
     }
 
     if (action === ESyncActions.REMOVE) {
-      clearTimeout(
-        state.remindersTimeouts.find((timeout) => timeout.reminderId === payload)?.timeoutId
-      )
+      clearTimeout(state.remindersTimeouts.find((timeout) => timeout.id === payload.id)?.timeoutId)
+
+      state.remindersTimeouts = removeItem<IReminderTimeout>(state.remindersTimeouts, payload.id)
     }
   }
 

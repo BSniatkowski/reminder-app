@@ -49,9 +49,21 @@ app.whenReady().then(() => {
 
   const { updateReminderTimeout } = remindersTimeoutsTracker()
 
-  ipcMain.on('synchronize-reminders', (_, payload) => {
+  ipcMain.on('synchronize-reminders', (event, payload) => {
     synchronizeStoreAtMain(payload)
     updateReminderTimeout(payload)
+
+    const windows = BrowserWindow.getAllWindows()
+
+    if (windows.length > 1) {
+      const senderId = event.sender.id
+
+      for (const window of windows) {
+        if (window.id !== senderId) {
+          window.webContents.send('synchronize-reminders', payload)
+        }
+      }
+    }
   })
 
   ipcMain.on('close-window', (event) => {

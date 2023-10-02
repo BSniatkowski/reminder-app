@@ -60,7 +60,7 @@ export const Reminder: React.FC<IReminderProps> = ({
           <Button
             variant={EButtonVariants.light}
             size={EButtonSizes.small}
-            iconVariant={EIconVariants.EDIT}
+            iconVariant={EIconVariants.DELETE}
             iconColor={primary}
             iconActiveColor={secondary}
             onClick={() => onRemoveReminderClick(id)}

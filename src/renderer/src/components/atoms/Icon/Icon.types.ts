@@ -12,7 +12,9 @@ export enum EIconVariants {
   GITHUB = 'github',
   ARR_RIGHT = 'arr_right',
   ARR_LEFT = 'arr_left',
-  CLOCK = 'clock'
+  CLOCK = 'clock',
+  DELETE = 'delete',
+  POSTPONE = 'postpone'
 }
 
 export interface IIconProps {

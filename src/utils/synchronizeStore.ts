@@ -55,8 +55,9 @@ export const synchronizeStoreAtMain = ({ action, payload }: TSyncMethodsArgs) =>
   db.read()
 
   if (action === ESyncActions.ADD) db.data = addItem<IReminderItem>(db.data, payload)
-  if (action === ESyncActions.REMOVE) db.data = removeItem<IReminderItem>(db.data, payload)
-  if (action === ESyncActions.UPDATE) db.data = updateItem<IReminderItem>(db.data, payload)
+  if (action === ESyncActions.REMOVE) db.data = removeItem<IReminderItem>(db.data, payload.id)
+  if (action === ESyncActions.UPDATE)
+    db.data = updateItem<IReminderItem, IReminderItem>(db.data, payload)
 
   db.write()
 }

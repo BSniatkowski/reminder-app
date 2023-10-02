@@ -22,7 +22,8 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
           ...popupSize,
           resizable: false,
           frame: false,
-          transparent: true
+          transparent: true,
+          alwaysOnTop: true
         }
       : {
           minWidth: 350,

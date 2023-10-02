@@ -8,5 +8,5 @@ export enum ESyncActions {
 
 export type TSyncMethodsArgs =
   | { action: ESyncActions.ADD; payload: IReminderItem }
-  | { action: ESyncActions.REMOVE; payload: string }
+  | { action: ESyncActions.REMOVE; payload: { id: string } }
   | { action: ESyncActions.UPDATE; payload: IReminderItem }

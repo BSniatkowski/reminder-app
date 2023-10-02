@@ -49,7 +49,7 @@ export const MainPage: React.FC = () => {
 
   const onRemoveReminderClick: TOnRemoveReminderClick = useCallback(
     (id) => {
-      dispatch(removeReminder(id))
+      dispatch(removeReminder({ id }))
     },
     [dispatch]
   )

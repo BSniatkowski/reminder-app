@@ -9,8 +9,6 @@ const api = {
     ipcRenderer.send('open-popup', id)
   },
   synchronizeReminders: (args: TSyncMethodsArgs) => {
-    console.log(args)
-
     ipcRenderer.send('synchronize-reminders', args)
   },
   handleSynchronizeReminders: (callback: (args: TSyncMethodsArgs) => void) => {

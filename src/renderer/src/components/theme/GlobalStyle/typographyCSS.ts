@@ -2,8 +2,8 @@ import { css } from 'styled-components'
 
 const minWidth = 350
 const maxWidth = 1920
-const minFontSize = 12
-const maxFontsize = 16
+export const minFontSize = 12
+export const maxFontsize = 16
 
 export const typographyCSS = css`
   *,
