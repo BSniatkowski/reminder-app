@@ -8,16 +8,14 @@ export enum ETimeParts {
   seconds = 'seconds'
 }
 
-interface IGetTimePartArrayProps {
-  time: Date
-  timePart: ETimeParts
-  actualDate: Date
-  defaulNumber: number
-}
+export type TGetTimePartArray = (timePart: ETimeParts) => Array<string>
 
-export type TGetTimePartArray = ({
-  time,
-  timePart,
-  actualDate,
-  defaulNumber
-}: IGetTimePartArrayProps) => Array<string>
+export type TScrollClockTo = ({
+  hour,
+  minute,
+  second
+}: {
+  hour?: string
+  minute?: string
+  second?: string
+}) => void

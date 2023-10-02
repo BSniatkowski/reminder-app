@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import { TSyncMethodsArgs } from '../globalTypes/synchronization.types'
-import { getStore } from '../utils/synchronizeStore'
+import { getStoreAtMain } from '../utils/synchronizeStore'
 
 // Custom APIs for renderer
 const api = {
@@ -21,7 +21,7 @@ const api = {
   }
 }
 
-const storeFromMain = getStore()
+const storeFromMain = getStoreAtMain()
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

@@ -13,7 +13,7 @@ const dbFileName = 'db.json'
 
 const fullDbPath = `${appDataPath}\\${dbFileName}`
 
-export const getStore: () => Array<IReminderItem> = () => {
+export const getStoreAtMain: () => Array<IReminderItem> = () => {
   try {
     accessSync(appDataPath, constants.R_OK | constants.W_OK)
   } catch (error) {

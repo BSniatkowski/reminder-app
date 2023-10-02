@@ -1,14 +1,16 @@
 import { Main } from '@renderer/components/templates/Main/Main'
 import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
 import { useCallback, useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   TOnAddReminderClick,
   TOnEditReminderClick,
-  TOnPreviewReminderClick
+  TOnPreviewReminderClick,
+  TOnRemoveReminderClick
 } from './MainPage.types'
 import { textPreview } from '@renderer/utils/textPreview'
 import { useNavigate } from 'react-router-dom'
+import { removeReminder } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 
 export const MainPage: React.FC = () => {
   const reminders = useSelector(selectAllReminders)
@@ -24,6 +26,8 @@ export const MainPage: React.FC = () => {
   }, [reminders])
 
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const onAddReminderClick: TOnAddReminderClick = useCallback(() => {
     navigate(`/reminder/new/edit`)
@@ -43,12 +47,20 @@ export const MainPage: React.FC = () => {
     [navigate]
   )
 
+  const onRemoveReminderClick: TOnRemoveReminderClick = useCallback(
+    (id) => {
+      dispatch(removeReminder(id))
+    },
+    [dispatch]
+  )
+
   return (
     <Main
       reminders={formattedReminders}
       onPreviewReminderClick={onPreviewReminderClick}
       onAddReminderClick={onAddReminderClick}
       onEditReminderClick={onEditReminderClick}
+      onRemoveReminderClick={onRemoveReminderClick}
     />
   )
 }

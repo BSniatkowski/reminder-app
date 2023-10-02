@@ -14,9 +14,10 @@ export const Reminder: React.FC<IReminderProps> = ({
   id,
   title,
   description,
-  // date, TODO
+  date,
   onPreviewReminderClick,
-  onEditReminderClick
+  onEditReminderClick,
+  onRemoveReminderClick
 }) => {
   const {
     palette: { primary, secondary }
@@ -35,9 +36,10 @@ export const Reminder: React.FC<IReminderProps> = ({
         alignItems="flex-start"
         nowrap
       >
-        {/* TODO - style during date-fns introduce
-        <Text>{date}</Text> */}
-        <Text as={ETextTags.h3}>{title}</Text>
+        <Tile transparent size={ETileSizes.small} nowrap>
+          <Text>{date}</Text>
+          <Text as={ETextTags.h3}>{title}</Text>
+        </Tile>
         <Tile transparent size={ETileSizes.small} nowrap>
           <Button
             variant={EButtonVariants.light}
@@ -54,6 +56,14 @@ export const Reminder: React.FC<IReminderProps> = ({
             iconColor={primary}
             iconActiveColor={secondary}
             onClick={() => onEditReminderClick(id)}
+          />
+          <Button
+            variant={EButtonVariants.light}
+            size={EButtonSizes.small}
+            iconVariant={EIconVariants.EDIT}
+            iconColor={primary}
+            iconActiveColor={secondary}
+            onClick={() => onRemoveReminderClick(id)}
           />
         </Tile>
       </Tile>

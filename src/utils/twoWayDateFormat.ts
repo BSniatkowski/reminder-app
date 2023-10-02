@@ -1,4 +1,4 @@
-import { EDateFormats } from '@renderer/enums/date.enums'
+import { EDateFormats } from '../enums/date.enums'
 import { format, parse } from 'date-fns'
 
 type TTwoWayDateFormatReturn<T> = T extends string ? Date : T extends number | Date ? string : never

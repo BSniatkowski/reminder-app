@@ -22,7 +22,8 @@ export default defineConfig({
         '@pages': resolve('src/renderer/src/components/pages'),
         '@icons': resolve('src/renderer/src/assets/icons'),
         '@utils': resolve('src/utils'),
-        '@globalTypes': resolve('src/globalTypes')
+        '@globalTypes': resolve('src/globalTypes'),
+        '@enums': resolve('src/enums')
       }
     },
     plugins: [react(), eslint(), svgr()]

@@ -4,6 +4,7 @@ import { createWindow } from './createWindow/createWindow'
 import { synchronizeStoreAtMain } from '../utils/synchronizeStore'
 
 import electronLogoUrl from '../../resources/icon.png?asset'
+import { remindersTimeoutsTracker } from './remindersTimeoutsTracker/remindersTimeoutsTracker'
 
 Menu.setApplicationMenu(null)
 
@@ -42,16 +43,15 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  createWindow()
-
-  setTimeout(() => createWindow(true, '1'), 5000) // just for routing testing purpose
-
   ipcMain.on('open-popup', (_, id) => {
     createWindow(true, id)
   })
 
+  const { updateReminderTimeout } = remindersTimeoutsTracker()
+
   ipcMain.on('synchronize-reminders', (_, payload) => {
     synchronizeStoreAtMain(payload)
+    updateReminderTimeout(payload)
   })
 
   ipcMain.on('close-window', (event) => {
