@@ -3,5 +3,11 @@ import { maxFontsize } from '@renderer/components/theme/GlobalStyle/typographyCS
 import { styled } from 'styled-components'
 
 export const PopupWrapper = styled(TileWrapper)`
+  height: 320px;
   font-size: ${maxFontsize}px;
+
+  & > p {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 `

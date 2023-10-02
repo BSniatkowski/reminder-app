@@ -10,7 +10,7 @@ declare module 'styled-components' {
       white: string
       black: string
       warning: string
-      error: string
+      alert: string
     }
     spacing: {
       small: number

@@ -10,5 +10,6 @@ export enum ETextTags {
 
 export interface ITextProps {
   as?: ETextTags
+  nowrap?: boolean
   children: React.ReactNode
 }

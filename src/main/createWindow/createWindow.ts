@@ -4,7 +4,7 @@ import { join } from 'path'
 
 import icon from '../../../resources/icon.png?asset'
 
-const popupSize = { height: 300, width: 400 }
+const popupSize = { height: 320, width: 640 }
 
 export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, id) => {
   const displayDetails = screen.getPrimaryDisplay()
@@ -23,7 +23,8 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
           resizable: false,
           frame: false,
           transparent: true,
-          alwaysOnTop: true
+          alwaysOnTop: true,
+          skipTaskbar: true
         }
       : {
           minWidth: 350,
@@ -36,6 +37,11 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
       sandbox: false
     }
   })
+
+  if (isPopup) {
+    window.once('focus', () => window.flashFrame(false))
+    window.flashFrame(true)
+  }
 
   window.on('ready-to-show', () => {
     window.show()

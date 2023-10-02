@@ -36,11 +36,18 @@ export const Reminder: React.FC<IReminderProps> = ({
         alignItems="flex-start"
         nowrap
       >
-        <Tile transparent size={ETileSizes.small} nowrap>
-          <Text>{date}</Text>
+        <Tile
+          transparent
+          size={ETileSizes.small}
+          alignItems="flex-start"
+          justifyContent="flex-start"
+        >
+          <Tile>
+            <Text nowrap>{date}</Text>
+          </Tile>
           <Text as={ETextTags.h3}>{title}</Text>
         </Tile>
-        <Tile transparent size={ETileSizes.small} nowrap>
+        <Tile transparent size={ETileSizes.small} justifyContent="flex-end">
           <Button
             variant={EButtonVariants.light}
             size={EButtonSizes.small}
@@ -67,7 +74,7 @@ export const Reminder: React.FC<IReminderProps> = ({
           />
         </Tile>
       </Tile>
-      <Tile transparent size={ETileSizes.small}>
+      <Tile transparent size={ETileSizes.full}>
         <Text as={ETextTags.p}>{description}</Text>
       </Tile>
       <BackgroundWrapper>

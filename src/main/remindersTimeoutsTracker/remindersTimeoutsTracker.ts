@@ -62,16 +62,12 @@ export const remindersTimeoutsTracker = () => {
   initializeRemindersTimeouts()
 
   const updateReminderTimeout = ({ action, payload }: TSyncMethodsArgs) => {
+    clearTimeout(state.remindersTimeouts.find((timeout) => timeout.id === payload.id)?.timeoutId)
+
+    state.remindersTimeouts = removeItem<IReminderTimeout>(state.remindersTimeouts, payload.id)
+
     if (action === ESyncActions.UPDATE || action === ESyncActions.ADD) {
-      clearTimeout(state.remindersTimeouts.find((timeout) => timeout.id === payload.id)?.timeoutId)
-
       setReminderTimeout(payload)
-    }
-
-    if (action === ESyncActions.REMOVE) {
-      clearTimeout(state.remindersTimeouts.find((timeout) => timeout.id === payload.id)?.timeoutId)
-
-      state.remindersTimeouts = removeItem<IReminderTimeout>(state.remindersTimeouts, payload.id)
     }
   }
 

@@ -27,8 +27,10 @@ export const Header: React.FC<IHeaderProps> = ({ links }) => {
         contentDirection={ETileContentDirections.row}
         nowrap
       >
-        <Icon size="2.4rem" variant={EIconVariants.CALENDAR} color={primary} />
-        <Text>Reminder App</Text>
+        <Tile transparent nowrap size={ETileSizes.small}>
+          <Icon size="2.4rem" variant={EIconVariants.CALENDAR} color={primary} />
+          <Text>Reminder App</Text>
+        </Tile>
         <Navigation links={links} />
       </Tile>
     </S.HeaderWrapper>

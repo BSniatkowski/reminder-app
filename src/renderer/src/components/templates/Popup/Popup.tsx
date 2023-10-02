@@ -8,6 +8,7 @@ import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
 import { EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
+import { Decoration } from '@renderer/components/atoms/Decoration/Decoration'
 
 export const Popup: React.FC<TPopupProps> = ({ title, description, onPostpone, onClose }) => {
   const {
@@ -17,18 +18,24 @@ export const Popup: React.FC<TPopupProps> = ({ title, description, onPostpone, o
   const descriptionNodes = findAndReplaceLinks({ text: description })
 
   return (
-    <S.PopupWrapper $contentDirection={ETileContentDirections.column} $alignItems="flex-end">
+    <S.PopupWrapper
+      $size={ETileSizes.full}
+      $contentDirection={ETileContentDirections.column}
+      $justifyContent="space-between"
+      $alignItems="flex-end"
+      $nowrap
+    >
+      <Decoration animate />
       <Tile size={ETileSizes.full}>
         <Text>{title}</Text>
-        {descriptionNodes}
       </Tile>
+      {descriptionNodes}
       <Tile transparent nowrap>
         <Button
           variant={EButtonVariants.light}
           iconColor={primary}
           iconActiveColor={secondary}
           iconVariant={EIconVariants.POSTPONE}
-          text="Remind me 15 minutes later..."
           onClick={onPostpone}
         />
         <Button
