@@ -40,7 +40,8 @@ export const remindersTimeoutsTracker = () => {
   }
 
   const setNextDaySynchronization = () => {
-    const synchronizationTimeout = endOfDay(new Date())
+    const actualDate = new Date()
+    const synchronizationTime = endOfDay(actualDate)
 
     setTimeout(
       () => {
@@ -48,7 +49,7 @@ export const remindersTimeoutsTracker = () => {
         setRemindersTimeoutsForToday(getStoreAtMain())
         setNextDaySynchronization()
       },
-      differenceInMilliseconds(synchronizationTimeout, new Date())
+      differenceInMilliseconds(synchronizationTime, actualDate)
     )
   }
 
