@@ -1,5 +1,6 @@
 import { IReminderItem } from '@globalTypes/reminders.types'
 import {
+  EReminderSections,
   TOnAddReminderClick,
   TOnDialogAcceptClick,
   TOnDialogCancelClick,
@@ -9,7 +10,7 @@ import {
 } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
 
 export interface IMainProps {
-  reminders: Array<IReminderItem>
+  reminders: Array<IReminderItem & { section?: EReminderSections }>
   isDialogVisible: boolean
   dialogMainText: string
   onAddReminderClick: TOnAddReminderClick

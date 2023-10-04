@@ -3,6 +3,7 @@ import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/re
 import { useCallback, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  EReminderSections,
   TOnAddReminderClick,
   TOnDialogAcceptClick,
   TOnDialogCancelClick,
@@ -13,6 +14,8 @@ import {
 import { textPreview } from '@renderer/utils/textPreview'
 import { useNavigate } from 'react-router-dom'
 import { removeReminder } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
+import { twoWayDateFormat } from '@utils/twoWayDateFormat'
+import { addDays, isAfter, isBefore, isSameDay, isToday } from 'date-fns'
 
 export const MainPage: React.FC = () => {
   const reminders = useSelector(selectAllReminders)
@@ -28,15 +31,39 @@ export const MainPage: React.FC = () => {
     )?.title}"?`
   }, [reminders, selectedReminderId])
 
-  const formattedReminders = useMemo(() => {
-    return reminders.map(({ title, description, ...props }) => {
-      return {
-        title: textPreview({ text: title, maxLength: 25 }),
-        description: textPreview({ text: description ?? '', maxLength: 200 }),
-        ...props
-      }
-    })
-  }, [reminders])
+  const assignSection = (date: string) => {
+    const formattedDate = twoWayDateFormat(date)
+
+    const actualDate = new Date()
+
+    if (isBefore(formattedDate, actualDate)) return { section: EReminderSections.archive }
+
+    if (isToday(formattedDate)) return { section: EReminderSections.today }
+
+    if (isSameDay(addDays(formattedDate, 1), actualDate))
+      return { section: EReminderSections.tomorrow }
+
+    if (isAfter(addDays(formattedDate, 1), actualDate)) return { section: EReminderSections.future }
+
+    return {}
+  }
+
+  const formattedReminders = useMemo(
+    () =>
+      [...reminders]
+        .sort(
+          (itemA, itemB) =>
+            twoWayDateFormat(itemA.date).getTime() - twoWayDateFormat(itemB.date).getTime()
+        )
+        .map(({ title, description, date, ...props }) => ({
+          title: textPreview({ text: title, maxLength: 25 }),
+          description: textPreview({ text: description ?? '', maxLength: 200 }),
+          date,
+          ...assignSection(date),
+          ...props
+        })),
+    [reminders]
+  )
 
   const navigate = useNavigate()
 
