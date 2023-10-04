@@ -16,8 +16,8 @@ import {
 } from 'date-fns'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
-import { EDateFormats } from '@renderer/enums/date.enums'
-import { twoWayDateFormat } from '@renderer/utils/twoWayDateFormat'
+import { EDateFormats } from '@enums/date.enums'
+import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 
 import * as SharedS from '../Shared.style'
 import * as S from './Calendar.style'

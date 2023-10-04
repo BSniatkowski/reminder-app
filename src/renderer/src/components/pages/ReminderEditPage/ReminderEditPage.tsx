@@ -1,7 +1,7 @@
+import { IReminderItem } from '@globalTypes/reminders.types'
 import { IFieldItem, EFieldType, TOnSubmit } from '@renderer/components/organisms/Form/Form.types'
 import { ReminderEdit } from '@renderer/components/templates/ReminderEdit/ReminderEdit'
 import {
-  IReminderItem,
   addReminder,
   updateReminder
 } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'

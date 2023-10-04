@@ -1,82 +1,82 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { v4 as uuidv4 } from 'uuid'
-import { twoWayDateFormat } from '@renderer/utils/twoWayDateFormat'
-
-export interface IReminderItemBody {
-  title: string
-  description: string
-  date: string
-}
-
-export interface IReminderItem extends IReminderItemBody {
-  id: string
-}
+import { addItem, removeItem, updateItem } from '@utils/basicArrayOperations'
+import { IReminderItem, IUpdatedReminderItem } from '@globalTypes/reminders.types'
+import { ESyncActions } from '@globalTypes/synchronization.types'
+import { store } from '@renderer/store/store'
+import {
+  TAddReminderAction,
+  TRemoveReminderAction,
+  TUpdateReminderAction
+} from './remindersSlice.types'
 
 export interface IRemindersState {
   remindersList: Array<IReminderItem>
 }
 
 const initialState: IRemindersState = {
-  remindersList: [
-    {
-      id: '0',
-      title: 'Pariatur Lorem ad voluptate aute Lorem.',
-      description:
-        'Aute duis aliquip eiusmod id elit aliqua labore. Minim velit https://www.youtube.com/ velit dolore voluptate sint irure id. Enim voluptate laboris do irure ex nisi laboris https://www.youtube.com/ ipsum ullamco proident eiusmod. Consectetur ex veniam id aute laboris culpa. Non sit veniam minim dolor id magna est enim ex. Et ad id incididunt duis incididunt cillum fugiat officia anim https://www.facebook.com/ labore aliqua elit veniam.',
-      date: twoWayDateFormat(new Date())
-    },
-    {
-      id: '1',
-      title:
-        'Non minim sint dolore consectetur proident veniam in ullamco fugiat reprehenderit dolore eiusmod dolor officia.',
-      description:
-        'Et non adipisicing https://www.youtube.com/ nostrud consectetur aliqua eu irure ea id proident aute https://www.youtube.com/ adipisicing dolor velit. Reprehenderit enim in excepteur ullamco est velit occaecat et eu eiusmod pariatur eu et. Nostrud dolor ullamco ut enim aliquip duis labore duis officia culpa reprehenderit mollit veniam fugiat. Reprehenderit magna nostrud pariatur adipisicing non officia ad proident. Officia ad labore non occaecat non do dolor magna https://www.facebook.com/ ullamco. Ex sunt in incididunt dolore ut aliquip.',
-      date: twoWayDateFormat(new Date())
-    },
-    {
-      id: '2',
-      title: 'Laboris officia culpa aute adipisicing commodo aliqua est eu qui fugiat est et.',
-      description: 'Laboris laborum dolor dolor excepteur labore irure excepteur nisi.',
-      date: twoWayDateFormat(new Date())
-    },
-    {
-      id: '3',
-      title: 'Consectetur reprehenderit consequat in nisi commodo.',
-      description:
-        'Consectetur aute et pariatur cupidatat excepteur https://electron-vite.org/ in ex. https://electron-vite.org/ Elit https://electron-vite.org/ magna excepteur sint culpa. Duis dolore qui reprehenderit irure quis deserunt in commodo. Consectetur labore ex in reprehenderit https://electron-vite.org/ nisi fugiat do. Ipsum velit consectetur do nisi cupidatat esse eiusmod fugiat ipsum ullamco veniam laboris. Eiusmod qui et ut aute eiusmod laboris velit laborum minim est fugiat. Eu https://electron-vite.org/ aliquip consectetur pariatur ex amet commodo aute pariatur https://electron-vite.org/ consectetur ipsum anim officia sit.',
-      date: twoWayDateFormat(new Date())
-    }
-  ]
+  remindersList: window.storeFromMain || []
 }
 
 export const remindersSlice = createSlice({
   name: 'reminders',
   initialState,
   reducers: {
-    addReminder: (state, action: PayloadAction<IReminderItemBody>) => {
-      state.remindersList = [...state.remindersList, { id: uuidv4(), ...action.payload }]
+    addReminder: (state, action: TAddReminderAction) => {
+      const { title, description, date, isFromMain } = action.payload
+
+      const newItem = { id: uuidv4(), title, description, date }
+
+      state.remindersList = addItem<IReminderItem>(state.remindersList, newItem)
+
+      if (!isFromMain)
+        window.api.synchronizeReminders({ action: ESyncActions.ADD, payload: newItem })
     },
-    removeReminder: (state, action: PayloadAction<string>) => {
-      state.remindersList = state.remindersList.filter((reminder) => reminder.id !== action.payload)
-      console.log(state.remindersList)
+    removeReminder: (state, action: TRemoveReminderAction) => {
+      const { id, isFromMain } = action.payload
+
+      state.remindersList = removeItem<IReminderItem>(state.remindersList, id)
+
+      if (!isFromMain)
+        window.api.synchronizeReminders({ action: ESyncActions.REMOVE, payload: { id } })
     },
-    updateReminder: (state, action: PayloadAction<IReminderItem>) => {
-      const foundReminderIndex = state.remindersList.findIndex(
-        (reminder) => reminder.id === action.payload.id
+    updateReminder: (state, action: TUpdateReminderAction) => {
+      state.remindersList = updateItem<IReminderItem, IUpdatedReminderItem>(
+        state.remindersList,
+        action.payload
       )
 
-      if (typeof foundReminderIndex === 'number') {
-        state.remindersList = [
-          ...state.remindersList.slice(0, foundReminderIndex),
-          action.payload,
-          ...state.remindersList.slice(foundReminderIndex + 1)
-        ]
-      }
+      if (!action.payload.isFromMain)
+        window.api.synchronizeReminders({
+          action: ESyncActions.UPDATE,
+          payload: { ...action.payload, isFromMain: undefined }
+        })
     }
   }
 })
 
 export const { addReminder, removeReminder, updateReminder } = remindersSlice.actions
+
+window.api.handleSynchronizeReminders(({ action, payload }) => {
+  switch (action) {
+    case ESyncActions.ADD: {
+      store.dispatch(addReminder({ ...payload, isFromMain: true }))
+      break
+    }
+    case ESyncActions.REMOVE: {
+      store.dispatch(removeReminder({ ...payload, isFromMain: true }))
+      break
+    }
+    case ESyncActions.UPDATE: {
+      store.dispatch(updateReminder({ ...payload, isFromMain: true }))
+      break
+    }
+    default: {
+      console.error(`Uknown action: ${action}`)
+      break
+    }
+  }
+})
 
 export const remindersReducer = remindersSlice.reducer

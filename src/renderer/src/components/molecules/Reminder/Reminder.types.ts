@@ -1,10 +1,12 @@
+import { IReminderItem } from '@globalTypes/reminders.types'
 import {
   TOnEditReminderClick,
-  TOnPreviewReminderClick
+  TOnPreviewReminderClick,
+  TOnRemoveReminderClick
 } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
-import { IReminderItem } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 
 export interface IReminderProps extends IReminderItem {
   onPreviewReminderClick: TOnPreviewReminderClick
   onEditReminderClick: TOnEditReminderClick
+  onRemoveReminderClick: TOnRemoveReminderClick
 }

@@ -24,11 +24,11 @@ export const router = createHashRouter([
         path: '/reminder/:id/edit',
         element: <ReminderEditPage />,
         loader: ReminderLoader
-      },
-      {
-        path: '/popup/:id',
-        element: <PopupPage />
       }
     ]
+  },
+  {
+    path: '/popup/:id',
+    element: <PopupPage />
   }
 ])

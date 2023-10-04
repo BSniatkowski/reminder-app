@@ -12,6 +12,8 @@ import { ReactComponent as GithubIcon } from '@icons/github.svg'
 import { ReactComponent as ArrRightIcon } from '@icons/arr_right.svg'
 import { ReactComponent as ArrLeftIcon } from '@icons/arr_left.svg'
 import { ReactComponent as ClockIcon } from '@icons/clock.svg'
+import { ReactComponent as DeleteIcon } from '@icons/delete.svg'
+import { ReactComponent as PostponeIcon } from '@icons/postpone.svg'
 
 import { EIconVariants, IIconProps } from './Icon.types'
 import * as S from './Icon.style'
@@ -30,7 +32,9 @@ const iconsMap = {
   [EIconVariants.GITHUB]: GithubIcon,
   [EIconVariants.ARR_RIGHT]: ArrRightIcon,
   [EIconVariants.ARR_LEFT]: ArrLeftIcon,
-  [EIconVariants.CLOCK]: ClockIcon
+  [EIconVariants.CLOCK]: ClockIcon,
+  [EIconVariants.DELETE]: DeleteIcon,
+  [EIconVariants.POSTPONE]: PostponeIcon
 }
 
 export const Icon: React.FC<IIconProps> = ({ variant, size, isActive, color, activeColor }) => {

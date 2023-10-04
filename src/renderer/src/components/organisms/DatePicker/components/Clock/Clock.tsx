@@ -1,25 +1,26 @@
 import * as S from './Clock.style'
 import * as SharedS from '../Shared.style'
 import { IDateWidgetProps } from '../Shared.types'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { twoWayDateFormat } from '@renderer/utils/twoWayDateFormat'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import { getTimePartArray } from '../../utils/getTimePartArray'
 
-import { ETimeParts } from './Clock.types'
+import { ETimeParts, TScrollClockTo } from './Clock.types'
 import { scrollToElementInsideParent } from '../../utils/scrollToElementInsideParent'
-import { set } from 'date-fns'
+import { getHours, getMinutes, getSeconds, set } from 'date-fns'
 import { getActualVisibleListElement } from '../../utils/getActualVisibleListElement'
 import { useFormContext } from 'react-hook-form'
+import { formatTo2Digits } from '../../utils/formatTo2Digits'
 
 export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
   const time = useMemo(() => twoWayDateFormat(date), [date])
   const { setValue } = useFormContext()
 
-  const [hours, setHours] = useState<Array<string>>([])
-  const [minutes, setMinutes] = useState<Array<string>>([])
-  const [seconds, setSeconds] = useState<Array<string>>([])
+  const hours = getTimePartArray(ETimeParts.hours)
+  const minutes = getTimePartArray(ETimeParts.minutes)
+  const seconds = getTimePartArray(ETimeParts.seconds)
 
-  const itemSize = 3
+  const itemSize = 5
 
   const hoursNodesRefs = useRef<Map<string, HTMLElement>>()
 
@@ -31,71 +32,58 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
     return hoursNodesRefs.current
   }, [])
 
-  type TScrollClockTo = ({
-    hour,
-    minute,
-    second
-  }: {
-    hour: number
-    minute: number
-    second: number
-  }) => void
-
   const scrollClockTo = useCallback<TScrollClockTo>(
     ({ hour, minute, second }) => {
-      scrollToElementInsideParent({ elementId: `H${hour}`, refsMap: getRefsMap() })
-      scrollToElementInsideParent({ elementId: `M${minute}`, refsMap: getRefsMap() })
-      scrollToElementInsideParent({ elementId: `S${second}`, refsMap: getRefsMap() })
+      scrollToElementInsideParent({
+        elementId: `${ETimeParts.hours}${hour}`,
+        refsMap: getRefsMap()
+      })
+      scrollToElementInsideParent({
+        elementId: `${ETimeParts.minutes}${minute}`,
+        refsMap: getRefsMap()
+      })
+      scrollToElementInsideParent({
+        elementId: `${ETimeParts.seconds}${second}`,
+        refsMap: getRefsMap()
+      })
     },
     [getRefsMap]
   )
 
   const onMouseLeave = useCallback(() => {
-    const hour = Number(
-      getActualVisibleListElement({ refsMap: getRefsMap(), mandatoryId: 'H' })?.replace('H', '')
-    )
-    const minute = Number(
-      getActualVisibleListElement({ refsMap: getRefsMap(), mandatoryId: 'M' })?.replace('M', '')
-    )
-    const second = Number(
-      getActualVisibleListElement({ refsMap: getRefsMap(), mandatoryId: 'S' })?.replace('S', '')
-    )
+    const hour = getActualVisibleListElement({
+      refsMap: getRefsMap(),
+      mandatoryId: ETimeParts.hours
+    })?.replace(ETimeParts.hours, '')
 
-    scrollClockTo({ hour, minute, second })
+    const minute = getActualVisibleListElement({
+      refsMap: getRefsMap(),
+      mandatoryId: ETimeParts.minutes
+    })?.replace(ETimeParts.minutes, '')
 
-    const newTime = twoWayDateFormat(set(time, { hours: hour, minutes: minute, seconds: second }))
+    const second = getActualVisibleListElement({
+      refsMap: getRefsMap(),
+      mandatoryId: ETimeParts.seconds
+    })?.replace(ETimeParts.seconds, '')
+
+    const newTime = twoWayDateFormat(
+      set(time, { hours: Number(hour), minutes: Number(minute), seconds: Number(second) })
+    )
 
     setValue(name, newTime)
-  }, [getRefsMap, name, scrollClockTo, setValue, time])
+  }, [getRefsMap, name, setValue, time])
 
   useEffect(() => {
-    const actualDate = new Date()
+    const actualDate = twoWayDateFormat(date)
 
-    const newHours = getTimePartArray({
-      time,
-      timePart: ETimeParts.hours,
-      actualDate,
-      defaulNumber: 24
-    })
+    const initialClock = {
+      hour: formatTo2Digits(getHours(actualDate)),
+      minute: formatTo2Digits(getMinutes(actualDate)),
+      second: formatTo2Digits(getSeconds(actualDate))
+    }
 
-    const newMinutes = getTimePartArray({
-      time,
-      timePart: ETimeParts.minutes,
-      actualDate,
-      defaulNumber: 60
-    })
-
-    const newSeconds = getTimePartArray({
-      time,
-      timePart: ETimeParts.seconds,
-      actualDate,
-      defaulNumber: 60
-    })
-
-    setHours(newHours)
-    setMinutes(newMinutes)
-    setSeconds(newSeconds)
-  }, [time])
+    if (isVisible) scrollClockTo(initialClock)
+  }, [date, isVisible, scrollClockTo])
 
   return (
     <SharedS.DateWidgetWrapper $isVisible={isVisible} onMouseLeave={onMouseLeave}>
@@ -107,9 +95,9 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
               const map = getRefsMap()
 
               if (node) {
-                map.set(`H${hour}`, node)
+                map.set(`${ETimeParts.hours}${hour}`, node)
               } else {
-                map.delete(`H${hour}`)
+                map.delete(`${ETimeParts.hours}${hour}`)
               }
             }}
           >
@@ -125,9 +113,9 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
               const map = getRefsMap()
 
               if (node) {
-                map.set(`M${minute}`, node)
+                map.set(`${ETimeParts.minutes}${minute}`, node)
               } else {
-                map.delete(`M${minute}`)
+                map.delete(`${ETimeParts.minutes}${minute}`)
               }
             }}
           >
@@ -143,9 +131,9 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
               const map = getRefsMap()
 
               if (node) {
-                map.set(`S${second}`, node)
+                map.set(`${ETimeParts.seconds}${second}`, node)
               } else {
-                map.delete(`S${second}`)
+                map.delete(`${ETimeParts.seconds}${second}`)
               }
             }}
           >

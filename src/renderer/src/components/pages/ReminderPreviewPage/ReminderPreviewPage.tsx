@@ -1,5 +1,5 @@
+import { IReminderItem } from '@globalTypes/reminders.types'
 import { ReminderPreview } from '@renderer/components/templates/ReminderPreview/ReminderPreview'
-import { IReminderItem } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 import { useCallback } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 

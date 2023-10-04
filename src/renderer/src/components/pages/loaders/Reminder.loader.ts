@@ -1,6 +1,6 @@
 import { store } from '@renderer/store/store'
 import { selectReminderById } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
-import { twoWayDateFormat } from '@renderer/utils/twoWayDateFormat'
+import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import { redirect } from 'react-router-dom'
 
 export const ReminderLoader = ({ params }: { params: { id?: string } }) => {

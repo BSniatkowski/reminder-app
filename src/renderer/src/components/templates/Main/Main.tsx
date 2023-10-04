@@ -5,7 +5,8 @@ export const Main: React.FC<IMainProps> = ({
   reminders,
   onAddReminderClick,
   onPreviewReminderClick,
-  onEditReminderClick
+  onEditReminderClick,
+  onRemoveReminderClick
 }) => {
   return (
     <>
@@ -14,6 +15,7 @@ export const Main: React.FC<IMainProps> = ({
         onAddReminderClick={onAddReminderClick}
         onPreviewReminderClick={onPreviewReminderClick}
         onEditReminderClick={onEditReminderClick}
+        onRemoveReminderClick={onRemoveReminderClick}
       />
     </>
   )

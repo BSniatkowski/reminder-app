@@ -14,9 +14,10 @@ export const Reminder: React.FC<IReminderProps> = ({
   id,
   title,
   description,
-  // date, TODO
+  date,
   onPreviewReminderClick,
-  onEditReminderClick
+  onEditReminderClick,
+  onRemoveReminderClick
 }) => {
   const {
     palette: { primary, secondary }
@@ -35,10 +36,18 @@ export const Reminder: React.FC<IReminderProps> = ({
         alignItems="flex-start"
         nowrap
       >
-        {/* TODO - style during date-fns introduce
-        <Text>{date}</Text> */}
-        <Text as={ETextTags.h3}>{title}</Text>
-        <Tile transparent size={ETileSizes.small} nowrap>
+        <Tile
+          transparent
+          size={ETileSizes.small}
+          alignItems="flex-start"
+          justifyContent="flex-start"
+        >
+          <Tile>
+            <Text nowrap>{date}</Text>
+          </Tile>
+          <Text as={ETextTags.h3}>{title}</Text>
+        </Tile>
+        <Tile transparent size={ETileSizes.small} justifyContent="flex-end">
           <Button
             variant={EButtonVariants.light}
             size={EButtonSizes.small}
@@ -55,9 +64,17 @@ export const Reminder: React.FC<IReminderProps> = ({
             iconActiveColor={secondary}
             onClick={() => onEditReminderClick(id)}
           />
+          <Button
+            variant={EButtonVariants.light}
+            size={EButtonSizes.small}
+            iconVariant={EIconVariants.DELETE}
+            iconColor={primary}
+            iconActiveColor={secondary}
+            onClick={() => onRemoveReminderClick(id)}
+          />
         </Tile>
       </Tile>
-      <Tile transparent size={ETileSizes.small}>
+      <Tile transparent size={ETileSizes.full}>
         <Text as={ETextTags.p}>{description}</Text>
       </Tile>
       <BackgroundWrapper>

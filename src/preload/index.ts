@@ -1,16 +1,25 @@
-import { contextBridge, ipcRenderer, webFrame } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { TSyncMethodsArgs } from '../globalTypes/synchronization.types'
+import { getStoreAtMain } from '../utils/synchronizeStore'
 
 // Custom APIs for renderer
 const api = {
-  createPopup: (id) => {
-    ipcRenderer.send('create-popup', id)
+  openPopup: (id: string) => {
+    ipcRenderer.send('open-popup', id)
+  },
+  synchronizeReminders: (args: TSyncMethodsArgs) => {
+    ipcRenderer.send('synchronize-reminders', args)
+  },
+  handleSynchronizeReminders: (callback: (args: TSyncMethodsArgs) => void) => {
+    ipcRenderer.on('synchronize-reminders', (_, args) => callback(args))
   },
   closeWindow: () => {
-    console.log(webFrame.routingId)
     ipcRenderer.send('close-window')
   }
 }
+
+const storeFromMain = getStoreAtMain()
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
@@ -19,6 +28,7 @@ if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld('storeFromMain', storeFromMain)
   } catch (error) {
     console.error(error)
   }
@@ -27,4 +37,6 @@ if (process.contextIsolated) {
   window.electron = electronAPI
   // @ts-ignore (define in dts)
   window.api = api
+  // @ts-ignore (define in dts)
+  window.storeFromMain = storeFromMain
 }
