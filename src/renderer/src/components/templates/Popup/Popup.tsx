@@ -12,7 +12,7 @@ import { Decoration } from '@renderer/components/atoms/Decoration/Decoration'
 
 export const Popup: React.FC<TPopupProps> = ({ title, description, onPostpone, onClose }) => {
   const {
-    palette: { primary, secondary }
+    palette: { primary, secondary, white }
   } = useTheme()
 
   const descriptionNodes = findAndReplaceLinks({ text: description })
@@ -39,9 +39,9 @@ export const Popup: React.FC<TPopupProps> = ({ title, description, onPostpone, o
           onClick={onPostpone}
         />
         <Button
-          variant={EButtonVariants.light}
-          iconColor={primary}
-          iconActiveColor={secondary}
+          variant={EButtonVariants.remove}
+          iconColor={white}
+          iconActiveColor={white}
           iconVariant={EIconVariants.DELETE}
           onClick={onClose}
         />

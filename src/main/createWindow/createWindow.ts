@@ -4,14 +4,14 @@ import { join } from 'path'
 
 import icon from '../../../resources/icon.png?asset'
 
-const popupSize = { height: 320, width: 640 }
+const popupSize = { height: 260, width: 540 }
 
 export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, id) => {
   const displayDetails = screen.getPrimaryDisplay()
 
   const popupPosition = {
     x: displayDetails.workArea.width - popupSize.width,
-    y: 0
+    y: 30
   }
 
   // Create the browser window.
@@ -23,8 +23,7 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
           resizable: false,
           frame: false,
           transparent: true,
-          alwaysOnTop: true,
-          skipTaskbar: true
+          alwaysOnTop: true
         }
       : {
           minWidth: 350,

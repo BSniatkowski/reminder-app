@@ -1,6 +1,8 @@
 import { IReminderItem } from '@globalTypes/reminders.types'
 import { ReminderPreview } from '@renderer/components/templates/ReminderPreview/ReminderPreview'
+import { removeReminder } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 
 export const ReminderPage = () => {
@@ -10,7 +12,13 @@ export const ReminderPage = () => {
 
   const navigate = useNavigate()
 
+  const dispatch = useDispatch()
+
   const onEditReminderClick = useCallback(() => navigate(`/reminder/${id}/edit`), [id, navigate])
+  const onRemoveReminderClick = useCallback(() => {
+    dispatch(removeReminder({ id }))
+    navigate('/')
+  }, [dispatch, id, navigate])
 
   return (
     <ReminderPreview
@@ -18,6 +26,7 @@ export const ReminderPage = () => {
       description={description}
       date={date}
       onEditReminderClick={onEditReminderClick}
+      onRemoveReminderClick={onRemoveReminderClick}
     />
   )
 }

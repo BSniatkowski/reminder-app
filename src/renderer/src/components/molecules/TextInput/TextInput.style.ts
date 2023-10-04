@@ -20,4 +20,9 @@ export const STextInput = styled.input`
   outline: none;
   line-height: 1rem;
   font-size: 1.4rem;
+  color: ${({ theme }) => theme.palette.primary};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.palette.primary};
+  }
 `
