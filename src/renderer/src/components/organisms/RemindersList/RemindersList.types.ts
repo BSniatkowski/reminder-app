@@ -1,6 +1,5 @@
 import { IReminderItem } from '@globalTypes/reminders.types'
 import {
-  TOnAddReminderClick,
   TOnEditReminderClick,
   TOnPreviewReminderClick,
   TOnRemoveReminderClick
@@ -9,7 +8,6 @@ import {
 export interface IRemindersListProps {
   reminders: Array<IReminderItem>
   onPreviewReminderClick: TOnPreviewReminderClick
-  onAddReminderClick: TOnAddReminderClick
   onEditReminderClick: TOnEditReminderClick
   onRemoveReminderClick: TOnRemoveReminderClick
 }
