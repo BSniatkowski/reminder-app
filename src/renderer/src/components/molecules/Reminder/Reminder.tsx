@@ -20,7 +20,7 @@ export const Reminder: React.FC<IReminderProps> = ({
   onRemoveReminderClick
 }) => {
   const {
-    palette: { primary, secondary }
+    palette: { primary, secondary, white }
   } = useTheme()
 
   return (
@@ -65,11 +65,11 @@ export const Reminder: React.FC<IReminderProps> = ({
             onClick={() => onEditReminderClick(id)}
           />
           <Button
-            variant={EButtonVariants.light}
+            variant={EButtonVariants.remove}
             size={EButtonSizes.small}
             iconVariant={EIconVariants.DELETE}
-            iconColor={primary}
-            iconActiveColor={secondary}
+            iconColor={white}
+            iconActiveColor={white}
             onClick={() => onRemoveReminderClick(id)}
           />
         </Tile>

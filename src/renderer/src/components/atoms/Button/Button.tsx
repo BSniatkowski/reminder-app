@@ -40,7 +40,7 @@ export const Button: React.FC<IButtonProps> = ({
       {iconVariant && (
         <Icon
           variant={iconVariant}
-          size={size === EButtonSizes.small ? '1rem' : '2.4rem'}
+          size={size === EButtonSizes.small ? '1.6rem' : '2.4rem'}
           isActive={isHovered}
           color={iconColor}
           activeColor={iconActiveColor}

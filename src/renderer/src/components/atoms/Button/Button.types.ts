@@ -3,7 +3,8 @@ import { EIconVariants } from '../Icon/Icon.types'
 export enum EButtonVariants {
   normal,
   light,
-  roundTransparent
+  roundTransparent,
+  remove
 }
 
 export enum EButtonSizes {

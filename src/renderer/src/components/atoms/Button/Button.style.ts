@@ -77,6 +77,17 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
           background-color: ${theme.palette.secondary}85;
           box-shadow: 0 0 1rem 0.5rem ${theme.palette.secondary}85;
         }
+      `,
+      [EButtonVariants.remove]: css`
+        color: ${theme.palette.white};
+        background-color: ${theme.palette.alert.primary};
+        border-color: ${theme.palette.alert.primary};
+
+        &:hover {
+          color: ${theme.palette.white};
+          background-color: ${theme.palette.alert.hover};
+          border-color: ${theme.palette.alert.hover};
+        }
       `
     })[$variant]}
 `

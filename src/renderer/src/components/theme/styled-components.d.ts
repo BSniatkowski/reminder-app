@@ -10,7 +10,7 @@ declare module 'styled-components' {
       white: string
       black: string
       warning: string
-      alert: string
+      alert: { primary: string; hover: string }
     }
     spacing: {
       small: number

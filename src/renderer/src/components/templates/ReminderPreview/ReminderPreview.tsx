@@ -13,10 +13,11 @@ export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
   title,
   description,
   date,
-  onEditReminderClick
+  onEditReminderClick,
+  onRemoveReminderClick
 }) => {
   const {
-    palette: { primary, secondary }
+    palette: { primary, secondary, white }
   } = useTheme()
 
   return (
@@ -36,19 +37,36 @@ export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
       >
         {/* TODO - style during date-fns introduce */}
         <Tile>
-          <Text>{date}</Text>
+          <Text nowrap>{date}</Text>
         </Tile>
-        <Button
-          variant={EButtonVariants.light}
-          size={EButtonSizes.small}
-          iconVariant={EIconVariants.EDIT}
-          iconColor={primary}
-          iconActiveColor={secondary}
-          onClick={onEditReminderClick}
-        />
+        <Tile
+          transparent
+          size={ETileSizes.small}
+          alignItems="flex-start"
+          contentDirection={ETileContentDirections.row}
+        >
+          <Button
+            variant={EButtonVariants.light}
+            size={EButtonSizes.small}
+            iconVariant={EIconVariants.EDIT}
+            iconColor={primary}
+            iconActiveColor={secondary}
+            onClick={onEditReminderClick}
+          />
+          <Button
+            variant={EButtonVariants.remove}
+            size={EButtonSizes.small}
+            iconVariant={EIconVariants.DELETE}
+            iconColor={white}
+            iconActiveColor={white}
+            onClick={onRemoveReminderClick}
+          />
+        </Tile>
       </Tile>
-      <Text as={ETextTags.h2}>{title}</Text>
-      {findAndReplaceLinks({ text: description })}
+      <Tile transparent contentDirection={ETileContentDirections.column}>
+        <Text as={ETextTags.h2}>{title}</Text>
+        {findAndReplaceLinks({ text: description })}
+      </Tile>
     </Tile>
   )
 }

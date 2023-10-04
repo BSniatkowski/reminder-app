@@ -13,7 +13,7 @@ const theme: DefaultTheme = {
     white: '#fff',
     black: '#000',
     warning: '#ECA72C',
-    alert: '#ee5222'
+    alert: { primary: '#ff5537', hover: '#862b15' }
   },
   spacing: {
     small: 0.6,
