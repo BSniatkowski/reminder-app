@@ -1,5 +1,5 @@
 import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { maxFontsize } from '@renderer/components/theme/GlobalStyle/typographyCSS'
+import { maxFontsize } from '@renderer/providers/theme/GlobalStyle/typographyCSS'
 import { keyframes, styled } from 'styled-components'
 
 const fadeIn = keyframes`
