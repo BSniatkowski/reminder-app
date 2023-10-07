@@ -3,6 +3,7 @@ import { IReminderItemBody } from '@globalTypes/reminders.types'
 export type TPopupProps = Omit<IReminderItemBody, 'date'> & {
   isPostponeDialogVisible: boolean
   postponeDialogMainText: string
+  onDone: () => void
   onPostpone: () => void
   onPostponeDialogCancel: () => void
   onPostponeDialogAccept: () => void

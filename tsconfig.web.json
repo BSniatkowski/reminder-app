@@ -34,8 +34,8 @@
       "@pages/*": [
         "src/renderer/src/components/pages/*"
       ],
-      "@icons/*": [
-        "src/renderer/src/assets/icons/*"
+      "@assets/*": [
+        "src/renderer/src/assets/*"
       ],
       "@utils/*": [
         "src/utils/*"

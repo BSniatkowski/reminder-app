@@ -16,6 +16,7 @@ export const Popup: React.FC<TPopupProps> = ({
   description,
   isPostponeDialogVisible,
   postponeDialogMainText,
+  onDone,
   onPostpone,
   onPostponeDialogCancel,
   onPostponeDialogAccept,
@@ -62,6 +63,13 @@ export const Popup: React.FC<TPopupProps> = ({
         </Tile>
         {descriptionNodes}
         <Tile transparent nowrap>
+          <Button
+            variant={EButtonVariants.light}
+            iconColor={primary}
+            iconActiveColor={secondary}
+            iconVariant={EIconVariants.DONE}
+            onClick={onDone}
+          />
           <Button
             variant={EButtonVariants.light}
             iconColor={primary}
