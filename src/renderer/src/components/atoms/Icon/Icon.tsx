@@ -1,19 +1,20 @@
-import { ReactComponent as AddIcon } from '@icons/add.svg'
-import { ReactComponent as EditIcon } from '@icons/edit.svg'
-import { ReactComponent as NotificationIcon } from '@icons/notification.svg'
-import { ReactComponent as HomeIcon } from '@icons/home.svg'
-import { ReactComponent as CalendarIcon } from '@icons/calendar.svg'
-import { ReactComponent as StatsIcon } from '@icons/stats.svg'
-import { ReactComponent as SettingsIcon } from '@icons/settings.svg'
-import { ReactComponent as InfoIcon } from '@icons/info.svg'
-import { ReactComponent as PreviewIcon } from '@icons/preview.svg'
-import { ReactComponent as CodeIcon } from '@icons/code.svg'
-import { ReactComponent as GithubIcon } from '@icons/github.svg'
-import { ReactComponent as ArrRightIcon } from '@icons/arr_right.svg'
-import { ReactComponent as ArrLeftIcon } from '@icons/arr_left.svg'
-import { ReactComponent as ClockIcon } from '@icons/clock.svg'
-import { ReactComponent as DeleteIcon } from '@icons/delete.svg'
-import { ReactComponent as PostponeIcon } from '@icons/postpone.svg'
+import { ReactComponent as AddIcon } from '@assets/icons/add.svg'
+import { ReactComponent as EditIcon } from '@assets/icons/edit.svg'
+import { ReactComponent as NotificationIcon } from '@assets/icons/notification.svg'
+import { ReactComponent as HomeIcon } from '@assets/icons/home.svg'
+import { ReactComponent as CalendarIcon } from '@assets/icons/calendar.svg'
+import { ReactComponent as StatsIcon } from '@assets/icons/stats.svg'
+import { ReactComponent as SettingsIcon } from '@assets/icons/settings.svg'
+import { ReactComponent as InfoIcon } from '@assets/icons/info.svg'
+import { ReactComponent as PreviewIcon } from '@assets/icons/preview.svg'
+import { ReactComponent as CodeIcon } from '@assets/icons/code.svg'
+import { ReactComponent as GithubIcon } from '@assets/icons/github.svg'
+import { ReactComponent as ArrRightIcon } from '@assets/icons/arr_right.svg'
+import { ReactComponent as ArrLeftIcon } from '@assets/icons/arr_left.svg'
+import { ReactComponent as ClockIcon } from '@assets/icons/clock.svg'
+import { ReactComponent as DeleteIcon } from '@assets/icons/delete.svg'
+import { ReactComponent as PostponeIcon } from '@assets/icons/postpone.svg'
+import { ReactComponent as DoneIcon } from '@assets/icons/done.svg'
 
 import { EIconVariants, IIconProps } from './Icon.types'
 import * as S from './Icon.style'
@@ -34,7 +35,8 @@ const iconsMap = {
   [EIconVariants.ARR_LEFT]: ArrLeftIcon,
   [EIconVariants.CLOCK]: ClockIcon,
   [EIconVariants.DELETE]: DeleteIcon,
-  [EIconVariants.POSTPONE]: PostponeIcon
+  [EIconVariants.POSTPONE]: PostponeIcon,
+  [EIconVariants.DONE]: DoneIcon
 }
 
 export const Icon: React.FC<IIconProps> = ({ variant, size, isActive, color, activeColor }) => {

@@ -14,7 +14,8 @@ export enum EIconVariants {
   ARR_LEFT = 'arr_left',
   CLOCK = 'clock',
   DELETE = 'delete',
-  POSTPONE = 'postpone'
+  POSTPONE = 'postpone',
+  DONE = 'done'
 }
 
 export interface IIconProps {
