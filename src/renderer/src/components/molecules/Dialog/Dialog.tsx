@@ -20,7 +20,7 @@ export const Dialog: React.FC<IDialogProps> = ({
     <S.DialogWrapper $isVisible={isVisible}>
       <S.DialogOverlay />
       {isVisible && <S.BodyOverflowHidden />}
-      <Tile contentDirection={ETileContentDirections.column}>
+      <Tile size={ETileSizes.full} contentDirection={ETileContentDirections.column}>
         <Text as={ETextTags.h4}>{mainText}</Text>
         <Tile transparent size={ETileSizes.full} justifyContent="flex-end">
           <Button onClick={onCancel} variant={EButtonVariants.light} text={cancelText} />

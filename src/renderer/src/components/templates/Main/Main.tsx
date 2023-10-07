@@ -8,6 +8,7 @@ import { Button } from '@renderer/components/atoms/Button/Button'
 import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
+import { Accordion } from '@renderer/components/molecules/Accordion/Accordion'
 
 export const Main: React.FC<IMainProps> = ({
   reminders,
@@ -55,48 +56,44 @@ export const Main: React.FC<IMainProps> = ({
         onAccept={onDialogAcceptClick}
       />
       {archiveReminders.length > 0 && (
-        <>
-          <Divider text="Archive reminders" />
+        <Accordion title="Archive reminders">
           <RemindersList
             reminders={archiveReminders}
             onPreviewReminderClick={onPreviewReminderClick}
             onEditReminderClick={onEditReminderClick}
             onRemoveReminderClick={onRemoveReminderClick}
           />
-        </>
+        </Accordion>
       )}
       {todayReminders.length > 0 && (
-        <>
-          <Divider text="Today reminders" />
+        <Accordion title="Today reminders" initialOpen>
           <RemindersList
             reminders={todayReminders}
             onPreviewReminderClick={onPreviewReminderClick}
             onEditReminderClick={onEditReminderClick}
             onRemoveReminderClick={onRemoveReminderClick}
           />
-        </>
+        </Accordion>
       )}
       {tomorrowReminders.length > 0 && (
-        <>
-          <Divider text="Tomorrow reminders" />
+        <Accordion title="Tomorrow reminders" initialOpen>
           <RemindersList
             reminders={tomorrowReminders}
             onPreviewReminderClick={onPreviewReminderClick}
             onEditReminderClick={onEditReminderClick}
             onRemoveReminderClick={onRemoveReminderClick}
           />
-        </>
+        </Accordion>
       )}
       {futureReminders.length > 0 && (
-        <>
-          <Divider text="Future reminders" />
+        <Accordion title="Future reminders">
           <RemindersList
             reminders={futureReminders}
             onPreviewReminderClick={onPreviewReminderClick}
             onEditReminderClick={onEditReminderClick}
             onRemoveReminderClick={onRemoveReminderClick}
           />
-        </>
+        </Accordion>
       )}
       {reminders.length > 0 && <Divider />}
       <Button

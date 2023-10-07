@@ -16,9 +16,8 @@ const theme: DefaultTheme = {
     alert: { primary: '#ff5537', hover: '#862b15' }
   },
   spacing: {
-    small: 0.6,
-    normal: 1,
-    big: 1.25
+    small: 0.4,
+    normal: 0.8
   },
   border: {
     primary: `0.1rem solid ${primary}`,

@@ -40,7 +40,7 @@ export const MainPage: React.FC = () => {
 
     if (isToday(formattedDate)) return { section: EReminderSections.today }
 
-    if (isSameDay(addDays(formattedDate, 1), actualDate))
+    if (isSameDay(formattedDate, addDays(actualDate, 1)))
       return { section: EReminderSections.tomorrow }
 
     if (isAfter(addDays(formattedDate, 1), actualDate)) return { section: EReminderSections.future }
