@@ -35,7 +35,7 @@ export const Button: React.FC<IButtonProps> = ({
         seIsHovered(false)
       }}
     >
-      {text && <Text>{text}</Text>}
+      {text && <Text nowrap>{text}</Text>}
       {isHovered && !variant && !withoutDecoration && <Decoration animate color={primary} />}
       {iconVariant && (
         <Icon

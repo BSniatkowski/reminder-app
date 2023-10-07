@@ -6,19 +6,16 @@ export const TileWrapper = styled.div<ITileWrapperProps>`
   display: flex;
   align-items: ${({ $alignItems = 'center' }) => $alignItems};
   justify-content: ${({ $justifyContent = 'center' }) => $justifyContent};
-  flex-wrap: ${({ $nowrap }) => ($nowrap ? 'nowrap' : 'wrap')};
+  ${({ $nowrap }) =>
+    $nowrap
+      ? css`
+          flex-wrap: nowrap;
+        `
+      : css`
+          flex-wrap: wrap;
+          min-width: 1%;
+        `};
   color: ${({ theme }) => theme.palette.primary};
-  ${({ $transparent, theme }) =>
-    !$transparent &&
-    css`
-      background-color: ${theme.palette.white};
-    `};
-  ${({ $transparent, theme }) =>
-    !$transparent &&
-    css`
-      border: ${theme.border.primary};
-      box-shadow: ${theme.boxShadow.heavy};
-    `};
 
   flex-direction: ${({ $contentDirection }) =>
     $contentDirection === ETileContentDirections.column ? 'column' : 'row'};
@@ -44,4 +41,15 @@ export const TileWrapper = styled.div<ITileWrapperProps>`
         border-radius: ${theme.borderRadius.primary}rem;
       `
     })[$size]}
+
+  ${({ $transparent, theme }) =>
+    $transparent
+      ? css`
+          border-radius: 0;
+        `
+      : css`
+          background-color: ${theme.palette.white};
+          border: ${theme.border.primary};
+          box-shadow: ${theme.boxShadow.heavy};
+        `};
 `

@@ -40,7 +40,7 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
       `,
       [EButtonSizes.full]: css`
         width: 100%;
-        padding: ${theme.spacing.big / 2}rem ${theme.spacing.big}rem;
+        padding: ${theme.spacing.normal / 2}rem ${theme.spacing.normal}rem;
         border-radius: ${theme.borderRadius.primary}rem;
       `
     })[$size]}

@@ -29,6 +29,9 @@ export const Reminder: React.FC<IReminderProps> = ({
       contentDirection={ETileContentDirections.column}
       alignItems="flex-start"
     >
+      <BackgroundWrapper>
+        <Icon variant={EIconVariants.NOTIFICATION} color={primary} />
+      </BackgroundWrapper>
       <Tile
         transparent
         size={ETileSizes.full}
@@ -42,7 +45,7 @@ export const Reminder: React.FC<IReminderProps> = ({
           alignItems="flex-start"
           justifyContent="flex-start"
         >
-          <Tile>
+          <Tile nowrap>
             <Text nowrap>{date}</Text>
           </Tile>
           <Text as={ETextTags.h3}>{title}</Text>
@@ -77,9 +80,6 @@ export const Reminder: React.FC<IReminderProps> = ({
       <Tile transparent size={ETileSizes.full}>
         <Text as={ETextTags.p}>{description}</Text>
       </Tile>
-      <BackgroundWrapper>
-        <Icon variant={EIconVariants.NOTIFICATION} color={primary} />
-      </BackgroundWrapper>
     </Tile>
   )
 }

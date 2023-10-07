@@ -1,3 +1,3 @@
 export interface IDividerProps {
-  text?: string
+  title?: string
 }

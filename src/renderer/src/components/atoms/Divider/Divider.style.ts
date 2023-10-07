@@ -3,8 +3,8 @@ import { styled } from 'styled-components'
 export const SDivider = styled.div`
   position: relative;
   width: 100%;
-  height: ${({ theme }) => theme.spacing.small / 2}rem;
-  margin: ${({ theme }) => theme.spacing.normal}rem 0;
+  height: 2px;
+  margin: ${({ theme }) => theme.spacing.normal * 2}rem 0;
   border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   background-color: ${({ theme }) => theme.palette.primary};
 

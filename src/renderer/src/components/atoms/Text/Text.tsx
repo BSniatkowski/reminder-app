@@ -9,6 +9,7 @@ export const Text: React.FC<ITextProps> = ({ as = ETextTags.span, nowrap, childr
   } = useTheme()
 
   const basicStyles = {
+    minWidth: '1%',
     width: 'inherit',
     overflowWrap: 'break-word',
     textWrap: nowrap ? 'nowrap' : 'wrap'

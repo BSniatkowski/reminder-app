@@ -15,7 +15,6 @@ declare module 'styled-components' {
     spacing: {
       small: number
       normal: number
-      big: number
     }
     border: {
       primary: string
