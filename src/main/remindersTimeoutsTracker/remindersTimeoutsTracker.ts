@@ -27,6 +27,8 @@ export const remindersTimeoutsTracker = () => {
     for (const timeout of state.remindersTimeouts) {
       clearTimeout(timeout.timeoutId)
     }
+
+    state.remindersTimeouts = []
   }
 
   const setRemindersTimeoutsForToday = (reminders: Array<IReminderItem>) => {
