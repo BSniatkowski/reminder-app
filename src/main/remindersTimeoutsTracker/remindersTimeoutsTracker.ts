@@ -16,6 +16,8 @@ export const remindersTimeoutsTracker = () => {
   const setReminderTimeout = (reminder: IReminderItem) => {
     const timeToPopup = differenceInMilliseconds(twoWayDateFormat(reminder.date), new Date())
 
+    if (timeToPopup <= 0) return
+
     const timeoutId = setTimeout(() => createWindow(true, reminder.id), timeToPopup)
 
     state.remindersTimeouts = [...state.remindersTimeouts, { id: reminder.id, timeoutId }]
