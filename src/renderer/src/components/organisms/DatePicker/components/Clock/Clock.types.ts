@@ -1,6 +1,9 @@
 export interface ISliderProps {
+  $display: boolean
   $itemSize: number
 }
+
+export type TSliderItemInputProps = Omit<ISliderProps, '$display'>
 
 export enum ETimeParts {
   hours = 'hours',
