@@ -61,7 +61,7 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
       join(__dirname, '../renderer/index.html'),
       isPopup
         ? {
-            hash: `/popup/${JSON.stringify(id)}`
+            hash: `/popup/${id}`
           }
         : {}
     )
