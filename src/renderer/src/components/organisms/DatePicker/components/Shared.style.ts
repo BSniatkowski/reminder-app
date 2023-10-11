@@ -16,4 +16,5 @@ export const DateWidgetWrapper = styled(TileWrapper).attrs({
   z-index: 9998;
   top: 100%;
   right: 0;
+  user-select: none;
 `
