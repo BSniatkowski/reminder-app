@@ -6,10 +6,12 @@ import { Button } from '@renderer/components/atoms/Button/Button'
 import { Tile } from '@renderer/components/atoms/Tile/Tile'
 import { EFieldType, IFormProps } from './Form.types'
 import { DatePicker } from '@renderer/components/organisms/DatePicker/DatePicker'
+import { Checkbox } from '@renderer/components/molecules/Checkbox/Checkbox'
 
 const fieldsComponentsMap = {
   [EFieldType.text]: TextInput,
   [EFieldType.textarea]: Textarea,
+  [EFieldType.checkbox]: Checkbox,
   [EFieldType.date]: DatePicker
 }
 

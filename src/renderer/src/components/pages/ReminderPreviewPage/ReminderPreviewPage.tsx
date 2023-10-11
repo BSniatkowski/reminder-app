@@ -7,7 +7,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom'
 
 export const ReminderPage = () => {
   const {
-    reminder: { id, title, description, date }
+    reminder: { id, title, description, link, autoOpenLink, date }
   } = useLoaderData() as { reminder: IReminderItem }
 
   const navigate = useNavigate()
@@ -41,6 +41,8 @@ export const ReminderPage = () => {
     <ReminderPreview
       title={title}
       description={description}
+      link={link}
+      autoOpenLink={autoOpenLink}
       date={date}
       onEditReminderClick={onEditReminderClick}
       onRemoveReminderClick={onRemoveReminderClick}

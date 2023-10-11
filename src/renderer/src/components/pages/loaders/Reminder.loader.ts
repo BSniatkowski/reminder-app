@@ -6,7 +6,13 @@ import { redirect } from 'react-router-dom'
 export const ReminderLoader = ({ params }: { params: { id?: string } }) => {
   const reminder =
     params?.id === 'new'
-      ? { title: 'New reminder', description: '', date: twoWayDateFormat(new Date()) }
+      ? {
+          title: 'New reminder',
+          description: '',
+          link: '',
+          autoOpenLink: false,
+          date: twoWayDateFormat(new Date())
+        }
       : selectReminderById(params?.id)(store.getState()) ?? redirect('/404')
 
   return { reminder }

@@ -3,6 +3,7 @@ import { FieldValues, Path, SubmitHandler } from 'react-hook-form'
 export enum EFieldType {
   text = 'text',
   textarea = 'textarea',
+  checkbox = 'checkbox',
   date = 'date'
 }
 

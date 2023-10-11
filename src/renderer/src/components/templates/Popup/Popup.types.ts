@@ -1,6 +1,6 @@
 import { IReminderItemBody } from '@globalTypes/reminders.types'
 
-export type TPopupProps = Omit<IReminderItemBody, 'date'> & {
+export type TPopupProps = Omit<IReminderItemBody, 'date' | 'autoOpenLink'> & {
   isPostponeDialogVisible: boolean
   postponeDialogMainText: string
   onDone: () => void
