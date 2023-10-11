@@ -6,7 +6,7 @@ export const LayoutWrapper = styled.div`
 `
 
 export const LayoutInsideWrapper = styled.div`
-  min-height: calc(100vh - ${({ theme }) => theme.spacing.normal * 8}rem);
-  padding: 0 ${({ theme }) => theme.spacing.normal * 2}rem ${({ theme }) => theme.spacing.normal}rem;
+  min-height: calc(100vh - ${({ theme }) => theme.spacing.normal * 7}rem);
+  padding: ${({ theme }) => theme.spacing.normal}rem ${({ theme }) => theme.spacing.normal * 2}rem;
   background-color: ${({ theme }) => theme.palette.white};
 `

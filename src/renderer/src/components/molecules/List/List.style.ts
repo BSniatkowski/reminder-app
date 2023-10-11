@@ -5,6 +5,10 @@ export const ListWrapper = styled.div<IListWrapper>`
   display: flex;
   gap: ${({ theme }) => theme.spacing.normal}rem;
 
+  & > *:last-of-type {
+    margin-bottom: ${({ theme }) => theme.spacing.normal}rem;
+  }
+
   flex-direction: ${({ $direction }) => ($direction === EListDirections.column ? 'column' : 'row')};
   ${({ $wrap = false, $direction = EListDirections.row }) =>
     $wrap

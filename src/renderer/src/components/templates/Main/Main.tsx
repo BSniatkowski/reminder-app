@@ -3,7 +3,6 @@ import { IMainProps } from './Main.type'
 import { Dialog } from '@renderer/components/molecules/Dialog/Dialog'
 import { useMemo } from 'react'
 import { EReminderSections } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
-import { Divider } from '@renderer/components/atoms/Divider/Divider'
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
@@ -95,7 +94,6 @@ export const Main: React.FC<IMainProps> = ({
           />
         </Accordion>
       )}
-      {reminders.length > 0 && <Divider />}
       <Button
         size={EButtonSizes.full}
         iconVariant={EIconVariants.ADD}
