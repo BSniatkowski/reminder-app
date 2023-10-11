@@ -1,4 +1,4 @@
-import { IReminderItem } from '@globalTypes/reminders.types'
+import { IReminderItem, IReminderItemBody } from '@globalTypes/reminders.types'
 import { IFieldItem, EFieldType, TOnSubmit } from '@renderer/components/organisms/Form/Form.types'
 import { ReminderEdit } from '@renderer/components/templates/ReminderEdit/ReminderEdit'
 import {
@@ -10,21 +10,15 @@ import { useLoaderData, useNavigate } from 'react-router-dom'
 
 export const ReminderEditPage = () => {
   const {
-    reminder: { id, title, description, date }
+    reminder: { id, title, description, link, autoOpenLink, date }
   } = useLoaderData() as { reminder: IReminderItem }
 
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
-  const onSubmit: TOnSubmit<IReminderItem> = (formValues) => {
-    const { title, description, date } = formValues
-
-    dispatch(
-      id
-        ? updateReminder({ id, title, description, date })
-        : addReminder({ title, description, date })
-    )
+  const onSubmit: TOnSubmit<IReminderItemBody> = (formValues) => {
+    dispatch(id ? updateReminder({ id, ...formValues }) : addReminder(formValues))
     navigate(id ? `/reminder/${id}` : '/')
   }
 
@@ -35,6 +29,13 @@ export const ReminderEditPage = () => {
       label: 'Description',
       type: EFieldType.textarea,
       defaultValue: description
+    },
+    { name: 'link', label: 'Link', type: EFieldType.text, defaultValue: link },
+    {
+      name: 'autoOpenLink',
+      label: 'Open link at reminder show',
+      type: EFieldType.checkbox,
+      defaultValue: autoOpenLink
     },
     { name: 'date', label: 'Date', type: EFieldType.date, defaultValue: date }
   ]

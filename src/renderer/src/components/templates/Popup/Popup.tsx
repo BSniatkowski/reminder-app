@@ -10,10 +10,12 @@ import { EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { Decoration } from '@renderer/components/atoms/Decoration/Decoration'
 import { Dialog } from '@renderer/components/molecules/Dialog/Dialog'
+import { Link } from '@renderer/components/atoms/Link/Link'
 
 export const Popup: React.FC<TPopupProps> = ({
   title,
   description,
+  link,
   isPostponeDialogVisible,
   postponeDialogMainText,
   onDone,
@@ -61,6 +63,7 @@ export const Popup: React.FC<TPopupProps> = ({
         <Tile size={ETileSizes.full}>
           <Text>{title}</Text>
         </Tile>
+        <Link text={'Open associated link'} linkRef={link} />
         {descriptionNodes}
         <Tile transparent nowrap>
           <Button

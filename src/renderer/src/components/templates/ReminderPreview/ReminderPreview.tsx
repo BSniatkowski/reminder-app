@@ -9,10 +9,13 @@ import { useTheme } from 'styled-components'
 import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { findAndReplaceLinks } from '@renderer/utils/findAndReplaceLinks'
 import { Dialog } from '@renderer/components/molecules/Dialog/Dialog'
+import { Link } from '@renderer/components/atoms/Link/Link'
 
 export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
   title,
   description,
+  link,
+  autoOpenLink,
   date,
   onEditReminderClick,
   onRemoveReminderClick,
@@ -76,8 +79,21 @@ export const ReminderPreview: React.FC<IReminderPreviewProps> = ({
             />
           </Tile>
         </Tile>
-        <Tile transparent size={ETileSizes.full} contentDirection={ETileContentDirections.column}>
-          <Text as={ETextTags.h2}>{title}</Text>
+        <Tile
+          transparent
+          size={ETileSizes.full}
+          contentDirection={ETileContentDirections.column}
+          alignItems="flex-start"
+        >
+          <Text as={ETextTags.h1}>{title}</Text>
+          {link && (
+            <Tile size={ETileSizes.full} justifyContent="flex-start">
+              <Text as={ETextTags.h2}>{`Associated link${
+                autoOpenLink ? ' will be open with popup' : ''
+              }:`}</Text>
+              <Link text={link} linkRef={link} />
+            </Tile>
+          )}
           {findAndReplaceLinks({ text: description })}
         </Tile>
       </Tile>
