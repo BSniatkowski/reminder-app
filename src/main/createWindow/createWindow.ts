@@ -4,7 +4,7 @@ import { join } from 'path'
 
 import icon from '../../../resources/icon.png?asset'
 
-const popupSize = { height: 260, width: 540 }
+const popupSize = { height: 360, width: 640 }
 
 export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, id) => {
   const displayDetails = screen.getPrimaryDisplay()

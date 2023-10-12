@@ -11,11 +11,13 @@ import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/T
 import { Decoration } from '@renderer/components/atoms/Decoration/Decoration'
 import { Dialog } from '@renderer/components/molecules/Dialog/Dialog'
 import { Link } from '@renderer/components/atoms/Link/Link'
+import { YTPlayer } from '@renderer/components/organisms/YTPlayer/YTPlayer'
 
 export const Popup: React.FC<TPopupProps> = ({
   title,
   description,
   link,
+  videoId,
   isPostponeDialogVisible,
   postponeDialogMainText,
   onDone,
@@ -60,6 +62,7 @@ export const Popup: React.FC<TPopupProps> = ({
         $nowrap
       >
         <Decoration animate />
+        {videoId && <YTPlayer videoId={videoId} autoPlay />}
         <Tile size={ETileSizes.full}>
           <Text>{title}</Text>
         </Tile>
