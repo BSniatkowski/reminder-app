@@ -35,17 +35,17 @@ export const PopupPage: React.FC = () => {
     [popupData?.title]
   )
 
-  const onDone = useCallback(() => {
-    window.api.closeWindow()
-  }, [])
+  const videoId = useMemo(() => {
+    const link = popupData?.link
 
-  const onPostpone = useCallback(() => {
-    setIsPostponeDialogVisible(true)
-  }, [])
+    const isYoutubeLink = link?.match(
+      /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
+    )?.length
 
-  const onPostponeDialogCancel = useCallback(() => {
-    setIsPostponeDialogVisible(false)
-  }, [])
+    if (!isYoutubeLink) return
+
+    return link.slice(link?.indexOf('=') + 1, link?.indexOf('&'))
+  }, [popupData?.link])
 
   const onPostponeDialogAccept = useCallback(() => {
     if (!id) return
@@ -55,14 +55,6 @@ export const PopupPage: React.FC = () => {
 
     window.api.closeWindow()
   }, [dispatch, id])
-
-  const onRemove = useCallback(() => {
-    setIsRemoveReminderDialogVisible(true)
-  }, [])
-
-  const onRemoveDialogCancel = useCallback(() => {
-    setIsRemoveReminderDialogVisible(false)
-  }, [])
 
   const onRemoveDialogAccept = useCallback(() => {
     if (id) dispatch(removeReminder({ id }))
@@ -76,22 +68,23 @@ export const PopupPage: React.FC = () => {
     audio.oncanplay = () => audio.play()
   }, [])
 
-  return (
+  return popupData ? (
     <Popup
-      title={popupData?.title || 'Uknown popup'}
-      description={popupData?.description || ''}
-      link={popupData?.description || ''}
+      {...popupData}
+      videoId={videoId}
       isPostponeDialogVisible={isPostponeDialogVisible}
       isRemoveReminderDialogVisible={isRemoveReminderDialogVisible}
       postponeDialogMainText={postponeDialogMainText}
       removeDialogMainText={removeDialogMainText}
-      onDone={onDone}
-      onPostpone={onPostpone}
-      onPostponeDialogCancel={onPostponeDialogCancel}
+      onDone={() => window.api.closeWindow()}
+      onPostpone={() => setIsPostponeDialogVisible(true)}
+      onPostponeDialogCancel={() => setIsPostponeDialogVisible(false)}
       onPostponeDialogAccept={onPostponeDialogAccept}
-      onRemove={onRemove}
-      onRemoveDialogCancel={onRemoveDialogCancel}
+      onRemove={() => setIsRemoveReminderDialogVisible(true)}
+      onRemoveDialogCancel={() => setIsRemoveReminderDialogVisible(false)}
       onRemoveDialogAccept={onRemoveDialogAccept}
     />
+  ) : (
+    <>Error page placeholder</>
   )
 }

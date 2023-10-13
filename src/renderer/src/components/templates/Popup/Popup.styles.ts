@@ -11,13 +11,18 @@ const fadeIn = keyframes`
   }`
 
 export const PopupWrapper = styled(TileWrapper)`
-  height: calc(260px - 0.2rem);
-  width: calc(100% - 0.2rem);
+  min-height: 100vh;
+  height: fit-content;
   font-size: ${maxFontsize}px;
   animation: 300ms ${fadeIn} linear;
 
   & > p {
     overflow-y: auto;
     overflow-x: hidden;
+  }
+
+  & > iframe {
+    height: calc(100vh - ${({ theme }) => theme.spacing.normal * 2}rem);
+    width: 100%;
   }
 `

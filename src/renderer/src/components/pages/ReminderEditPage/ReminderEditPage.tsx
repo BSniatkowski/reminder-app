@@ -10,7 +10,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom'
 
 export const ReminderEditPage = () => {
   const {
-    reminder: { id, title, description, link, autoOpenLink, date }
+    reminder: { id, title, description, link, autoOpenLink, autoPlay, date }
   } = useLoaderData() as { reminder: IReminderItem }
 
   const dispatch = useDispatch()
@@ -36,6 +36,12 @@ export const ReminderEditPage = () => {
       label: 'Open link at reminder show',
       type: EFieldType.checkbox,
       defaultValue: autoOpenLink
+    },
+    {
+      name: 'autoPlay',
+      label: 'Autoplay video',
+      type: EFieldType.checkbox,
+      defaultValue: autoPlay
     },
     { name: 'date', label: 'Date', type: EFieldType.date, defaultValue: date }
   ]

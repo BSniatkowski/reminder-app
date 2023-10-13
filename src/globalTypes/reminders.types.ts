@@ -3,6 +3,7 @@ export interface IReminderItemBody {
   description: string
   link: string
   autoOpenLink: boolean
+  autoPlay: boolean
   date: string
 }
 
@@ -16,5 +17,6 @@ export interface IUpdatedReminderItem {
   description?: string
   link?: string
   autoOpenLink?: boolean
+  autoPlay?: boolean
   date?: string
 }
