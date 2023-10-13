@@ -12,20 +12,22 @@ import {
   set,
   getHours,
   getMinutes,
-  getSeconds
+  getSeconds,
+  startOfMonth,
+  getDay
 } from 'date-fns'
+import locale from 'date-fns/esm/locale/en-GB'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { useTheme } from 'styled-components'
 import { EDateFormats } from '@enums/date.enums'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 
-import * as SharedS from '../Shared.style'
 import * as S from './Calendar.style'
 import { IDateWidgetProps } from '../Shared.types'
 import { useFormContext } from 'react-hook-form'
 import { ETileContentDirections } from '@renderer/components/atoms/Tile/Tile.types'
 
-export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
+export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps) => {
   const { setValue } = useFormContext()
 
   const {
@@ -44,9 +46,25 @@ export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
   const actualDayInMonth = useMemo(() => getDate(new Date()), [])
 
   const currentMonthDays = useMemo(
-    () => new Array(getDaysInMonth(currentDate)).fill(1),
+    () => [...Array(getDaysInMonth(currentDate)).keys()],
     [currentDate]
   )
+
+  const selectedDayInMonth = useMemo(() => getDate(selectedDate), [selectedDate])
+
+  const weekdays = useMemo(() => {
+    const [first, ...rest] = [...Array(7).keys()].map(
+      (i) => locale?.localize?.day(i, { width: 'abbreviated' })
+    )
+
+    return [...rest, first]
+  }, [])
+
+  const emptyDaysElements = useMemo(() => {
+    const firstWeekdayOfMonth = getDay(startOfMonth(currentDate))
+
+    return [...Array(firstWeekdayOfMonth === 0 ? 6 : firstWeekdayOfMonth - 1).keys()]
+  }, [currentDate])
 
   const previousMonth = useCallback(() => {
     setCurrentDate(addMonths(currentDate, -1))
@@ -55,8 +73,6 @@ export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
   const nextMonth = useCallback(() => {
     setCurrentDate(addMonths(currentDate, 1))
   }, [currentDate, setCurrentDate])
-
-  const selectedDayInMonth = useMemo(() => getDate(selectedDate), [selectedDate])
 
   const updateSelectedDate = useCallback(
     (day: number) => {
@@ -79,7 +95,8 @@ export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
   )
 
   return (
-    <SharedS.DateWidgetWrapper
+    <S.CalendarWidgetWrapper
+      onMouseLeave={onMouseLeave}
       $contentDirection={ETileContentDirections.column}
       $isVisible={isVisible}
     >
@@ -103,7 +120,15 @@ export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
           iconActiveColor={primary}
         />
       </S.DateWrapper>
+      <S.WeekdaysWrapper>
+        {weekdays.map((dayShort) => (
+          <S.DayShort key={dayShort}>{dayShort}</S.DayShort>
+        ))}
+      </S.WeekdaysWrapper>
       <S.DaysWrapper>
+        {emptyDaysElements.map((_, index) => (
+          <S.EmptyDayElement key={index} />
+        ))}
         {currentMonthDays.map((_, day) => (
           <Button
             key={day}
@@ -119,6 +144,6 @@ export const Calendar = ({ name, date, isVisible }: IDateWidgetProps) => {
           />
         ))}
       </S.DaysWrapper>
-    </SharedS.DateWidgetWrapper>
+    </S.CalendarWidgetWrapper>
   )
 }
