@@ -67,7 +67,7 @@ export const Popup: React.FC<TPopupProps> = ({
         <Tile size={ETileSizes.full}>
           <Text>{title}</Text>
         </Tile>
-        <Link text={'Open associated link'} linkRef={link} />
+        {link && <Link text={'Open associated link'} linkRef={link} />}
         {descriptionNodes}
         <Tile transparent nowrap>
           <Button
