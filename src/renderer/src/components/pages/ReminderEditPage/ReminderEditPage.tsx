@@ -19,7 +19,7 @@ export const ReminderEditPage = () => {
 
   const onSubmit: TOnSubmit<IReminderItemBody> = (formValues) => {
     dispatch(id ? updateReminder({ id, ...formValues }) : addReminder(formValues))
-    navigate(id ? `/reminder/${id}` : '/')
+    navigate('/')
   }
 
   const fields: Array<IFieldItem<IReminderItem>> = [
