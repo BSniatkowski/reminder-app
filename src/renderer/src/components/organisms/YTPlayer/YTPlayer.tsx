@@ -18,7 +18,7 @@ export const YTPlayer = ({ videoId, autoPlay }: { videoId: string; autoPlay?: bo
       width: '640',
       videoId,
       events: {
-        onReady: (event: { target?: { playVideo: () => void } }) => {
+        onReady: (event) => {
           if (autoPlay) event?.target?.playVideo()
         }
       }
@@ -28,6 +28,7 @@ export const YTPlayer = ({ videoId, autoPlay }: { videoId: string; autoPlay?: bo
   const setOnPlayerReadyFunction = useCallback(() => {
     if (playerRef.current) return
 
+    // @ts-expect-error to type
     window.onYouTubeIframeAPIReady = createPlayer
   }, [createPlayer])
 
