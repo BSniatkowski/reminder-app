@@ -1,6 +1,9 @@
 export interface ISliderProps {
+  $display: boolean
   $itemSize: number
 }
+
+export type TSliderItemInputProps = Omit<ISliderProps, '$display'>
 
 export enum ETimeParts {
   hours = 'hours',
@@ -19,3 +22,9 @@ export type TScrollClockTo = ({
   minute?: string
   second?: string
 }) => void
+
+export type TOnInputChange = (event: React.ChangeEvent<HTMLInputElement>) => void
+
+export type TOnInputBlur = ({ timePart, value }: { timePart: ETimeParts; value: string }) => void
+
+export type TOnMouseLeaveSlider = (timePart: ETimeParts) => void

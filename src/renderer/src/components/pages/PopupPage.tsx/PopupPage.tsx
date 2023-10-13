@@ -80,6 +80,7 @@ export const PopupPage: React.FC = () => {
     <Popup
       title={popupData?.title || 'Uknown popup'}
       description={popupData?.description || ''}
+      link={popupData?.description || ''}
       isPostponeDialogVisible={isPostponeDialogVisible}
       isRemoveReminderDialogVisible={isRemoveReminderDialogVisible}
       postponeDialogMainText={postponeDialogMainText}

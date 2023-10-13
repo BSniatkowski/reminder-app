@@ -5,7 +5,7 @@ import {
   TOnRemoveReminderClick
 } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
 
-export interface IReminderProps extends IReminderItem {
+export interface IReminderProps extends Omit<IReminderItem, 'link' | 'autoOpenLink'> {
   onPreviewReminderClick: TOnPreviewReminderClick
   onEditReminderClick: TOnEditReminderClick
   onRemoveReminderClick: TOnRemoveReminderClick

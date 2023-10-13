@@ -7,6 +7,9 @@ import { createWindow } from '../createWindow/createWindow'
 import { getStoreAtMain } from '../../utils/synchronizeStore'
 import { removeItem } from '../../utils/basicArrayOperations'
 import { IReminderTimeout, IState } from './remindersTimeoutsTracker.types'
+import { shell } from 'electron'
+
+const openExternal = (url: string) => shell.openExternal(url)
 
 export const remindersTimeoutsTracker = () => {
   const state: IState = {
@@ -16,7 +19,13 @@ export const remindersTimeoutsTracker = () => {
   const setReminderTimeout = (reminder: IReminderItem) => {
     const timeToPopup = differenceInMilliseconds(twoWayDateFormat(reminder.date), new Date())
 
-    const timeoutId = setTimeout(() => createWindow(true, reminder.id), timeToPopup)
+    if (timeToPopup <= 0) return
+
+    const timeoutId = setTimeout(() => {
+      createWindow(true, reminder.id)
+
+      if (reminder.autoOpenLink) openExternal(reminder.link)
+    }, timeToPopup)
 
     state.remindersTimeouts = [...state.remindersTimeouts, { id: reminder.id, timeoutId }]
   }
@@ -25,6 +34,8 @@ export const remindersTimeoutsTracker = () => {
     for (const timeout of state.remindersTimeouts) {
       clearTimeout(timeout.timeoutId)
     }
+
+    state.remindersTimeouts = []
   }
 
   const setRemindersTimeoutsForToday = (reminders: Array<IReminderItem>) => {

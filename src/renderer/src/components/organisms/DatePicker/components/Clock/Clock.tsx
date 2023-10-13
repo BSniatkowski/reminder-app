@@ -1,11 +1,17 @@
 import * as S from './Clock.style'
 import * as SharedS from '../Shared.style'
 import { IDateWidgetProps } from '../Shared.types'
-import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import { getTimePartArray } from '../../utils/getTimePartArray'
 
-import { ETimeParts, TScrollClockTo } from './Clock.types'
+import {
+  ETimeParts,
+  TOnInputBlur,
+  TOnInputChange,
+  TOnMouseLeaveSlider,
+  TScrollClockTo
+} from './Clock.types'
 import { scrollToElementInsideParent } from '../../utils/scrollToElementInsideParent'
 import { getHours, getMinutes, getSeconds, set } from 'date-fns'
 import { getActualVisibleListElement } from '../../utils/getActualVisibleListElement'
@@ -13,8 +19,18 @@ import { useFormContext } from 'react-hook-form'
 import { formatTo2Digits } from '../../utils/formatTo2Digits'
 
 export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
-  const time = useMemo(() => twoWayDateFormat(date), [date])
   const { setValue } = useFormContext()
+
+  const time = useMemo(() => twoWayDateFormat(date), [date])
+
+  const clockSimpleFormat = useMemo(
+    () => ({
+      hour: formatTo2Digits(getHours(time)),
+      minute: formatTo2Digits(getMinutes(time)),
+      second: formatTo2Digits(getSeconds(time))
+    }),
+    [time]
+  )
 
   const hours = getTimePartArray(ETimeParts.hours)
   const minutes = getTimePartArray(ETimeParts.minutes)
@@ -23,6 +39,44 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
   const itemSize = 5
 
   const hoursNodesRefs = useRef<Map<string, HTMLElement>>()
+
+  const [activeInput, setActiveInput] = useState<null | ETimeParts>(null)
+
+  const setDate = useCallback((value: string) => setValue(name, value), [name, setValue])
+
+  const onInputChange = useCallback<TOnInputChange>((event) => {
+    const target = event?.target
+
+    if (!target) return
+
+    target.value =
+      Number(target?.value?.slice(0, 2)) <= Number(target.max)
+        ? target?.value?.slice(0, 2)
+        : target.max
+  }, [])
+
+  const onInputBlur = useCallback<TOnInputBlur>(
+    ({ timePart, value }) => {
+      const formattedValue = Number(value.slice(0, 2))
+
+      if (!formattedValue) {
+        setActiveInput(null)
+        return
+      }
+
+      const changedTime = {
+        [ETimeParts.hours]: { hours: formattedValue },
+        [ETimeParts.minutes]: { minutes: formattedValue },
+        [ETimeParts.seconds]: { seconds: formattedValue }
+      }[timePart]
+
+      const newTime = twoWayDateFormat(set(time, changedTime))
+
+      setDate(newTime)
+      setActiveInput(null)
+    },
+    [setDate, time]
+  )
 
   const getRefsMap = useCallback(() => {
     if (!hoursNodesRefs.current) {
@@ -50,44 +104,52 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
     [getRefsMap]
   )
 
-  const onMouseLeave = useCallback(() => {
-    const hour = getActualVisibleListElement({
-      refsMap: getRefsMap(),
-      mandatoryId: ETimeParts.hours
-    })?.replace(ETimeParts.hours, '')
+  const onMouseLeaveSlider = useCallback<TOnMouseLeaveSlider>(
+    (timePart) => {
+      const timeValue = getActualVisibleListElement({
+        refsMap: getRefsMap(),
+        mandatoryId: timePart
+      })?.replace(timePart, '')
 
-    const minute = getActualVisibleListElement({
-      refsMap: getRefsMap(),
-      mandatoryId: ETimeParts.minutes
-    })?.replace(ETimeParts.minutes, '')
+      if (!timeValue) return
 
-    const second = getActualVisibleListElement({
-      refsMap: getRefsMap(),
-      mandatoryId: ETimeParts.seconds
-    })?.replace(ETimeParts.seconds, '')
+      const newTimeProp = {
+        [ETimeParts.hours]: { hours: Number(timeValue) },
+        [ETimeParts.minutes]: { minutes: Number(timeValue) },
+        [ETimeParts.seconds]: { seconds: Number(timeValue) }
+      }[timePart]
 
-    const newTime = twoWayDateFormat(
-      set(time, { hours: Number(hour), minutes: Number(minute), seconds: Number(second) })
-    )
+      const newTime = twoWayDateFormat(set(time, newTimeProp))
 
-    setValue(name, newTime)
-  }, [getRefsMap, name, setValue, time])
+      setDate(newTime)
+    },
+    [getRefsMap, setDate, time]
+  )
 
   useEffect(() => {
-    const actualDate = twoWayDateFormat(date)
-
-    const initialClock = {
-      hour: formatTo2Digits(getHours(actualDate)),
-      minute: formatTo2Digits(getMinutes(actualDate)),
-      second: formatTo2Digits(getSeconds(actualDate))
-    }
-
-    if (isVisible) scrollClockTo(initialClock)
-  }, [date, isVisible, scrollClockTo])
+    if (isVisible && activeInput === null) scrollClockTo(clockSimpleFormat)
+  }, [time, isVisible, scrollClockTo, clockSimpleFormat, activeInput])
 
   return (
-    <SharedS.DateWidgetWrapper $isVisible={isVisible} onMouseLeave={onMouseLeave}>
-      <S.Slider $itemSize={itemSize}>
+    <SharedS.DateWidgetWrapper $isVisible={isVisible}>
+      {activeInput === ETimeParts.hours && (
+        <S.SliderItemInput
+          autoFocus
+          $itemSize={itemSize}
+          defaultValue={clockSimpleFormat.hour}
+          max={23}
+          onChange={onInputChange}
+          onBlur={(event) =>
+            onInputBlur({ timePart: ETimeParts.hours, value: event?.target?.value })
+          }
+        />
+      )}
+      <S.Slider
+        $display={activeInput !== ETimeParts.hours}
+        $itemSize={itemSize}
+        onMouseLeave={() => onMouseLeaveSlider(ETimeParts.hours)}
+        onClick={() => setActiveInput(ETimeParts.hours)}
+      >
         {hours.map((hour) => (
           <S.SliderItem
             key={hour}
@@ -105,7 +167,24 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
           </S.SliderItem>
         ))}
       </S.Slider>
-      <S.Slider $itemSize={itemSize}>
+      {activeInput === ETimeParts.minutes && (
+        <S.SliderItemInput
+          autoFocus
+          $itemSize={itemSize}
+          defaultValue={clockSimpleFormat.minute}
+          max={59}
+          onChange={onInputChange}
+          onBlur={(event) =>
+            onInputBlur({ timePart: ETimeParts.minutes, value: event?.target?.value })
+          }
+        />
+      )}
+      <S.Slider
+        $display={activeInput !== ETimeParts.minutes}
+        $itemSize={itemSize}
+        onMouseLeave={() => onMouseLeaveSlider(ETimeParts.minutes)}
+        onClick={() => setActiveInput(ETimeParts.minutes)}
+      >
         {minutes.map((minute) => (
           <S.SliderItem
             key={minute}
@@ -123,7 +202,24 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
           </S.SliderItem>
         ))}
       </S.Slider>
-      <S.Slider $itemSize={itemSize}>
+      {activeInput === ETimeParts.seconds && (
+        <S.SliderItemInput
+          autoFocus
+          $itemSize={itemSize}
+          defaultValue={clockSimpleFormat.second}
+          max={59}
+          onChange={onInputChange}
+          onBlur={(event) =>
+            onInputBlur({ timePart: ETimeParts.seconds, value: event?.target?.value })
+          }
+        />
+      )}
+      <S.Slider
+        $display={activeInput !== ETimeParts.seconds}
+        $itemSize={itemSize}
+        onMouseLeave={() => onMouseLeaveSlider(ETimeParts.seconds)}
+        onClick={() => setActiveInput(ETimeParts.seconds)}
+      >
         {seconds.map((second) => (
           <S.SliderItem
             key={second}

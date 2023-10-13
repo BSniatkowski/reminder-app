@@ -5,7 +5,17 @@ export const ListWrapper = styled.div<IListWrapper>`
   display: flex;
   gap: ${({ theme }) => theme.spacing.normal}rem;
 
-  flex-direction: ${({ $direction }) => ($direction === EListDirections.column ? 'column' : 'row')};
+  ${({ $direction }) =>
+    $direction === EListDirections.column
+      ? css`
+          flex-direction: column;
+          & > *:last-of-type {
+            margin-bottom: ${({ theme }) => theme.spacing.normal}rem;
+          }
+        `
+      : css`
+          flex-direction: row;
+        `};
   ${({ $wrap = false, $direction = EListDirections.row }) =>
     $wrap
       ? css`

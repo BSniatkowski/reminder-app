@@ -22,5 +22,15 @@ export const scrollToElementInsideParent: TScrollToElementInsideParent = ({
 
   if (!scrollY) return
 
-  element?.parentElement?.scrollBy(0, scrollY)
+  const onScrollEnd = () => {
+    if (!parentelement) return
+
+    parentelement?.setAttribute('style', 'pointer-events: unset')
+    parentelement?.removeEventListener('scrollend', onScrollEnd)
+  }
+
+  parentelement?.setAttribute('style', 'pointer-events: none')
+  parentelement?.addEventListener('scrollend', onScrollEnd)
+
+  parentelement?.scrollBy(0, scrollY)
 }

@@ -24,9 +24,9 @@ export const remindersSlice = createSlice({
   initialState,
   reducers: {
     addReminder: (state, action: TAddReminderAction) => {
-      const { title, description, date, isFromMain } = action.payload
+      const { isFromMain, ...props } = action.payload
 
-      const newItem = { id: uuidv4(), title, description, date }
+      const newItem = { id: uuidv4(), ...props }
 
       state.remindersList = addItem<IReminderItem>(state.remindersList, newItem)
 
@@ -42,15 +42,17 @@ export const remindersSlice = createSlice({
         window.api.synchronizeReminders({ action: ESyncActions.REMOVE, payload: { id } })
     },
     updateReminder: (state, action: TUpdateReminderAction) => {
+      const { isFromMain, ...props } = action.payload
+
       state.remindersList = updateItem<IReminderItem, IUpdatedReminderItem>(
         state.remindersList,
-        action.payload
+        props
       )
 
-      if (!action.payload.isFromMain)
+      if (!isFromMain)
         window.api.synchronizeReminders({
           action: ESyncActions.UPDATE,
-          payload: { ...action.payload, isFromMain: undefined }
+          payload: props
         })
     }
   }
