@@ -51,8 +51,18 @@ export const DatePicker = <T extends FieldValues>({ label, ...props }: IDatePick
           iconActiveColor={primary}
         />
       </S.DatePickerButtonsWrapper>
-      <Calendar name={field.name} date={field.value} isVisible={isCalendarVisible} />
-      <Clock name={field.name} date={field.value} isVisible={isClockVisible} />
+      <Calendar
+        name={field.name}
+        date={field.value}
+        isVisible={isCalendarVisible}
+        onMouseLeave={() => setIsCalendarVisible(false)}
+      />
+      <Clock
+        name={field.name}
+        date={field.value}
+        isVisible={isClockVisible}
+        onMouseLeave={() => setIsClockVisible(false)}
+      />
     </S.DatePickerWrapper>
   )
 }

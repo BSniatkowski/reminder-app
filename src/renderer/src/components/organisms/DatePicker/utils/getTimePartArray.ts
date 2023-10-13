@@ -8,5 +8,5 @@ export const getTimePartArray: TGetTimePartArray = (timePart) => {
     [ETimeParts.seconds]: 60
   }[timePart]
 
-  return new Array(defaulNumber).fill(0).map((_, index) => formatTo2Digits(index))
+  return [...Array(defaulNumber).keys()].map((_, index) => formatTo2Digits(index))
 }

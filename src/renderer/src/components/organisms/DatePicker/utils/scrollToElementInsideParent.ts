@@ -1,14 +1,13 @@
-type TScrollToElementInsideParent = ({
-  elementId,
-  refsMap
-}: {
+type TScrollToElementInsideParent = (args: {
   elementId: string
   refsMap: Map<string, HTMLElement>
+  smooth?: boolean
 }) => void
 
 export const scrollToElementInsideParent: TScrollToElementInsideParent = ({
   elementId,
-  refsMap
+  refsMap,
+  smooth
 }) => {
   const element = refsMap.get(elementId)
   const parentelement = element?.parentElement
@@ -32,5 +31,5 @@ export const scrollToElementInsideParent: TScrollToElementInsideParent = ({
   parentelement?.setAttribute('style', 'pointer-events: none')
   parentelement?.addEventListener('scrollend', onScrollEnd)
 
-  parentelement?.scrollBy(0, scrollY)
+  parentelement?.scrollBy({ left: 0, top: scrollY, behavior: smooth ? 'smooth' : 'instant' })
 }

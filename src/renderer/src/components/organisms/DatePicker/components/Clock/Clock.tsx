@@ -18,7 +18,7 @@ import { getActualVisibleListElement } from '../../utils/getActualVisibleListEle
 import { useFormContext } from 'react-hook-form'
 import { formatTo2Digits } from '../../utils/formatTo2Digits'
 
-export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
+export const Clock = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps) => {
   const { setValue } = useFormContext()
 
   const time = useMemo(() => twoWayDateFormat(date), [date])
@@ -55,11 +55,19 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
         : target.max
   }, [])
 
+  const getRefsMap = useCallback(() => {
+    if (!hoursNodesRefs.current) {
+      hoursNodesRefs.current = new Map()
+    }
+
+    return hoursNodesRefs.current
+  }, [])
+
   const onInputBlur = useCallback<TOnInputBlur>(
     ({ timePart, value }) => {
       const formattedValue = Number(value.slice(0, 2))
 
-      if (!formattedValue) {
+      if (typeof formattedValue !== 'number') {
         setActiveInput(null)
         return
       }
@@ -78,27 +86,22 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
     [setDate, time]
   )
 
-  const getRefsMap = useCallback(() => {
-    if (!hoursNodesRefs.current) {
-      hoursNodesRefs.current = new Map()
-    }
-
-    return hoursNodesRefs.current
-  }, [])
-
   const scrollClockTo = useCallback<TScrollClockTo>(
     ({ hour, minute, second }) => {
       scrollToElementInsideParent({
         elementId: `${ETimeParts.hours}${hour}`,
-        refsMap: getRefsMap()
+        refsMap: getRefsMap(),
+        smooth: true
       })
       scrollToElementInsideParent({
         elementId: `${ETimeParts.minutes}${minute}`,
-        refsMap: getRefsMap()
+        refsMap: getRefsMap(),
+        smooth: true
       })
       scrollToElementInsideParent({
         elementId: `${ETimeParts.seconds}${second}`,
-        refsMap: getRefsMap()
+        refsMap: getRefsMap(),
+        smooth: true
       })
     },
     [getRefsMap]
@@ -131,7 +134,7 @@ export const Clock = ({ name, date, isVisible }: IDateWidgetProps) => {
   }, [time, isVisible, scrollClockTo, clockSimpleFormat, activeInput])
 
   return (
-    <SharedS.DateWidgetWrapper $isVisible={isVisible}>
+    <SharedS.DateWidgetWrapper $isVisible={isVisible} onMouseLeave={onMouseLeave}>
       {activeInput === ETimeParts.hours && (
         <S.SliderItemInput
           autoFocus
