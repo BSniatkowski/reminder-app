@@ -68,11 +68,9 @@ export const PopupPage: React.FC = () => {
     audio.oncanplay = () => audio.play()
   }, [])
 
-  return (
+  return popupData ? (
     <Popup
-      title={popupData?.title || 'Uknown popup'}
-      description={popupData?.description || ''}
-      link={popupData?.link || ''}
+      {...popupData}
       videoId={videoId}
       isPostponeDialogVisible={isPostponeDialogVisible}
       isRemoveReminderDialogVisible={isRemoveReminderDialogVisible}
@@ -86,5 +84,7 @@ export const PopupPage: React.FC = () => {
       onRemoveDialogCancel={() => setIsRemoveReminderDialogVisible(false)}
       onRemoveDialogAccept={onRemoveDialogAccept}
     />
+  ) : (
+    <>Error page placeholder</>
   )
 }

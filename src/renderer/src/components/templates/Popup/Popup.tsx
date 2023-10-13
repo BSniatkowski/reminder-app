@@ -18,6 +18,7 @@ export const Popup: React.FC<TPopupProps> = ({
   description,
   link,
   videoId,
+  autoPlay,
   isPostponeDialogVisible,
   postponeDialogMainText,
   onDone,
@@ -62,7 +63,7 @@ export const Popup: React.FC<TPopupProps> = ({
         $nowrap
       >
         <Decoration animate />
-        {videoId && <YTPlayer videoId={videoId} autoPlay />}
+        {videoId && <YTPlayer videoId={videoId} autoPlay={autoPlay} />}
         <Tile size={ETileSizes.full}>
           <Text>{title}</Text>
         </Tile>

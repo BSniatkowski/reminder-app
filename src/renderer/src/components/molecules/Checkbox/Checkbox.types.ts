@@ -8,9 +8,6 @@ export interface ICheckboxProps<T extends FieldValues>
 export type TCheckbox<T extends FieldValues> = React.FC<ICheckboxProps<T>>
 
 export interface ICheckboxWrapperProps {
-  $disabled?: boolean
-}
-
-export interface ICheckboxTileProps {
   $isActive: boolean
+  $disabled?: boolean
 }

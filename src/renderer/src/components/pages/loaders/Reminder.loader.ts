@@ -11,6 +11,7 @@ export const ReminderLoader = ({ params }: { params: { id?: string } }) => {
           description: '',
           link: '',
           autoOpenLink: false,
+          autoPlay: true,
           date: twoWayDateFormat(new Date())
         }
       : selectReminderById(params?.id)(store.getState()) ?? redirect('/404')
