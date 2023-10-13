@@ -1,13 +1,15 @@
+import { ETrustedLinks } from '@enums/links.enum'
 import { useCallback, useEffect, useRef } from 'react'
+import { IYTPlayerProps, TPlayerRef, TScriptTagRef } from './YTPlayer.types'
 
-export const YTPlayer = ({ videoId, autoPlay }: { videoId: string; autoPlay?: boolean }) => {
-  const scriptTagRef = useRef<null | HTMLScriptElement>(null)
-  const playerRef = useRef<null | unknown>(null)
+export const YTPlayer: React.FC<IYTPlayerProps> = ({ videoId, autoPlay }) => {
+  const scriptTagRef = useRef<TScriptTagRef>(null)
+  const playerRef = useRef<TPlayerRef>(null)
 
   const insertYTScriptAPI = useCallback(() => {
     scriptTagRef.current = document.createElement('script')
 
-    scriptTagRef.current.src = 'https://www.youtube.com/iframe_api'
+    scriptTagRef.current.src = ETrustedLinks.youtubeAPI
     const firstScriptTag = document.getElementsByTagName('script')[0]
     firstScriptTag?.parentNode?.insertBefore(scriptTagRef.current, firstScriptTag)
   }, [])
@@ -28,7 +30,7 @@ export const YTPlayer = ({ videoId, autoPlay }: { videoId: string; autoPlay?: bo
   const setOnPlayerReadyFunction = useCallback(() => {
     if (playerRef.current) return
 
-    // @ts-expect-error to type
+    // @ts-expect-error Trigger by youtube API after scripts being loaded
     window.onYouTubeIframeAPIReady = createPlayer
   }, [createPlayer])
 
