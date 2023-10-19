@@ -19,6 +19,7 @@ export enum EIconVariants {
 }
 
 export enum EIconSizes {
+  large = '18.5rem',
   big = '6rem',
   normal = '4.6rem'
 }

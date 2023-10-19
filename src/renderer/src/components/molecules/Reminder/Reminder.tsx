@@ -1,57 +1,31 @@
 import { IReminderProps } from './Reminder.types'
-import { Button } from '@renderer/components/atoms/Button/Button'
-import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { Text } from '@renderer/components/atoms/Text/Text'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
-import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
-import { BackgroundWrapper } from './Reminder.style'
+import * as S from './Reminder.style'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
+import { EIconSizes, EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
+import { Gloss } from '@renderer/components/atoms/Gloss/Gloss'
+import { useState } from 'react'
 
-export const Reminder: React.FC<IReminderProps> = ({
-  id,
-  title,
-  description,
-  date,
-  onPreviewReminderClick,
-  onEditReminderClick,
-  onRemoveReminderClick
-}) => {
+export const Reminder: React.FC<IReminderProps> = ({ title, date, onClick }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
   return (
-    <div>
-      <BackgroundWrapper>
-        <Icon variant={EIconVariants.NOTIFICATION} />
-      </BackgroundWrapper>
-      <div>
-        <div>
-          <div>
-            <Text nowrap>{date}</Text>
-          </div>
+    <S.ReminderWrapper
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <S.ReminderInsideWrapper>
+        <S.ReminderIconTileWrapper>
+          <Icon size={EIconSizes.big} variant={EIconVariants.NOTIFICATION} />
+        </S.ReminderIconTileWrapper>
+        <S.InfoWrapper>
           <Text as={ETextTags.h3}>{title}</Text>
-        </div>
-        <div>
-          <Button
-            variant={EButtonVariants.light}
-            size={EButtonSizes.small}
-            iconVariant={EIconVariants.PREVIEW}
-            onClick={() => onPreviewReminderClick(id)}
-          />
-          <Button
-            variant={EButtonVariants.light}
-            size={EButtonSizes.small}
-            iconVariant={EIconVariants.EDIT}
-            onClick={() => onEditReminderClick(id)}
-          />
-          <Button
-            variant={EButtonVariants.remove}
-            size={EButtonSizes.small}
-            iconVariant={EIconVariants.DELETE}
-            onClick={() => onRemoveReminderClick(id)}
-          />
-        </div>
-      </div>
-      <div>
-        <Text as={ETextTags.p}>{description}</Text>
-      </div>
-    </div>
+          <Text as={ETextTags.h4}>{date}</Text>
+        </S.InfoWrapper>
+        {isHovered && <Gloss />}
+      </S.ReminderInsideWrapper>
+    </S.ReminderWrapper>
   )
 }

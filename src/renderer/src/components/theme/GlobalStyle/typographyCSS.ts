@@ -7,6 +7,7 @@ export const typographyCSS = css`
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
     box-sizing: border-box;
+    color: ${({ theme }) => theme.palette.simple.text};
   }
 
   h1 {
@@ -14,15 +15,15 @@ export const typographyCSS = css`
   }
 
   h2 {
-    font-size: 2.8rem;
+    font-size: 4.2rem;
   }
 
   h3 {
-    font-size: 2.4rem;
+    font-size: 3.2rem;
   }
 
   h4 {
-    font-size: 2rem;
+    font-size: 2.4rem;
   }
 
   h5 {

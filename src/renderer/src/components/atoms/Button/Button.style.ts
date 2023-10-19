@@ -2,6 +2,9 @@ import { css, styled } from 'styled-components'
 import { EButtonSizes, EButtonVariants, IButtonWrapperProps } from './Button.types'
 
 export const ButtonWrapper = styled.div<IButtonWrapperProps>`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   cursor: pointer;
   user-select: none;
 

@@ -2,17 +2,46 @@ import { styled } from 'styled-components'
 import {} from './Reminder.types'
 import { IconOverrideWrapper } from '@renderer/components/atoms/Icon/Icon.style'
 
-export const BackgroundWrapper = styled.div`
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  height: 100%;
+export const ReminderInsideWrapper = styled.div`
+  display: flex;
+  height: 12rem;
   width: 100%;
   overflow: hidden;
-  opacity: 0.1;
+  background-color: ${({ theme }) => theme.palette.simple.secondary};
+  border-radius: ${({ theme }) => theme.borderRadius.secondary}rem;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  cursor: pointer;
+  transition: transform 100ms ease-in;
+`
+
+export const ReminderWrapper = styled.div`
+  position: relative;
+  transform-origin: top;
+  transform: perspective(10rem);
+  min-width: 42rem;
+
+  &:hover ${ReminderInsideWrapper} {
+    transform: perspective(10rem) rotateX(2deg);
+  }
+`
+
+export const ReminderIconTileWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  aspect-ratio: 1;
+  background: ${({ theme }) => theme.palette.gradients.tile};
+  box-shadow: ${({ theme }) => theme.boxShadow};
 
   & > ${IconOverrideWrapper} {
-    transform: translate(30%, 10%) rotate(15deg);
+    transform: rotate(20deg);
   }
+`
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
 `

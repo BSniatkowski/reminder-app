@@ -14,10 +14,14 @@ export const LayoutInsideWrapper = styled.div`
 `
 
 export const ContentWrapper = styled.section`
+  position: relative;
   display: inline-block;
   vertical-align: top;
   height: 100%;
   width: calc(100% - 14rem - 2rem);
   margin-left: 2rem;
   background: ${({ theme }) => theme.palette.gradients.section};
+  border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `

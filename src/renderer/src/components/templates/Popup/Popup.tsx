@@ -5,7 +5,7 @@ import { findAndReplaceLinks } from '@renderer/utils/findAndReplaceLinks'
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
-import { Decoration } from '@renderer/components/atoms/Decoration/Decoration'
+import { Gloss } from '@renderer/components/atoms/Gloss/Gloss'
 import { Dialog } from '@renderer/components/molecules/Dialog/Dialog'
 import { Link } from '@renderer/components/atoms/Link/Link'
 import { YTPlayer } from '@renderer/components/organisms/YTPlayer/YTPlayer'
@@ -55,7 +55,7 @@ export const Popup: React.FC<TPopupProps> = ({
         $alignItems="flex-end"
         $nowrap
       >
-        <Decoration animate />
+        <Gloss animate />
         {videoId && <YTPlayer videoId={videoId} autoPlay={autoPlay} />}
         <div>
           <Text>{title}</Text>

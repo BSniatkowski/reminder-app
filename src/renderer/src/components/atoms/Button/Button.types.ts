@@ -16,7 +16,7 @@ export interface IButtonProps {
   size?: EButtonSizes
   disabled?: boolean
   withoutDecoration?: boolean
-  text?: string
+  text?: React.ReactNode
   iconVariant?: EIconVariants
   onClick: () => void
 }

@@ -1,29 +1,32 @@
-import { List } from '@renderer/components/molecules/List/List'
 import { IRemindersListProps } from './RemindersList.types'
 import { Reminder } from '@renderer/components/molecules/Reminder/Reminder'
-import { EListDirections } from '@renderer/components/molecules/List/List.types'
+import { Button } from '@renderer/components/atoms/Button/Button'
+import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
+import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
+import * as S from './RemindersList.style'
 
 export const RemindersList: React.FC<IRemindersListProps> = ({
   reminders,
-  onPreviewReminderClick,
-  onEditReminderClick,
-  onRemoveReminderClick
+  onReminderClick,
+  onAddReminderClick
 }) => {
   return (
-    <List direction={EListDirections.column}>
+    <S.RemindersListWrapper>
       {reminders.length > 0 &&
-        reminders.map(({ id, title, description, date }) => (
+        reminders.map(({ id, title, date }) => (
           <Reminder
             key={id}
             id={id}
             title={title}
-            description={description}
             date={date}
-            onPreviewReminderClick={onPreviewReminderClick}
-            onEditReminderClick={onEditReminderClick}
-            onRemoveReminderClick={onRemoveReminderClick}
+            onClick={() => onReminderClick(id)}
           />
         ))}
-    </List>
+      <Button
+        size={EButtonSizes.big}
+        iconVariant={EIconVariants.ADD}
+        onClick={onAddReminderClick}
+      />
+    </S.RemindersListWrapper>
   )
 }
