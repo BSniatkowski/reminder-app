@@ -5,19 +5,19 @@ import { Outlet } from 'react-router-dom'
 import { Aside } from '@renderer/components/organisms/Aside/Aside'
 
 const links: TLinks = [
-  { path: '/', name: 'home', text: 'Home', iconVariant: EIconVariants.HOME }
-  // {
-  //   path: '/',
-  //   name: 'settings',
-  //   text: 'Settings',
-  //   iconVariant: EIconVariants.SETTINGS
-  // },
-  // {
-  //   path: '/',
-  //   name: 'about',
-  //   text: 'About app',
-  //   iconVariant: EIconVariants.INFO
-  // }
+  { path: '/', name: 'home', text: 'Home', iconVariant: EIconVariants.HOME },
+  {
+    path: '/settings',
+    name: 'settings',
+    text: 'Settings',
+    iconVariant: EIconVariants.SETTINGS
+  },
+  {
+    path: '/about',
+    name: 'about',
+    text: 'About app',
+    iconVariant: EIconVariants.INFO
+  }
 ]
 
 export const Layout: React.FC = () => {
@@ -25,7 +25,9 @@ export const Layout: React.FC = () => {
     <S.LayoutWrapper>
       <S.LayoutInsideWrapper>
         <Aside links={links} />
-        <Outlet />
+        <S.ContentWrapper>
+          <Outlet />
+        </S.ContentWrapper>
       </S.LayoutInsideWrapper>
     </S.LayoutWrapper>
   )

@@ -10,10 +10,9 @@ export const Navigation: React.FC<INavigationProps> = ({ links }) => {
 
   return (
     <List as="nav" direction={EListDirections.column}>
-      {links.map(({ path, name, text, iconVariant }) => (
+      {links.map(({ path, name, iconVariant }) => (
         <Button
           key={name}
-          text={text}
           iconVariant={iconVariant}
           disabled={pathname === path}
           onClick={() => navigate(path)}

@@ -26,9 +26,9 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
           alwaysOnTop: true
         }
       : {
-          minWidth: 350,
-          height: 720,
-          width: 1080
+          height: 1080,
+          width: 1920,
+          frame: false
         }),
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {

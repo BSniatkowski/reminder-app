@@ -18,11 +18,16 @@ export enum EIconVariants {
   DONE = 'done'
 }
 
+export enum EIconSizes {
+  big = '6rem',
+  normal = '4.6rem'
+}
+
 export interface IIconProps {
   variant: EIconVariants
-  size?: string
+  size?: EIconSizes
 }
 
 export interface IconOverrideWrapperProps {
-  $size?: string
+  $size?: EIconSizes
 }

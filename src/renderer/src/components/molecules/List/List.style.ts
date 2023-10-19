@@ -3,6 +3,7 @@ import { EListDirections, IListWrapper } from './List.types'
 
 export const ListWrapper = styled.div<IListWrapper>`
   display: flex;
+  padding: ${({ theme }) => theme.spacing.normal}rem;
   gap: ${({ theme }) => theme.spacing.normal}rem;
 
   ${({ $direction }) =>

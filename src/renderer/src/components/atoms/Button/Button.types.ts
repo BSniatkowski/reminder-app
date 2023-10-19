@@ -2,15 +2,13 @@ import { EIconVariants } from '../Icon/Icon.types'
 
 export enum EButtonVariants {
   normal,
-  light,
-  roundTransparent,
   remove
 }
 
 export enum EButtonSizes {
   small,
   normal,
-  full
+  big
 }
 
 export interface IButtonProps {
