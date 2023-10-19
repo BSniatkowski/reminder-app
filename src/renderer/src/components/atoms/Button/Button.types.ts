@@ -20,8 +20,6 @@ export interface IButtonProps {
   withoutDecoration?: boolean
   text?: string
   iconVariant?: EIconVariants
-  iconColor?: string
-  iconActiveColor?: string
   onClick: () => void
 }
 

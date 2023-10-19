@@ -1,11 +1,7 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import styled, { css } from 'styled-components'
 import { IDateWidgetWrapperProps } from './Shared.types'
 
-export const DateWidgetWrapper = styled(TileWrapper).attrs({
-  $size: ETileSizes.small
-})<IDateWidgetWrapperProps>`
+export const DateWidgetWrapper = styled.div<IDateWidgetWrapperProps>`
   ${({ $isVisible }) =>
     !$isVisible &&
     css`

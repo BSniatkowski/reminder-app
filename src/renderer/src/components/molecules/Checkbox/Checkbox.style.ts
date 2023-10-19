@@ -1,5 +1,3 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { css, styled } from 'styled-components'
 import { ICheckboxWrapperProps } from './Checkbox.types'
 import { SLabel } from '@renderer/components/atoms/Label/Label.style'
@@ -26,13 +24,7 @@ export const CheckboxTile = styled.div`
   }
 `
 
-export const CheckboxWrapper = styled(TileWrapper).attrs<ICheckboxWrapperProps>({
-  $transparent: true,
-  $contentDirection: ETileContentDirections.row,
-  $justifyContent: 'space-between',
-  $alignItems: 'flex-start',
-  $size: ETileSizes.full
-})`
+export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
   --size: 2.2rem;
   padding-top: ${({ theme }) => theme.spacing.normal + 1.4}rem;
   cursor: pointer;

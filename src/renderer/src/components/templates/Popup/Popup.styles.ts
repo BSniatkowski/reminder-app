@@ -1,5 +1,3 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { maxFontsize } from '@renderer/components/theme/GlobalStyle/typographyCSS'
 import { keyframes, styled } from 'styled-components'
 
 const fadeIn = keyframes`
@@ -10,10 +8,9 @@ const fadeIn = keyframes`
     opacity: 1;
   }`
 
-export const PopupWrapper = styled(TileWrapper)`
+export const PopupWrapper = styled.div`
   min-height: 100vh;
   height: fit-content;
-  font-size: ${maxFontsize}px;
   animation: 300ms ${fadeIn} linear;
 
   & > p {

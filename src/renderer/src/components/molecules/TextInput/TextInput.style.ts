@@ -1,14 +1,6 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { styled } from 'styled-components'
 
-export const TextInputWrapper = styled(TileWrapper).attrs({
-  $transparent: true,
-  $contentDirection: ETileContentDirections.column,
-  $justifyContent: 'space-between',
-  $alignItems: 'flex-start',
-  $size: ETileSizes.full
-})`
+export const TextInputWrapper = styled.div`
   padding-top: ${({ theme }) => theme.spacing.normal + 1.4}rem;
 `
 
@@ -20,9 +12,9 @@ export const STextInput = styled.input`
   outline: none;
   line-height: 1rem;
   font-size: 1.4rem;
-  color: ${({ theme }) => theme.palette.primary};
+  color: ${({ theme }) => theme.palette.simple.text};
 
   &::placeholder {
-    color: ${({ theme }) => theme.palette.primary};
+    color: ${({ theme }) => theme.palette.simple.text};
   }
 `

@@ -39,16 +39,11 @@ const iconsMap = {
   [EIconVariants.DONE]: DoneIcon
 }
 
-export const Icon: React.FC<IIconProps> = ({ variant, size, isActive, color, activeColor }) => {
+export const Icon: React.FC<IIconProps> = ({ variant, size }) => {
   const IconComponent = iconsMap[variant] || AddIcon
 
   return (
-    <S.IconOverrideWrapper
-      $size={size}
-      $isActive={isActive}
-      $color={color}
-      $activeColor={activeColor}
-    >
+    <S.IconOverrideWrapper $size={size}>
       <IconComponent />
     </S.IconOverrideWrapper>
   )

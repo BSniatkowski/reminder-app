@@ -18,21 +18,15 @@ import {
 } from 'date-fns'
 import locale from 'date-fns/esm/locale/en-GB'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
-import { useTheme } from 'styled-components'
 import { EDateFormats } from '@enums/date.enums'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 
 import * as S from './Calendar.style'
 import { IDateWidgetProps } from '../Shared.types'
 import { useFormContext } from 'react-hook-form'
-import { ETileContentDirections } from '@renderer/components/atoms/Tile/Tile.types'
 
 export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps) => {
   const { setValue } = useFormContext()
-
-  const {
-    palette: { primary, white }
-  } = useTheme()
 
   const [currentDate, setCurrentDate] = useState(twoWayDateFormat(date))
   const selectedDate = useMemo(() => twoWayDateFormat(date), [date])
@@ -95,11 +89,7 @@ export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetPro
   )
 
   return (
-    <S.CalendarWidgetWrapper
-      onMouseLeave={onMouseLeave}
-      $contentDirection={ETileContentDirections.column}
-      $isVisible={isVisible}
-    >
+    <S.CalendarWidgetWrapper onMouseLeave={onMouseLeave} $isVisible={isVisible}>
       <S.DateWrapper>
         <Button
           size={EButtonSizes.small}
@@ -107,8 +97,6 @@ export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetPro
           disabled={isThisMonth}
           withoutDecoration
           iconVariant={EIconVariants.ARR_LEFT}
-          iconColor={white}
-          iconActiveColor={primary}
         />
         {format(currentDate, EDateFormats.yearAndMonth)}
         <Button
@@ -116,8 +104,6 @@ export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetPro
           onClick={nextMonth}
           withoutDecoration
           iconVariant={EIconVariants.ARR_RIGHT}
-          iconColor={white}
-          iconActiveColor={primary}
         />
       </S.DateWrapper>
       <S.WeekdaysWrapper>

@@ -3,7 +3,6 @@ import * as S from './Form.style'
 import { TextInput } from '@renderer/components/molecules/TextInput/TextInput'
 import { Textarea } from '@renderer/components/molecules/Textarea/Textarea'
 import { Button } from '@renderer/components/atoms/Button/Button'
-import { Tile } from '@renderer/components/atoms/Tile/Tile'
 import { EFieldType, IFormProps } from './Form.types'
 import { DatePicker } from '@renderer/components/organisms/DatePicker/DatePicker'
 import { Checkbox } from '@renderer/components/molecules/Checkbox/Checkbox'
@@ -37,10 +36,10 @@ export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
             <FieldComponent<FormValues> key={name} name={name} label={label} control={control} />
           )
         })}
-        <Tile transparent>
+        <div>
           <Button onClick={reset} text="Reset" />
           <Button onClick={handleSubmit(onSubmit)} text="Submit" />
-        </Tile>
+        </div>
       </S.FormWrapper>
     </FormProvider>
   )
