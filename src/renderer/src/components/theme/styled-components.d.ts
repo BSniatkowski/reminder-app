@@ -3,17 +3,29 @@ import 'styled-components'
 declare module 'styled-components' {
   export interface DefaultTheme {
     palette: {
-      primary: string
-      secondary: string
-      hover: string
-      link: string
-      white: string
-      black: string
-      warning: string
-      alert: { primary: string; hover: string }
+      simple: {
+        primary: string
+        secondary: string
+        disabled: string
+        hover: string
+        text: string
+        delete: string
+        blue: string
+        white: string
+        black: string
+      }
+      background: {
+        primary: string
+        secondary: string
+      }
+      gradients: {
+        tile: string
+        section: string
+        overlay: string
+        gloss: string
+      }
     }
     spacing: {
-      small: number
       normal: number
     }
     border: {
@@ -24,9 +36,6 @@ declare module 'styled-components' {
       primary: number
       secondary: number
     }
-    boxShadow: {
-      light: string
-      heavy: string
-    }
+    boxShadow: string
   }
 }
