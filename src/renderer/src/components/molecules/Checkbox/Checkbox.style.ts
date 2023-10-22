@@ -7,8 +7,7 @@ export const CheckboxTile = styled.div`
   margin: calc(var(--size) * 0.2);
   height: calc(var(--size) * 0.8);
   width: calc(var(--size) * 0.8);
-  border: ${({ theme }) => theme.border.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+  border: solid 2px ${({ theme }) => theme.palette.simple.text};
 
   &::after {
     content: '';
@@ -18,17 +17,18 @@ export const CheckboxTile = styled.div`
     transform: translate(-50%, -50%);
     height: 60%;
     width: 60%;
-    border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
-    background-color: ${({ theme }) => theme.palette.primary};
+    background-color: ${({ theme }) => theme.palette.simple.text};
     transition: opacity 100ms ease-in;
   }
 `
 
 export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
-  --size: 2.2rem;
-  padding-top: ${({ theme }) => theme.spacing.normal + 1.4}rem;
+  position: relative;
   cursor: pointer;
   transition: filter 100ms ease-in;
+  padding: 1.6rem 0.4rem 0.4rem 0.4rem;
+  width: 100%;
+  --size: 2rem;
 
   ${({ $disabled }) =>
     $disabled &&
@@ -37,7 +37,7 @@ export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
     `}
 
   & > ${SLabel} {
-    transform: translateX(var(--size));
+    transform: translate(calc(var(--size) + 0.4rem), -1.2rem);
   }
 
   & > ${CheckboxTile} {

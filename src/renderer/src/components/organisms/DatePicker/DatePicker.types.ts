@@ -6,3 +6,12 @@ export interface IDatePickerProps<T extends FieldValues>
     IBasicFieldProps {}
 
 export type TDatePicker<T extends FieldValues> = React.FC<IDatePickerProps<T>>
+
+export enum EActivePickers {
+  calendar = 'calendar',
+  clock = 'clock',
+  none = 'none'
+}
+export interface IDatePickerButtonsWrapperProps {
+  $activePicker?: EActivePickers
+}

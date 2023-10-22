@@ -1,15 +1,31 @@
 import { Main } from '@renderer/components/templates/Main/Main'
 import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
 import { useCallback, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { EReminderSections } from './MainPage.types'
 import { textPreview } from '@renderer/utils/textPreview'
-import { useNavigate } from 'react-router-dom'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import { addDays, isAfter, isBefore, isSameDay, isToday } from 'date-fns'
+import { ReminderEditForm } from '@renderer/components/organisms/ReminderEditForm/ReminderEditForm'
+import {
+  addReminder,
+  removeReminder,
+  updateReminder
+} from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
+import { IReminderItemBody } from '@globalTypes/reminders.types'
 
 export const MainPage: React.FC = () => {
+  const dispatch = useDispatch()
+
   const reminders = useSelector(selectAllReminders)
+
+  const [actualReminderId, setActualReminderId] = useState<null | string>(null)
+  const [isFormVisible, setIsFormVisible] = useState(false)
+
+  const reminder = useMemo(
+    () => reminders.find(({ id }) => id === actualReminderId),
+    [actualReminderId, reminders]
+  )
 
   const assignSection = (date: string) => {
     const formattedDate = twoWayDateFormat(date)
@@ -50,11 +66,49 @@ export const MainPage: React.FC = () => {
     [actualFilters, reminders]
   )
 
-  const navigate = useNavigate()
-
   const onAddReminderClick = useCallback(() => {
-    navigate(`/reminder/new/edit`)
-  }, [navigate])
+    setIsFormVisible(true)
+  }, [])
 
-  return <Main reminders={formattedReminders} onAddReminderClick={onAddReminderClick} />
+  const onReminderClick = useCallback<(id: string) => void>((id) => {
+    setActualReminderId(id)
+    setIsFormVisible(true)
+  }, [])
+
+  const onDelete = useCallback(() => {
+    setIsFormVisible(false)
+    if (!actualReminderId) return
+
+    dispatch(removeReminder({ id: actualReminderId }))
+    setActualReminderId(null)
+  }, [actualReminderId, dispatch])
+
+  const onSubmit = useCallback<(formValues: IReminderItemBody) => void>(
+    (formValues) => {
+      dispatch(
+        actualReminderId
+          ? updateReminder({ id: actualReminderId, ...formValues })
+          : addReminder(formValues)
+      )
+      setIsFormVisible(false)
+      setActualReminderId(null)
+    },
+    [actualReminderId, dispatch]
+  )
+
+  return (
+    <>
+      <Main
+        reminders={formattedReminders}
+        onReminderClick={onReminderClick}
+        onAddReminderClick={onAddReminderClick}
+      />
+      <ReminderEditForm
+        isFormVisible={isFormVisible}
+        reminder={reminder}
+        onDelete={onDelete}
+        onSubmit={onSubmit}
+      />
+    </>
+  )
 }

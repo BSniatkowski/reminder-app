@@ -8,13 +8,13 @@ import { Text } from '@renderer/components/atoms/Text/Text'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
 
-export const Main: React.FC<IMainProps> = ({ reminders, onAddReminderClick }) => {
+export const Main: React.FC<IMainProps> = ({ reminders, onReminderClick, onAddReminderClick }) => {
   return (
     <>
       {reminders.length > 0 ? (
         <RemindersList
           reminders={reminders}
-          onReminderClick={() => {}}
+          onReminderClick={onReminderClick}
           onAddReminderClick={onAddReminderClick}
         />
       ) : (

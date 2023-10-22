@@ -3,6 +3,7 @@ import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { TLinks } from '@renderer/components/molecules/Navigation/Navigation.types'
 import { Outlet } from 'react-router-dom'
 import { Aside } from '@renderer/components/organisms/Aside/Aside'
+import { TitleBar } from '@renderer/components/organisms/TitleBar/TitleBar'
 
 const links: TLinks = [
   { path: '/', name: 'home', text: 'Home', iconVariant: EIconVariants.HOME },
@@ -23,6 +24,7 @@ const links: TLinks = [
 export const Layout: React.FC = () => {
   return (
     <S.LayoutWrapper>
+      <TitleBar />
       <S.LayoutInsideWrapper>
         <Aside links={links} />
         <S.ContentWrapper>

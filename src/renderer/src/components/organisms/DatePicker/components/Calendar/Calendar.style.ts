@@ -11,15 +11,15 @@ export const DateWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  column-gap: ${({ theme }) => theme.spacing.normal}rem;
+  column-gap: 1rem;
   font-size: 1.2rem;
   font-weight: 700;
 
   & > ${ButtonWrapper} {
-    background-color: ${({ theme }) => theme.palette.primary};
+    background-color: ${({ theme }) => theme.palette.simple.primary};
 
     &:hover {
-      background-color: ${({ theme }) => theme.palette.secondary};
+      background-color: ${({ theme }) => theme.palette.simple.secondary};
     }
   }
 `
@@ -29,13 +29,10 @@ export const WeekdaysWrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: nowrap;
-  gap: ${({ theme }) => theme.spacing.small / 2}rem;
+  gap: 0.5rem;
 
   height: fit-content;
-  width: calc(
-    7 * (var(--itemSize) + ${({ theme }) => theme.spacing.small / 2}rem) -
-      ${({ theme }) => theme.spacing.small / 2}rem
-  );
+  width: calc(7 * (var(--itemSize) + 0.5rem) - 0.5rem);
 `
 
 export const DayShort = styled.div`
@@ -44,7 +41,7 @@ export const DayShort = styled.div`
   opacity: 0.7;
   text-align: center;
   font-weight: 700;
-  color: ${({ theme }) => theme.palette.primary};
+  color: ${({ theme }) => theme.palette.simple.primary};
 `
 
 export const DaysWrapper = styled.div`
@@ -53,14 +50,11 @@ export const DaysWrapper = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.small / 2}rem;
+  gap: 0.5remrem;
 
   --itemSize: 3rem;
-  height: calc(6 * (var(--itemSize) * 4 / 5 + ${({ theme }) => theme.spacing.small / 2}rem));
-  width: calc(
-    7 * (var(--itemSize) + ${({ theme }) => theme.spacing.small / 2}rem) -
-      ${({ theme }) => theme.spacing.small / 2}rem
-  );
+  height: calc(6 * (var(--itemSize) * 4 / 5 + 0.5rem));
+  width: calc(7 * (var(--itemSize) + 0.5rem) - 0.5rem);
 
   & > ${ButtonWrapper} {
     height: calc(var(--itemSize) * 4 / 5);

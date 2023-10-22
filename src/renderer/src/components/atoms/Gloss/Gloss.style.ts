@@ -18,5 +18,5 @@ export const GlossDiv = styled.div`
   background: ${({ theme }) => theme.palette.gradients.gloss};
   pointer-events: none;
   opacity: 1;
-  animation: 0.3s ${glossOpacity} ease-out;
+  animation: 0.1s ${glossOpacity} ease-out;
 `

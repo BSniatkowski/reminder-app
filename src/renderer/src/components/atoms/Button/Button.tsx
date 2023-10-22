@@ -5,16 +5,17 @@ import { EIconSizes } from '../Icon/Icon.types'
 
 export const Button: React.FC<IButtonProps> = ({
   variant,
-  size,
+  size = EButtonSizes.normal,
   disabled,
   text,
   iconVariant,
   onClick
 }) => {
   const iconSize = {
-    [EButtonSizes.big]: EIconSizes.big,
-    [EButtonSizes.normal]: EIconSizes.normal
-  }[(size = EButtonSizes.normal)]
+    [EButtonSizes.big]: EIconSizes.normal,
+    [EButtonSizes.normal]: EIconSizes.normal,
+    [EButtonSizes.small]: EIconSizes.small
+  }[size]
 
   return (
     <S.ButtonWrapper $variant={variant} $size={size} $disabled={disabled} onClick={onClick}>

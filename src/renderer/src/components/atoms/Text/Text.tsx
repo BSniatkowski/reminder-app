@@ -1,12 +1,8 @@
-import { useTheme } from 'styled-components'
 import { ETextTags, ITextProps } from './Text.types'
 import { CSSProperties } from 'react'
 
 export const Text: React.FC<ITextProps> = ({ as = ETextTags.span, nowrap, children }) => {
   const Component = as === ETextTags.a ? ETextTags.span : as
-  const {
-    spacing: { small }
-  } = useTheme()
 
   const basicStyles = {
     minWidth: '1%',
@@ -20,7 +16,7 @@ export const Text: React.FC<ITextProps> = ({ as = ETextTags.span, nowrap, childr
       ? basicStyles
       : {
           ...basicStyles,
-          padding: `${small / 2}rem`
+          padding: `0.4rem`
         }
 
   return <Component style={style}>{children}</Component>

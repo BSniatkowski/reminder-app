@@ -19,18 +19,10 @@ declare module 'styled-components' {
         secondary: string
       }
       gradients: {
-        tile: string
         section: string
         overlay: string
         gloss: string
       }
-    }
-    spacing: {
-      normal: number
-    }
-    border: {
-      primary: string
-      secondary: string
     }
     borderRadius: {
       primary: number

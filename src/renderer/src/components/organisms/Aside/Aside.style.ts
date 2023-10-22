@@ -13,7 +13,7 @@ export const AsideWrapper = styled.aside`
     margin: 1rem auto 1rem auto;
 
     & > svg > path {
-      fill: ${({ theme }) => theme.palette.simple.secondary};
+      fill: ${({ theme }) => theme.palette.simple.primary};
     }
   }
 `

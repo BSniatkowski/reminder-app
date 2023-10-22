@@ -19,7 +19,7 @@ export const PopupWrapper = styled.div`
   }
 
   & > iframe {
-    height: calc(100vh - ${({ theme }) => theme.spacing.normal * 2}rem);
+    height: calc(100vh - 2rem);
     width: 100%;
   }
 `

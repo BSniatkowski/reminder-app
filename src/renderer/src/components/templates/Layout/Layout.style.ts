@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const LayoutWrapper = styled.div`
   -webkit-app-region: drag;
-  height: 100vh;
+  height: calc(100vh - 3rem);
   overflow: hidden;
-  padding: ${({ theme }) => theme.spacing.normal}rem;
+  padding: 1rem;
+  margin-top: 3rem;
   background-color: ${({ theme }) => theme.palette.background.primary};
 `
 

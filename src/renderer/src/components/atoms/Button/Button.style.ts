@@ -37,13 +37,15 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
       `,
       [EButtonSizes.big]: css`
         padding: 0.7rem 2.8rem;
-        border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+        border-radius: ${({ theme }) => theme.borderRadius.secondary}rem;
       `
     })[$size]}
 
   ${({ $variant = EButtonVariants.normal }) =>
     ({
       [EButtonVariants.normal]: css``,
-      [EButtonVariants.remove]: css``
+      [EButtonVariants.remove]: css`
+        background-color: ${({ theme }) => theme.palette.simple.delete};
+      `
     })[$variant]}
 `

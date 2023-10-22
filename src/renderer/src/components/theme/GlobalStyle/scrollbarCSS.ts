@@ -9,6 +9,8 @@ export const scrollbarCSS = css`
 
   ::-webkit-scrollbar-track {
     background-color: ${({ theme }) => theme.palette.simple.hover};
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
   }
 
   ::-webkit-scrollbar-thumb {

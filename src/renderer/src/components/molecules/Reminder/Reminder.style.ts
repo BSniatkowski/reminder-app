@@ -31,7 +31,7 @@ export const ReminderIconTileWrapper = styled.div`
   justify-content: center;
   height: 100%;
   aspect-ratio: 1;
-  background: ${({ theme }) => theme.palette.gradients.tile};
+  background: ${({ theme }) => theme.palette.simple.primary};
   box-shadow: ${({ theme }) => theme.boxShadow};
 
   & > ${IconOverrideWrapper} {
