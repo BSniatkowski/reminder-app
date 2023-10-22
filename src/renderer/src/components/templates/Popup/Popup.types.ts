@@ -14,3 +14,7 @@ export type TPopupProps = Omit<IReminderItemBody, 'date' | 'autoOpenLink'> & {
   onRemoveDialogCancel: () => void
   onRemoveDialogAccept: () => void
 }
+
+export interface IPopupWrapperProps {
+  $withVideo: boolean
+}

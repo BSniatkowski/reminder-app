@@ -1,5 +1,6 @@
 import { IconOverrideWrapper } from '@renderer/components/atoms/Icon/Icon.style'
-import { keyframes, styled } from 'styled-components'
+import { css, keyframes, styled } from 'styled-components'
+import { IPopupWrapperProps } from './Popup.types'
 
 const fadeIn = keyframes`
   0% {
@@ -9,15 +10,27 @@ const fadeIn = keyframes`
     opacity: 1;
   }`
 
-export const PopupWrapper = styled.div`
+export const PopupWrapper = styled.div<IPopupWrapperProps>`
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  height: 100vh;
   padding: 1rem;
   border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   background-color: ${({ theme }) => theme.palette.simple.white};
   animation: 300ms ${fadeIn} linear;
+
+  ${({ $withVideo }) =>
+    $withVideo
+      ? css`
+          height: fit-content;
+          overflow-y: auto;
+          overflow-x: hidden;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        `
+      : css`
+          height: 100vh;
+        `}
 
   & > iframe {
     height: calc(100vh - 2rem);

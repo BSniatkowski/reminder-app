@@ -24,7 +24,7 @@ export const Popup: React.FC<TPopupProps> = ({
   const descriptionNodes = findAndReplaceLinks({ text: description })
 
   return (
-    <S.PopupWrapper>
+    <S.PopupWrapper $withVideo={!!videoId}>
       {videoId && <YTPlayer videoId={videoId} autoPlay={autoPlay} />}
       <S.TitleWithIcon>
         <Icon variant={EIconVariants.NOTIFICATION} size={EIconSizes.normal} />
