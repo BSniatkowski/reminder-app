@@ -1,5 +1,5 @@
 import { Button } from '@renderer/components/atoms/Button/Button'
-import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
+import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
 import { useCallback, useMemo, useState } from 'react'
 
 import {
@@ -92,18 +92,16 @@ export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetPro
     <S.CalendarWidgetWrapper onMouseLeave={onMouseLeave} $isVisible={isVisible}>
       <S.DateWrapper>
         <Button
-          size={EButtonSizes.small}
           onClick={previousMonth}
           disabled={isThisMonth}
-          withoutDecoration
           iconVariant={EIconVariants.ARR_LEFT}
+          size={EButtonSizes.xsmall}
         />
         {format(currentDate, EDateFormats.yearAndMonth)}
         <Button
-          size={EButtonSizes.small}
           onClick={nextMonth}
-          withoutDecoration
           iconVariant={EIconVariants.ARR_RIGHT}
+          size={EButtonSizes.xsmall}
         />
       </S.DateWrapper>
       <S.WeekdaysWrapper>
@@ -116,18 +114,14 @@ export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetPro
           <S.EmptyDayElement key={index} />
         ))}
         {currentMonthDays.map((_, day) => (
-          <Button
+          <S.DayElement
             key={day}
-            variant={
-              selectedDayInMonth === day + 1 && isSameMonthAsSelected
-                ? EButtonVariants.normal
-                : EButtonVariants.light
-            }
-            disabled={isThisMonth && day + 1 < actualDayInMonth}
-            withoutDecoration
+            $isSelected={selectedDayInMonth === day + 1 && isSameMonthAsSelected}
+            $disabled={isThisMonth && day + 1 < actualDayInMonth}
             onClick={() => updateSelectedDate(day + 1)}
-            text={`${day + 1}`}
-          />
+          >
+            {day + 1}
+          </S.DayElement>
         ))}
       </S.DaysWrapper>
     </S.CalendarWidgetWrapper>

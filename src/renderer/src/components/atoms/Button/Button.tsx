@@ -14,7 +14,8 @@ export const Button: React.FC<IButtonProps> = ({
   const iconSize = {
     [EButtonSizes.big]: EIconSizes.normal,
     [EButtonSizes.normal]: EIconSizes.normal,
-    [EButtonSizes.small]: EIconSizes.small
+    [EButtonSizes.small]: EIconSizes.small,
+    [EButtonSizes.xsmall]: EIconSizes.xsmall
   }[size]
 
   return (

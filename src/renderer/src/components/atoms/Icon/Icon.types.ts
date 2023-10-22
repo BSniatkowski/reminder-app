@@ -26,14 +26,15 @@ export enum EIconSizes {
   large = '18.5rem',
   big = '6rem',
   normal = '4.6rem',
-  small = '3.4rem'
+  small = '3.4rem',
+  xsmall = '1.4rem'
 }
 
 export interface IIconProps {
   variant: EIconVariants
-  size?: EIconSizes | string
+  size?: EIconSizes
 }
 
 export interface IconOverrideWrapperProps {
-  $size?: EIconSizes | string
+  $size?: EIconSizes
 }

@@ -106,7 +106,7 @@ export const MainPage: React.FC = () => {
       <ReminderEditForm
         isFormVisible={isFormVisible}
         reminder={reminder}
-        onDelete={onDelete}
+        onDelete={!!actualReminderId && onDelete}
         onSubmit={onSubmit}
       />
     </>

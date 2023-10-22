@@ -21,13 +21,13 @@ export const DatePickerButtonsWrapper = styled.div<IDatePickerButtonsWrapperProp
   ${({ $activePicker = EActivePickers.none }) =>
     ({
       [EActivePickers.calendar]: css`
-        & > ${ButtonWrapper}:nth-child(1) svg path {
-          box-shadow: 0 0 4px 0 ${({ theme }) => theme.palette.simple.text};
+        & > ${ButtonWrapper}:nth-child(1) svg {
+          filter: drop-shadow(0 0 0.8rem ${({ theme }) => theme.palette.simple.text});
         }
       `,
       [EActivePickers.clock]: css`
-        & > ${ButtonWrapper}:nth-child(2) svg path {
-          box-shadow: 0 0 4px 0 ${({ theme }) => theme.palette.simple.text};
+        & > ${ButtonWrapper}:nth-child(2) svg {
+          filter: drop-shadow(0 0 0.8rem ${({ theme }) => theme.palette.simple.text});
         }
       `,
       [EActivePickers.none]: ''

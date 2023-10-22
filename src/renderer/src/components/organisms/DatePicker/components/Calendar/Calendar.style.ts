@@ -1,25 +1,27 @@
 import { ButtonWrapper } from '@renderer/components/atoms/Button/Button.style'
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 import { DateWidgetWrapper } from '../Shared.style'
 
 export const CalendarWidgetWrapper = styled(DateWidgetWrapper)`
-  --itemSize: 3rem;
+  --itemSize: 2.4rem;
+
+  flex-direction: column;
+  row-gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
 `
 
 export const DateWrapper = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  column-gap: 1rem;
-  font-size: 1.2rem;
-  font-weight: 700;
 
   & > ${ButtonWrapper} {
-    background-color: ${({ theme }) => theme.palette.simple.primary};
+    padding: 0 0.5rem;
+    background-color: ${({ theme }) => theme.palette.simple.secondary};
 
     &:hover {
-      background-color: ${({ theme }) => theme.palette.simple.secondary};
+      background-color: ${({ theme }) => theme.palette.simple.hover};
     }
   }
 `
@@ -36,12 +38,8 @@ export const WeekdaysWrapper = styled.div`
 `
 
 export const DayShort = styled.div`
-  padding: calc(var(--itemSize) * 1 / 5);
   width: var(--itemSize);
-  opacity: 0.7;
   text-align: center;
-  font-weight: 700;
-  color: ${({ theme }) => theme.palette.simple.primary};
 `
 
 export const DaysWrapper = styled.div`
@@ -50,24 +48,48 @@ export const DaysWrapper = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
-  gap: 0.5remrem;
+  gap: 0.5rem;
 
-  --itemSize: 3rem;
-  height: calc(6 * (var(--itemSize) * 4 / 5 + 0.5rem));
+  height: calc(8 * (var(--itemSize) - 1rem));
   width: calc(7 * (var(--itemSize) + 0.5rem) - 0.5rem);
+`
 
-  & > ${ButtonWrapper} {
-    height: calc(var(--itemSize) * 4 / 5);
-    width: var(--itemSize);
+export const DayElement = styled.div<{ $isSelected: boolean; $disabled: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(var(--itemSize) - 1rem);
+  width: var(--itemSize);
+  background-color: ${({ theme }) => theme.palette.simple.secondary};
 
-    & > span {
-      padding: 0 !important;
-      font-weight: 500;
-    }
+  ${({ theme, $disabled }) =>
+    $disabled
+      ? css`
+          pointer-events: none;
+          background-color: ${theme.palette.simple.disabled};
+        `
+      : css`
+          box-shadow: ${({ theme }) => theme.boxShadow};
+          cursor: pointer;
+
+          &:hover {
+            background-color: ${theme.palette.simple.hover};
+          }
+        `}
+
+  ${({ theme, $isSelected }) =>
+    $isSelected &&
+    css`
+      background-color: ${theme.palette.simple.delete};
+    `}
+
+  & > span {
+    padding: 0 !important;
+    font-weight: 500;
   }
 `
 
 export const EmptyDayElement = styled.div`
-  height: calc(var(--itemSize) * 4 / 5);
+  height: calc(var(--itemSize) - 1rem);
   width: var(--itemSize);
 `

@@ -49,7 +49,11 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
       {isFormVisible && <S.ReminderEditFormModalOverlay />}
       <S.ReminderEditFormModal $isFormVisible={isFormVisible}>
         {isFormVisible && (
-          <Form<IReminderItem> fields={fields} onDelete={onDelete} onSubmit={onSubmit} />
+          <Form<IReminderItem>
+            fields={fields}
+            onDelete={onDelete && onDelete}
+            onSubmit={onSubmit}
+          />
         )}
       </S.ReminderEditFormModal>
     </>

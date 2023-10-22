@@ -42,12 +42,14 @@ export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
           })}
         </S.FormInsideWrapper>
         <S.ActionButtonsContainer>
-          <Button
-            onClick={onDelete}
-            variant={EButtonVariants.remove}
-            size={EButtonSizes.big}
-            iconVariant={EIconVariants.DELETE}
-          />
+          {onDelete && (
+            <Button
+              onClick={onDelete}
+              variant={EButtonVariants.remove}
+              size={EButtonSizes.big}
+              iconVariant={EIconVariants.DELETE}
+            />
+          )}
           <Button
             size={EButtonSizes.big}
             onClick={handleSubmit(onSubmit)}

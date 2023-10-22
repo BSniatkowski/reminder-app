@@ -33,7 +33,7 @@ export const DatePicker = <T extends FieldValues>({ label, ...props }: IDatePick
         : isClockVisible
         ? EActivePickers.clock
         : EActivePickers.none,
-    []
+    [isCalendarVisible, isClockVisible]
   )
 
   return (

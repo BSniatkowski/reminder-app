@@ -20,6 +20,6 @@ export interface IFieldItem<FormValues> extends IBasicFieldProps {
 export type TOnSubmit<FormValues extends FieldValues> = SubmitHandler<FormValues>
 export interface IFormProps<FormValues extends FieldValues> {
   fields: Array<IFieldItem<FormValues>>
-  onDelete: () => void
+  onDelete?: false | (() => void)
   onSubmit: TOnSubmit<FormValues>
 }

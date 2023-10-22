@@ -6,6 +6,7 @@ export enum EButtonVariants {
 }
 
 export enum EButtonSizes {
+  xsmall,
   small,
   normal,
   big
@@ -15,7 +16,6 @@ export interface IButtonProps {
   variant?: EButtonVariants
   size?: EButtonSizes
   disabled?: boolean
-  withoutDecoration?: boolean
   text?: React.ReactNode
   iconVariant?: EIconVariants
   onClick: () => void
