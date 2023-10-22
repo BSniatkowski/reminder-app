@@ -4,5 +4,6 @@ export const LinkWrapper = styled.a`
   min-width: 1%;
   width: 100%;
   overflow-wrap: break-word;
-  color: ${({ theme }) => theme.palette.link};
+  color: ${({ theme }) => theme.palette.simple.primary};
+  text-decoration: none;
 `

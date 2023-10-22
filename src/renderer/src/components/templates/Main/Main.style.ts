@@ -11,7 +11,7 @@ export const EncourageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  min-width: 46rem;
+  min-width: 47.5rem;
   width: 50%;
 `
 
