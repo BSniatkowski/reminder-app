@@ -26,6 +26,8 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
           alwaysOnTop: true
         }
       : {
+          minHeight: 740,
+          minWidth: 640,
           height: 1080,
           width: 1920,
           frame: false

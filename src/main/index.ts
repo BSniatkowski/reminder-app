@@ -66,6 +66,28 @@ app.whenReady().then(() => {
     }
   })
 
+  ipcMain.on('ask-for-state', (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender)
+
+    window?.webContents.send('ask-for-state', window?.isMaximized())
+  })
+
+  ipcMain.on('toggle-maximize-window', (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender)
+
+    if (window?.isMaximized()) {
+      window?.unmaximize()
+    } else {
+      window?.maximize()
+    }
+  })
+
+  ipcMain.on('minimize-window', (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender)
+
+    window?.minimize()
+  })
+
   ipcMain.on('close-window', (event) => {
     event.sender.close()
   })
