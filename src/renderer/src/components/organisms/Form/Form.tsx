@@ -22,8 +22,6 @@ export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
   onDelete,
   onSubmit
 }: IFormProps<FormValues>): React.ReactNode => {
-  console.time('form render')
-
   const defaultValues = useMemo(
     () => Object.fromEntries(fields.map(({ name, defaultValue }) => [name, defaultValue])),
     [fields]
@@ -57,7 +55,6 @@ export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
     return [...fieldsWithoutConditions, ...fieldsWithCheckedConditions]
   }, [fields, watchAllFields])
 
-  console.timeEnd('form render')
   return (
     <FormProvider
       control={control}

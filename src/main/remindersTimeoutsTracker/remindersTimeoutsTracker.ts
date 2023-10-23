@@ -25,7 +25,7 @@ export const remindersTimeoutsTracker = () => {
     const timeoutId = setTimeout(() => {
       createWindow({ id: reminder.id, small: !reminder.description && !reminder.link })
 
-      if (reminder.autoOpenLink) openExternal(reminder.link)
+      if (reminder.link && reminder.autoOpenLink) openExternal(reminder.link)
     }, timeToPopup)
 
     state.remindersTimeouts = [...state.remindersTimeouts, { id: reminder.id, timeoutId }]
