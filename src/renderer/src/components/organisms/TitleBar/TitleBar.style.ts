@@ -13,16 +13,17 @@ export const TitleBarWrapper = styled.header`
   background-color: ${({ theme }) => theme.palette.simple.secondary};
 `
 
-export const BarIconAndTitle = styled.header`
+export const BarIconAndTitle = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 3rem;
   padding-left: 0.8rem;
+  gap: 0.8rem;
   width: fit-content;
   font-weight: 600;
 `
-export const ButtonsContainer = styled.header`
+export const ButtonsContainer = styled.div`
   -webkit-app-region: no-drag;
   display: flex;
   justify-content: flex-start;

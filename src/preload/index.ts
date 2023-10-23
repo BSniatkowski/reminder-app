@@ -5,9 +5,6 @@ import { getStoreAtMain } from '../utils/synchronizeStore'
 
 // Custom APIs for renderer
 const api = {
-  openPopup: (id: string) => {
-    ipcRenderer.send('open-popup', id)
-  },
   synchronizeReminders: (args: TSyncMethodsArgs) => {
     ipcRenderer.send('synchronize-reminders', args)
   },

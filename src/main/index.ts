@@ -43,10 +43,6 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  ipcMain.on('open-popup', (_, id) => {
-    createWindow(true, id)
-  })
-
   const { updateReminderTimeout } = remindersTimeoutsTracker()
 
   ipcMain.on('synchronize-reminders', (event, payload) => {

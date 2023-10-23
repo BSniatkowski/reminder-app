@@ -10,6 +10,7 @@ import { YTPlayer } from '@renderer/components/organisms/YTPlayer/YTPlayer'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { textPreview } from '@renderer/utils/textPreview'
+import { useMemo } from 'react'
 
 export const Popup: React.FC<TPopupProps> = ({
   title,
@@ -23,8 +24,10 @@ export const Popup: React.FC<TPopupProps> = ({
 }) => {
   const descriptionNodes = findAndReplaceLinks({ text: description })
 
+  const isSmall = useMemo(() => !description && !link, [description, link])
+
   return (
-    <S.PopupWrapper $withVideo={!!videoId}>
+    <S.PopupWrapper $withVideo={!!videoId} $isSmall={isSmall}>
       {videoId && <YTPlayer videoId={videoId} autoPlay={autoPlay} />}
       <S.TitleWithIcon>
         <Icon variant={EIconVariants.NOTIFICATION} size={EIconSizes.normal} />
@@ -32,15 +35,23 @@ export const Popup: React.FC<TPopupProps> = ({
       </S.TitleWithIcon>
       {link && <Link text={textPreview({ text: link, maxLength: 70 })} linkRef={link} />}
       {descriptionNodes}
-      <S.ButtonsContainer>
+      <S.ButtonsContainer $isSmall={isSmall}>
         <Button
-          size={EButtonSizes.big}
+          size={isSmall ? EButtonSizes.small : EButtonSizes.big}
           variant={EButtonVariants.remove}
           iconVariant={EIconVariants.DELETE}
           onClick={onRemove}
         />
-        <Button size={EButtonSizes.big} iconVariant={EIconVariants.POSTPONE} onClick={onPostpone} />
-        <Button size={EButtonSizes.big} iconVariant={EIconVariants.DONE} onClick={onDone} />
+        <Button
+          size={isSmall ? EButtonSizes.small : EButtonSizes.big}
+          iconVariant={EIconVariants.POSTPONE}
+          onClick={onPostpone}
+        />
+        <Button
+          size={isSmall ? EButtonSizes.small : EButtonSizes.big}
+          iconVariant={EIconVariants.DONE}
+          onClick={onDone}
+        />
       </S.ButtonsContainer>
     </S.PopupWrapper>
   )

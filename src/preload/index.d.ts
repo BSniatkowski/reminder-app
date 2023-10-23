@@ -8,7 +8,6 @@ declare global {
     storeFromMain?: Array<IReminderItem>
     electron: ElectronAPI
     api: {
-      openPopup: (id: string) => void
       synchronizeReminders: (args: ISyncMethodsArgs) => void
       handleSynchronizeReminders: (callback: (args: ISyncMethodsArgs) => void) => void
       askForState: () => void

@@ -6,7 +6,7 @@ import {
 import { selectReminderById } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import { addMinutes } from 'date-fns'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -15,25 +15,9 @@ import popupSound from '@assets/sounds/popup_open.mp3'
 export const PopupPage: React.FC = () => {
   const { id } = useParams()
 
-  const [isPostponeDialogVisible, setIsPostponeDialogVisible] = useState(false)
-  const [isRemoveReminderDialogVisible, setIsRemoveReminderDialogVisible] = useState(false)
-
   const dispatch = useDispatch()
 
   const popupData = useSelector(selectReminderById(id))
-
-  const postponeDialogMainText = useMemo(
-    () =>
-      `Are you sure you want to postpone reminder "${
-        popupData?.title || 'Uknown popup'
-      }" for 15 minutes?`,
-    [popupData?.title]
-  )
-
-  const removeDialogMainText = useMemo(
-    () => `Are you sure you want to delete: "${popupData?.title || 'Uknown popup'}"?`,
-    [popupData?.title]
-  )
 
   const videoId = useMemo(() => {
     const link = popupData?.link
@@ -47,7 +31,7 @@ export const PopupPage: React.FC = () => {
     return link.slice(link?.indexOf('=') + 1, link?.indexOf('&'))
   }, [popupData?.link])
 
-  const onPostponeDialogAccept = useCallback(() => {
+  const onPostpone = useCallback(() => {
     if (!id) return
 
     const newDate = addMinutes(new Date(), 15)
@@ -56,7 +40,7 @@ export const PopupPage: React.FC = () => {
     window.api.closeWindow()
   }, [dispatch, id])
 
-  const onRemoveDialogAccept = useCallback(() => {
+  const onRemove = useCallback(() => {
     if (id) dispatch(removeReminder({ id }))
 
     window.api.closeWindow()
@@ -72,17 +56,9 @@ export const PopupPage: React.FC = () => {
     <Popup
       {...popupData}
       videoId={videoId}
-      isPostponeDialogVisible={isPostponeDialogVisible}
-      isRemoveReminderDialogVisible={isRemoveReminderDialogVisible}
-      postponeDialogMainText={postponeDialogMainText}
-      removeDialogMainText={removeDialogMainText}
       onDone={() => window.api.closeWindow()}
-      onPostpone={() => setIsPostponeDialogVisible(true)}
-      onPostponeDialogCancel={() => setIsPostponeDialogVisible(false)}
-      onPostponeDialogAccept={onPostponeDialogAccept}
-      onRemove={() => setIsRemoveReminderDialogVisible(true)}
-      onRemoveDialogCancel={() => setIsRemoveReminderDialogVisible(false)}
-      onRemoveDialogAccept={onRemoveDialogAccept}
+      onPostpone={onPostpone}
+      onRemove={onRemove}
     />
   ) : (
     <>Error page placeholder</>

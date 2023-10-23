@@ -23,7 +23,7 @@ export const remindersTimeoutsTracker = () => {
     if (timeToPopup <= 0 || !isToday(twoWayDateFormat(reminder.date))) return
 
     const timeoutId = setTimeout(() => {
-      createWindow(true, reminder.id)
+      createWindow({ id: reminder.id, small: !reminder.description && !reminder.link })
 
       if (reminder.autoOpenLink) openExternal(reminder.link)
     }, timeToPopup)

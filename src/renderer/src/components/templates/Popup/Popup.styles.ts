@@ -1,6 +1,6 @@
 import { IconOverrideWrapper } from '@renderer/components/atoms/Icon/Icon.style'
 import { css, keyframes, styled } from 'styled-components'
-import { IPopupWrapperProps } from './Popup.types'
+import { IButtonsContainerProps, IPopupWrapperProps } from './Popup.types'
 
 const fadeIn = keyframes`
   0% {
@@ -12,45 +12,52 @@ const fadeIn = keyframes`
 
 export const PopupWrapper = styled.div<IPopupWrapperProps>`
   display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
   padding: 1rem;
   border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   background-color: ${({ theme }) => theme.palette.simple.white};
   animation: 300ms ${fadeIn} linear;
+  gap: 1rem;
 
-  ${({ $withVideo }) =>
-    $withVideo
+  ${({ $isSmall, $withVideo }) =>
+    $isSmall
       ? css`
-          height: fit-content;
-          overflow-y: auto;
-          overflow-x: hidden;
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
+          justify-content: space-between;
         `
       : css`
-          height: 100vh;
+          flex-direction: column;
+
+          ${$withVideo
+            ? css`
+                height: fit-content;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+              `
+            : css`
+                height: 100vh;
+              `}
+
+          & > iframe {
+            height: calc(100vh - 2rem);
+            width: 100%;
+          }
+
+          & > a {
+            font-size: 1.6rem;
+            font-weight: 600;
+          }
+
+          & > p {
+            height: 21rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 1rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: ${({ theme }) => theme.palette.simple.primary};
+          }
         `}
-
-  & > iframe {
-    height: calc(100vh - 2rem);
-    width: 100%;
-  }
-
-  & > a {
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
-
-  & > p {
-    height: 21rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 1rem;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: ${({ theme }) => theme.palette.simple.primary};
-  }
 `
 
 export const TitleWithIcon = styled.div`
@@ -68,9 +75,9 @@ export const TitleWithIcon = styled.div`
   }
 `
 
-export const ButtonsContainer = styled.div`
+export const ButtonsContainer = styled.div<IButtonsContainerProps>`
   display: flex;
   justify-content: flex-end;
   column-gap: 1rem;
-  padding: 1rem 0;
+  padding: ${({ $isSmall }) => ($isSmall ? 0 : '1rem')} 0;
 `
