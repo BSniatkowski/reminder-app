@@ -9,10 +9,12 @@ export enum EFieldType {
 
 export interface IBasicFieldProps {
   label?: string
+  isVisible?: boolean
 }
 
 export interface IFieldItem<FormValues> extends IBasicFieldProps {
   name: Path<FormValues>
+  visibilityConditions?: Array<{ fieldName: string; condtion: (value: unknown) => boolean }>
   type: EFieldType
   defaultValue: unknown
 }

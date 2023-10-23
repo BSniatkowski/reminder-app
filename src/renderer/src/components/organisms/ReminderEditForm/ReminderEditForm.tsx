@@ -32,12 +32,26 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
     {
       name: 'autoOpenLink',
       label: 'Open link at reminder show',
+      visibilityConditions: [
+        { fieldName: 'link', condtion: (value) => typeof value === 'string' && value?.length > 0 }
+      ],
       type: EFieldType.checkbox,
       defaultValue: autoOpenLink
     },
     {
       name: 'autoPlay',
       label: 'Autoplay video',
+      visibilityConditions: [
+        {
+          fieldName: 'link',
+          condtion: (value) =>
+            typeof value === 'string' &&
+            value?.length > 0 &&
+            !!value?.match(
+              /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
+            )
+        }
+      ],
       type: EFieldType.checkbox,
       defaultValue: autoPlay
     },

@@ -10,7 +10,11 @@ import { useCallback, useMemo, useState } from 'react'
 import { Clock } from './components/Clock/Clock'
 import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
 
-export const DatePicker = <T extends FieldValues>({ label, ...props }: IDatePickerProps<T>) => {
+export const DatePicker = <T extends FieldValues>({
+  label,
+  isVisible,
+  ...props
+}: IDatePickerProps<T>) => {
   const { field } = useController(props)
 
   const [isCalendarVisible, setIsCalendarVisible] = useState(false)
@@ -37,29 +41,35 @@ export const DatePicker = <T extends FieldValues>({ label, ...props }: IDatePick
   )
 
   return (
-    <S.DatePickerWrapper>
-      {label && <Label asPlaceholder={!field.value} label={label} />}
-      <S.SDatePicker {...field} readOnly />
-      <S.DatePickerButtonsWrapper $activePicker={activePicker}>
-        <Button
-          size={EButtonSizes.small}
-          onClick={toggleCalendar}
-          iconVariant={EIconVariants.CALENDAR}
+    isVisible && (
+      <S.DatePickerWrapper>
+        {label && <Label asPlaceholder={!field.value} label={label} />}
+        <S.SDatePicker {...field} readOnly />
+        <S.DatePickerButtonsWrapper $activePicker={activePicker}>
+          <Button
+            size={EButtonSizes.small}
+            onClick={toggleCalendar}
+            iconVariant={EIconVariants.CALENDAR}
+          />
+          <Button
+            size={EButtonSizes.small}
+            onClick={toggleClock}
+            iconVariant={EIconVariants.CLOCK}
+          />
+        </S.DatePickerButtonsWrapper>
+        <Calendar
+          name={field.name}
+          date={field.value}
+          isVisible={isCalendarVisible}
+          onMouseLeave={() => setIsCalendarVisible(false)}
         />
-        <Button size={EButtonSizes.small} onClick={toggleClock} iconVariant={EIconVariants.CLOCK} />
-      </S.DatePickerButtonsWrapper>
-      <Calendar
-        name={field.name}
-        date={field.value}
-        isVisible={isCalendarVisible}
-        onMouseLeave={() => setIsCalendarVisible(false)}
-      />
-      <Clock
-        name={field.name}
-        date={field.value}
-        isVisible={isClockVisible}
-        onMouseLeave={() => setIsClockVisible(false)}
-      />
-    </S.DatePickerWrapper>
+        <Clock
+          name={field.name}
+          date={field.value}
+          isVisible={isClockVisible}
+          onMouseLeave={() => setIsClockVisible(false)}
+        />
+      </S.DatePickerWrapper>
+    )
   )
 }

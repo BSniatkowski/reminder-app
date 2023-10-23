@@ -3,13 +3,19 @@ import * as S from './TextInput.style'
 import { ITextInputProps } from './TextInput.types'
 import { Label } from '@renderer/components/atoms/Label/Label'
 
-export const TextInput = <T extends FieldValues>({ label, ...props }: ITextInputProps<T>) => {
+export const TextInput = <T extends FieldValues>({
+  label,
+  isVisible,
+  ...props
+}: ITextInputProps<T>) => {
   const { field } = useController(props)
 
   return (
-    <S.TextInputWrapper>
-      {label && <Label asPlaceholder={!field.value} label={label} />}
-      <S.STextInput {...field} />
-    </S.TextInputWrapper>
+    isVisible && (
+      <S.TextInputWrapper>
+        {label && <Label asPlaceholder={!field.value} label={label} />}
+        <S.STextInput {...field} />
+      </S.TextInputWrapper>
+    )
   )
 }
