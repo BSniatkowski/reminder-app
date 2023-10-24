@@ -1,5 +1,4 @@
 import * as S from './Clock.style'
-import * as SharedS from '../Shared.style'
 import { IDateWidgetProps } from '../Shared.types'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
@@ -36,7 +35,7 @@ export const Clock = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps)
   const minutes = getTimePartArray(ETimeParts.minutes)
   const seconds = getTimePartArray(ETimeParts.seconds)
 
-  const itemSize = 5
+  const itemSize = 5.4
 
   const hoursNodesRefs = useRef<Map<string, HTMLElement>>()
 
@@ -134,7 +133,7 @@ export const Clock = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps)
   }, [time, isVisible, scrollClockTo, clockSimpleFormat, activeInput])
 
   return (
-    <SharedS.DateWidgetWrapper $isVisible={isVisible} onMouseLeave={onMouseLeave}>
+    <S.ClockWidgetWrapper $isVisible={isVisible} onMouseLeave={onMouseLeave}>
       {activeInput === ETimeParts.hours && (
         <S.SliderItemInput
           autoFocus
@@ -240,6 +239,6 @@ export const Clock = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps)
           </S.SliderItem>
         ))}
       </S.Slider>
-    </SharedS.DateWidgetWrapper>
+    </S.ClockWidgetWrapper>
   )
 }

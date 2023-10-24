@@ -1,27 +1,16 @@
-import { useTheme } from 'styled-components'
 import { ETextTags, ITextProps } from './Text.types'
 import { CSSProperties } from 'react'
 
 export const Text: React.FC<ITextProps> = ({ as = ETextTags.span, nowrap, children }) => {
-  const Component = as === ETextTags.a ? ETextTags.span : as
-  const {
-    spacing: { small }
-  } = useTheme()
+  const Component = as || ETextTags.span
 
   const basicStyles = {
     minWidth: '1%',
     width: 'inherit',
     overflowWrap: 'break-word',
-    textWrap: nowrap ? 'nowrap' : 'wrap'
+    textWrap: nowrap ? 'nowrap' : 'wrap',
+    textDecoration: 'none'
   } as CSSProperties
 
-  const style =
-    as === ETextTags.a
-      ? basicStyles
-      : {
-          ...basicStyles,
-          padding: `${small / 2}rem`
-        }
-
-  return <Component style={style}>{children}</Component>
+  return <Component style={basicStyles}>{children}</Component>
 }

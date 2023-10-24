@@ -7,17 +7,17 @@ export const SLabel = styled.label<ISLabelProps>`
   line-height: 1.7rem;
   transition-property: font-size, top;
   transition-duration: 100ms;
-  left: ${({ theme }) => theme.spacing.normal * 1.5}rem;
+  left: 0.4rem;
   top: 0;
 
-  ${({ theme, $asPlaceholder }) =>
+  ${({ $asPlaceholder }) =>
     $asPlaceholder
       ? css`
-          font-size: 1.4rem;
-          top: ${theme.spacing.normal * 1.5 + 1.4}rem;
+          font-size: 2.4rem;
+          top: 3rem;
         `
       : css`
           font-size: 1.2rem;
-          top: ${theme.spacing.normal / 2}rem;
+          top: 0.5rem;
         `}
 `

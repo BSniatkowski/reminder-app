@@ -10,7 +10,7 @@ export const IconOverrideWrapper = styled.div<IconOverrideWrapperProps>`
     width: inherit;
 
     & > path {
-      fill: ${({ $isActive, $color, $activeColor }) => ($isActive ? $activeColor : $color)};
+      fill: ${({ theme }) => theme.palette.simple.text};
       transition: fill 100ms;
     }
   }

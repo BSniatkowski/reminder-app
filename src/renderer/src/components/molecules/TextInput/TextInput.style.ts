@@ -1,28 +1,24 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { styled } from 'styled-components'
 
-export const TextInputWrapper = styled(TileWrapper).attrs({
-  $transparent: true,
-  $contentDirection: ETileContentDirections.column,
-  $justifyContent: 'space-between',
-  $alignItems: 'flex-start',
-  $size: ETileSizes.full
-})`
-  padding-top: ${({ theme }) => theme.spacing.normal + 1.4}rem;
+export const TextInputWrapper = styled.div`
+  position: relative;
+  min-width: 30rem;
+  width: 100%;
+  padding-top: 2.4rem;
 `
 
 export const STextInput = styled.input`
   width: 100%;
-  padding: ${({ theme }) => theme.spacing.normal / 2}rem;
+  padding: 0.4rem;
   border: none;
-  border-bottom: ${({ theme }) => theme.border.secondary};
+  border-bottom: solid 0.2rem ${({ theme }) => theme.palette.simple.text};
+  background: transparent;
   outline: none;
   line-height: 1rem;
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.palette.primary};
+  font-size: 2.4rem;
+  color: ${({ theme }) => theme.palette.simple.text};
 
   &::placeholder {
-    color: ${({ theme }) => theme.palette.primary};
+    color: ${({ theme }) => theme.palette.simple.text};
   }
 `

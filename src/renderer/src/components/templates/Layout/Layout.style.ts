@@ -1,15 +1,28 @@
 import styled from 'styled-components'
 
 export const LayoutWrapper = styled.div`
-  padding-top: ${({ theme }) => theme.spacing.normal * 7}rem;
-  background-color: ${({ theme }) => theme.palette.white};
+  -webkit-app-region: drag;
+  height: calc(100vh - 3rem);
+  overflow: hidden;
+  padding: 1rem;
+  margin-top: 3rem;
+  background-color: ${({ theme }) => theme.palette.background.primary};
 `
 
 export const LayoutInsideWrapper = styled.div`
-  min-height: calc(100vh - ${({ theme }) => theme.spacing.normal * 7}rem);
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.normal}rem ${({ theme }) => theme.spacing.normal * 2}rem;
-  background-color: ${({ theme }) => theme.palette.white};
+  -webkit-app-region: no-drag;
+  height: 100%;
+`
+
+export const ContentWrapper = styled.section`
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: calc(100% - 14rem - 2rem);
+  margin-left: 2rem;
+  background: ${({ theme }) => theme.palette.gradients.section};
+  border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `

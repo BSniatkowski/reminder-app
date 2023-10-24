@@ -1,5 +1,3 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
 import { css, styled } from 'styled-components'
 import { ICheckboxWrapperProps } from './Checkbox.types'
 import { SLabel } from '@renderer/components/atoms/Label/Label.style'
@@ -9,8 +7,7 @@ export const CheckboxTile = styled.div`
   margin: calc(var(--size) * 0.2);
   height: calc(var(--size) * 0.8);
   width: calc(var(--size) * 0.8);
-  border: ${({ theme }) => theme.border.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+  border: solid 2px ${({ theme }) => theme.palette.simple.text};
 
   &::after {
     content: '';
@@ -20,23 +17,20 @@ export const CheckboxTile = styled.div`
     transform: translate(-50%, -50%);
     height: 60%;
     width: 60%;
-    border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
-    background-color: ${({ theme }) => theme.palette.primary};
+    background-color: ${({ theme }) => theme.palette.simple.text};
     transition: opacity 100ms ease-in;
   }
 `
 
-export const CheckboxWrapper = styled(TileWrapper).attrs<ICheckboxWrapperProps>({
-  $transparent: true,
-  $contentDirection: ETileContentDirections.row,
-  $justifyContent: 'space-between',
-  $alignItems: 'flex-start',
-  $size: ETileSizes.full
-})`
-  --size: 2.2rem;
-  padding-top: ${({ theme }) => theme.spacing.normal + 1.4}rem;
+export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
+  position: relative;
   cursor: pointer;
+  display: flex;
   transition: filter 100ms ease-in;
+  padding: 2.4rem 0.4rem 0.4rem 0.4rem;
+  width: 100%;
+  user-select: none;
+  --size: 2rem;
 
   ${({ $disabled }) =>
     $disabled &&
@@ -45,7 +39,10 @@ export const CheckboxWrapper = styled(TileWrapper).attrs<ICheckboxWrapperProps>(
     `}
 
   & > ${SLabel} {
-    transform: translateX(var(--size));
+    position: relative;
+    line-height: 1em;
+    top: 0;
+    left: 0;
   }
 
   & > ${CheckboxTile} {

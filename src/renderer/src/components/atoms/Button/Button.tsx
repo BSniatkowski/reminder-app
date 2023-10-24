@@ -1,51 +1,27 @@
-import { useState } from 'react'
-import { Text } from '../Text/Text'
 import * as S from './Button.style'
 import { EButtonSizes, IButtonProps } from './Button.types'
-import { Decoration } from '../Decoration/Decoration'
-import { useTheme } from 'styled-components'
 import { Icon } from '../Icon/Icon'
+import { EIconSizes } from '../Icon/Icon.types'
 
 export const Button: React.FC<IButtonProps> = ({
   variant,
-  size,
+  size = EButtonSizes.normal,
   disabled,
-  withoutDecoration,
   text,
   iconVariant,
-  iconColor,
-  iconActiveColor,
   onClick
 }) => {
-  const {
-    palette: { primary }
-  } = useTheme()
-  const [isHovered, seIsHovered] = useState(false)
+  const iconSize = {
+    [EButtonSizes.big]: EIconSizes.normal,
+    [EButtonSizes.normal]: EIconSizes.normal,
+    [EButtonSizes.small]: EIconSizes.small,
+    [EButtonSizes.xsmall]: EIconSizes.xsmall
+  }[size]
 
   return (
-    <S.ButtonWrapper
-      $variant={variant}
-      $size={size}
-      $disabled={disabled}
-      onClick={onClick}
-      onMouseEnter={() => {
-        seIsHovered(true)
-      }}
-      onMouseLeave={() => {
-        seIsHovered(false)
-      }}
-    >
-      {text && <Text nowrap>{text}</Text>}
-      {isHovered && !variant && !withoutDecoration && <Decoration animate color={primary} />}
-      {iconVariant && (
-        <Icon
-          variant={iconVariant}
-          size={size === EButtonSizes.small ? '1.6rem' : '2.4rem'}
-          isActive={isHovered}
-          color={iconColor}
-          activeColor={iconActiveColor}
-        />
-      )}
+    <S.ButtonWrapper $variant={variant} $size={size} $disabled={disabled} onClick={onClick}>
+      {iconVariant && <Icon variant={iconVariant} size={iconSize} />}
+      {text}
     </S.ButtonWrapper>
   )
 }

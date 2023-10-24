@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import { ISliderProps, TSliderItemInputProps } from './Clock.types'
 import { STextInput } from '@renderer/components/molecules/TextInput/TextInput.style'
+import { DateWidgetWrapper } from '../Shared.style'
+
+export const ClockWidgetWrapper = styled(DateWidgetWrapper)`
+  column-gap: 1rem;
+`
 
 export const Slider = styled.div<ISliderProps>`
   --itemSize: ${({ $itemSize }) => $itemSize}rem;

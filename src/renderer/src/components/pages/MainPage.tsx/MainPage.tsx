@@ -1,118 +1,148 @@
 import { Main } from '@renderer/components/templates/Main/Main'
 import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  EReminderSections,
-  TOnAddReminderClick,
-  TOnDialogAcceptClick,
-  TOnDialogCancelClick,
-  TOnEditReminderClick,
-  TOnPreviewReminderClick,
-  TOnRemoveReminderClick
-} from './MainPage.types'
+import { EReminderSections } from './MainPage.types'
 import { textPreview } from '@renderer/utils/textPreview'
-import { useNavigate } from 'react-router-dom'
-import { removeReminder } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import { addDays, isAfter, isBefore, isSameDay, isToday } from 'date-fns'
+import { ReminderEditForm } from '@renderer/components/organisms/ReminderEditForm/ReminderEditForm'
+import {
+  addReminder,
+  removeReminder,
+  updateReminder
+} from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
+import { IReminderItemBody } from '@globalTypes/reminders.types'
+import { RemindersSearchForm } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm'
 
 export const MainPage: React.FC = () => {
+  const dispatch = useDispatch()
+
   const reminders = useSelector(selectAllReminders)
 
-  const [isDialogVisible, setIsDialogVisible] = useState(false)
-  const [selectedReminderId, setSelectedReminderId] = useState<null | string>(null)
+  const [actualReminderId, setActualReminderId] = useState<null | string>(null)
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false)
+  const [isSearchFormVisible, setIsSearchFormVisible] = useState(false)
+  const [actualDate, setActualDate] = useState(new Date())
 
-  const dialogMainText = useMemo(() => {
-    if (!selectedReminderId) return ''
+  const reminder = useMemo(
+    () => reminders.find(({ id }) => id === actualReminderId),
+    [actualReminderId, reminders]
+  )
 
-    return `Are you sure you want to delete: "${reminders.find(
-      ({ id }) => id === selectedReminderId
-    )?.title}"?`
-  }, [reminders, selectedReminderId])
+  const assignSection = useCallback(
+    (date: string) => {
+      const formattedDate = twoWayDateFormat(date)
 
-  const assignSection = (date: string) => {
-    const formattedDate = twoWayDateFormat(date)
+      if (isBefore(formattedDate, actualDate)) return EReminderSections.archive
 
-    const actualDate = new Date()
+      if (isToday(formattedDate)) return EReminderSections.today
 
-    if (isBefore(formattedDate, actualDate)) return { section: EReminderSections.archive }
+      if (isSameDay(formattedDate, addDays(actualDate, 1))) return EReminderSections.tomorrow
 
-    if (isToday(formattedDate)) return { section: EReminderSections.today }
+      if (isAfter(addDays(formattedDate, 1), actualDate)) return EReminderSections.future
 
-    if (isSameDay(formattedDate, addDays(actualDate, 1)))
-      return { section: EReminderSections.tomorrow }
+      return EReminderSections.archive
+    },
+    [actualDate]
+  )
 
-    if (isAfter(addDays(formattedDate, 1), actualDate)) return { section: EReminderSections.future }
-
-    return {}
-  }
+  const [actualFilters, setActualFilters] = useState<Array<EReminderSections>>([
+    EReminderSections.today,
+    EReminderSections.tomorrow,
+    EReminderSections.future
+  ])
+  const [searchPhrase, setSearchPhrase] = useState('')
 
   const formattedReminders = useMemo(
     () =>
       [...reminders]
+        .filter(({ title, date }) =>
+          searchPhrase.length > 0
+            ? title.toLocaleLowerCase().includes(searchPhrase.toLocaleLowerCase()) &&
+              actualFilters.includes(assignSection(date))
+            : actualFilters.includes(assignSection(date))
+        )
         .sort(
           (itemA, itemB) =>
             twoWayDateFormat(itemA.date).getTime() - twoWayDateFormat(itemB.date).getTime()
         )
-        .map(({ title, description, date, ...props }) => ({
-          title: textPreview({ text: title, maxLength: 25 }),
-          description: textPreview({ text: description ?? '', maxLength: 200 }),
-          date,
-          ...assignSection(date),
-          ...props
+        .map(({ id, title, date }) => ({
+          id,
+          title: textPreview({ text: title, maxLength: 14 }),
+          date
         })),
-    [reminders]
+    [actualFilters, assignSection, reminders, searchPhrase]
   )
 
-  const navigate = useNavigate()
-
-  const dispatch = useDispatch()
-
-  const onAddReminderClick: TOnAddReminderClick = useCallback(() => {
-    navigate(`/reminder/new/edit`)
-  }, [navigate])
-
-  const onPreviewReminderClick: TOnPreviewReminderClick = useCallback(
-    (id) => {
-      navigate(`/reminder/${id}`)
-    },
-    [navigate]
-  )
-
-  const onEditReminderClick: TOnEditReminderClick = useCallback(
-    (id) => {
-      navigate(`/reminder/${id}/edit`)
-    },
-    [navigate]
-  )
-
-  const onRemoveReminderClick: TOnRemoveReminderClick = useCallback((id) => {
-    setSelectedReminderId(id)
-    setIsDialogVisible(true)
+  const onAddReminderClick = useCallback(() => {
+    setIsEditFormVisible(true)
+    setIsSearchFormVisible(false)
   }, [])
 
-  const onDialogCancelClick: TOnDialogCancelClick = useCallback(() => {
-    setIsDialogVisible(false)
-    setSelectedReminderId(null)
+  const onReminderClick = useCallback<(id: string) => void>((id) => {
+    setActualReminderId(id)
+    setIsEditFormVisible(true)
+    setIsSearchFormVisible(false)
   }, [])
 
-  const onDialogAcceptClick: TOnDialogAcceptClick = useCallback(() => {
-    setIsDialogVisible(false)
-    if (selectedReminderId) dispatch(removeReminder({ id: selectedReminderId }))
-  }, [dispatch, selectedReminderId])
+  const onDelete = useCallback(() => {
+    setIsEditFormVisible(false)
+    if (!actualReminderId) return
+
+    dispatch(removeReminder({ id: actualReminderId }))
+    setActualReminderId(null)
+  }, [actualReminderId, dispatch])
+
+  const onSubmit = useCallback<(formValues: IReminderItemBody) => void>(
+    (formValues) => {
+      dispatch(
+        actualReminderId
+          ? updateReminder({ id: actualReminderId, ...formValues })
+          : addReminder(formValues)
+      )
+      setIsEditFormVisible(false)
+      setActualReminderId(null)
+    },
+    [actualReminderId, dispatch]
+  )
+
+  useEffect(() => {
+    const dateUpdateInterval = setInterval(() => setActualDate(new Date()), 500)
+
+    return () => clearInterval(dateUpdateInterval)
+  }, [])
 
   return (
-    <Main
-      reminders={formattedReminders}
-      isDialogVisible={isDialogVisible}
-      dialogMainText={dialogMainText}
-      onPreviewReminderClick={onPreviewReminderClick}
-      onAddReminderClick={onAddReminderClick}
-      onEditReminderClick={onEditReminderClick}
-      onRemoveReminderClick={onRemoveReminderClick}
-      onDialogCancelClick={onDialogCancelClick}
-      onDialogAcceptClick={onDialogAcceptClick}
-    />
+    <>
+      <Main
+        reminders={formattedReminders}
+        onReminderClick={onReminderClick}
+        onAddReminderClick={onAddReminderClick}
+      />
+      <ReminderEditForm
+        isFormVisible={isEditFormVisible}
+        reminder={reminder}
+        onDelete={!!actualReminderId && onDelete}
+        onSubmit={onSubmit}
+      />
+      <RemindersSearchForm
+        isFormVisible={isSearchFormVisible}
+        toggleFormVisibility={() => {
+          setIsSearchFormVisible(!isSearchFormVisible)
+          setIsEditFormVisible(false)
+        }}
+        onSubmit={(values) => {
+          const { search, ...props } = values
+
+          const filters = Object.entries(props)
+            .map(([filter, isActive]) => isActive && filter)
+            .filter((filter) => filter) as Array<EReminderSections>
+
+          setSearchPhrase(search)
+          setActualFilters(filters)
+        }}
+      />
+    </>
   )
 }

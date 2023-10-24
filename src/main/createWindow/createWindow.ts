@@ -5,8 +5,12 @@ import { join } from 'path'
 import icon from '../../../resources/icon.png?asset'
 
 const popupSize = { height: 360, width: 640 }
+const popupSizeSmall = { height: 80, width: 640 }
 
-export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, id) => {
+export const createWindow: (args?: { id?: string; small?: boolean }) => void = (args) => {
+  const id = args?.id
+  const small = args?.small
+
   const displayDetails = screen.getPrimaryDisplay()
 
   const popupPosition = {
@@ -16,19 +20,21 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
 
   // Create the browser window.
   const window = new BrowserWindow({
-    ...(isPopup
+    ...(id
       ? {
           ...popupPosition,
-          ...popupSize,
+          ...(small ? popupSizeSmall : popupSize),
           resizable: false,
           frame: false,
           transparent: true,
           alwaysOnTop: true
         }
       : {
-          minWidth: 350,
-          height: 720,
-          width: 1080
+          minHeight: 740,
+          minWidth: 640,
+          height: 1080,
+          width: 1920,
+          frame: false
         }),
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -37,14 +43,14 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
     }
   })
 
-  if (isPopup) {
+  if (id) {
     window.once('focus', () => window.flashFrame(false))
     window.flashFrame(true)
   }
 
   window.on('ready-to-show', () => {
     window.show()
-    if (import.meta.env.DEV) window.webContents.openDevTools({ mode: isPopup ? 'detach' : 'right' })
+    if (import.meta.env.DEV) window.webContents.openDevTools({ mode: id ? 'detach' : 'right' })
   })
 
   window.webContents.setWindowOpenHandler((details) => {
@@ -55,11 +61,11 @@ export const createWindow: (isPopup?: boolean, id?: string) => void = (isPopup, 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${isPopup ? `#/popup/${id}` : ''}`)
+    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${id ? `#/popup/${id}` : ''}`)
   } else {
     window.loadFile(
       join(__dirname, '../renderer/index.html'),
-      isPopup
+      id
         ? {
             hash: `/popup/${id}`
           }

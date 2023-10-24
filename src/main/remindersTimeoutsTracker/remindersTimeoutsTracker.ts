@@ -17,14 +17,15 @@ export const remindersTimeoutsTracker = () => {
   }
 
   const setReminderTimeout = (reminder: IReminderItem) => {
-    const timeToPopup = differenceInMilliseconds(twoWayDateFormat(reminder.date), new Date())
+    const actualDate = new Date()
+    const timeToPopup = differenceInMilliseconds(twoWayDateFormat(reminder.date), actualDate)
 
-    if (timeToPopup <= 0) return
+    if (timeToPopup <= 0 || !isToday(twoWayDateFormat(reminder.date))) return
 
     const timeoutId = setTimeout(() => {
-      createWindow(true, reminder.id)
+      createWindow({ id: reminder.id, small: !reminder.description && !reminder.link })
 
-      if (reminder.autoOpenLink) openExternal(reminder.link)
+      if (reminder.link && reminder.autoOpenLink) openExternal(reminder.link)
     }, timeToPopup)
 
     state.remindersTimeouts = [...state.remindersTimeouts, { id: reminder.id, timeoutId }]

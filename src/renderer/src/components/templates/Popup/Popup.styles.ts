@@ -1,6 +1,6 @@
-import { TileWrapper } from '@renderer/components/atoms/Tile/Tile.style'
-import { maxFontsize } from '@renderer/components/theme/GlobalStyle/typographyCSS'
-import { keyframes, styled } from 'styled-components'
+import { IconOverrideWrapper } from '@renderer/components/atoms/Icon/Icon.style'
+import { css, keyframes, styled } from 'styled-components'
+import { IButtonsContainerProps, IPopupWrapperProps } from './Popup.types'
 
 const fadeIn = keyframes`
   0% {
@@ -10,19 +10,74 @@ const fadeIn = keyframes`
     opacity: 1;
   }`
 
-export const PopupWrapper = styled(TileWrapper)`
-  min-height: 100vh;
-  height: fit-content;
-  font-size: ${maxFontsize}px;
+export const PopupWrapper = styled.div<IPopupWrapperProps>`
+  display: flex;
+  padding: 1rem;
+  border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+  background-color: ${({ theme }) => theme.palette.simple.white};
   animation: 300ms ${fadeIn} linear;
+  gap: 1rem;
 
-  & > p {
-    overflow-y: auto;
-    overflow-x: hidden;
+  ${({ $isSmall, $withVideo }) =>
+    $isSmall
+      ? css`
+          justify-content: space-between;
+        `
+      : css`
+          flex-direction: column;
+
+          ${$withVideo
+            ? css`
+                height: fit-content;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+              `
+            : css`
+                height: 100vh;
+              `}
+
+          & > iframe {
+            height: calc(100vh - 2rem);
+            width: 100%;
+          }
+
+          & > a {
+            font-size: 1.6rem;
+            font-weight: 600;
+          }
+
+          & > p {
+            height: 21rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 1rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: ${({ theme }) => theme.palette.simple.primary};
+          }
+        `}
+`
+
+export const TitleWithIcon = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 0.6rem;
+
+  & > * {
+    color: ${({ theme }) => theme.palette.simple.primary};
+    font-weight: 500;
   }
 
-  & > iframe {
-    height: calc(100vh - ${({ theme }) => theme.spacing.normal * 2}rem);
-    width: 100%;
+  & > ${IconOverrideWrapper} svg > path {
+    fill: ${({ theme }) => theme.palette.simple.primary};
   }
+`
+
+export const ButtonsContainer = styled.div<IButtonsContainerProps>`
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 1rem;
+  padding: ${({ $isSmall }) => ($isSmall ? 0 : '1rem')} 0;
 `

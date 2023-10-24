@@ -1,22 +1,21 @@
 import { Label } from '@renderer/components/atoms/Label/Label'
 import { FieldValues, useController } from 'react-hook-form'
-import { IDatePickerProps } from './DatePicker.types'
+import { EActivePickers, IDatePickerProps } from './DatePicker.types'
 
 import * as S from './DatePicker.style'
 import { Button } from '@renderer/components/atoms/Button/Button'
-import { EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
-import { useTheme } from 'styled-components'
 import { Calendar } from './components/Calendar/Calendar'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Clock } from './components/Clock/Clock'
+import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
 
-export const DatePicker = <T extends FieldValues>({ label, ...props }: IDatePickerProps<T>) => {
+export const DatePicker = <T extends FieldValues>({
+  label,
+  isVisible,
+  ...props
+}: IDatePickerProps<T>) => {
   const { field } = useController(props)
-
-  const {
-    palette: { primary }
-  } = useTheme()
 
   const [isCalendarVisible, setIsCalendarVisible] = useState(false)
   const [isClockVisible, setIsClockVisible] = useState(false)
@@ -31,38 +30,46 @@ export const DatePicker = <T extends FieldValues>({ label, ...props }: IDatePick
     setIsCalendarVisible(false)
   }, [isClockVisible, setIsCalendarVisible, setIsClockVisible])
 
+  const activePicker = useMemo(
+    () =>
+      isCalendarVisible
+        ? EActivePickers.calendar
+        : isClockVisible
+        ? EActivePickers.clock
+        : EActivePickers.none,
+    [isCalendarVisible, isClockVisible]
+  )
+
   return (
-    <S.DatePickerWrapper>
-      {label && <Label asPlaceholder={!field.value} label={label} />}
-      <S.SDatePicker {...field} readOnly />
-      <S.DatePickerButtonsWrapper>
-        <Button
-          variant={EButtonVariants.roundTransparent}
-          onClick={toggleCalendar}
-          iconVariant={EIconVariants.CALENDAR}
-          iconColor={primary}
-          iconActiveColor={primary}
+    isVisible && (
+      <S.DatePickerWrapper>
+        {label && <Label asPlaceholder={!field.value} label={label} />}
+        <S.SDatePicker {...field} readOnly />
+        <S.DatePickerButtonsWrapper $activePicker={activePicker}>
+          <Button
+            size={EButtonSizes.small}
+            onClick={toggleCalendar}
+            iconVariant={EIconVariants.CALENDAR}
+          />
+          <Button
+            size={EButtonSizes.small}
+            onClick={toggleClock}
+            iconVariant={EIconVariants.CLOCK}
+          />
+        </S.DatePickerButtonsWrapper>
+        <Calendar
+          name={field.name}
+          date={field.value}
+          isVisible={isCalendarVisible}
+          onMouseLeave={() => setIsCalendarVisible(false)}
         />
-        <Button
-          variant={EButtonVariants.roundTransparent}
-          onClick={toggleClock}
-          iconVariant={EIconVariants.CLOCK}
-          iconColor={primary}
-          iconActiveColor={primary}
+        <Clock
+          name={field.name}
+          date={field.value}
+          isVisible={isClockVisible}
+          onMouseLeave={() => setIsClockVisible(false)}
         />
-      </S.DatePickerButtonsWrapper>
-      <Calendar
-        name={field.name}
-        date={field.value}
-        isVisible={isCalendarVisible}
-        onMouseLeave={() => setIsCalendarVisible(false)}
-      />
-      <Clock
-        name={field.name}
-        date={field.value}
-        isVisible={isClockVisible}
-        onMouseLeave={() => setIsClockVisible(false)}
-      />
-    </S.DatePickerWrapper>
+      </S.DatePickerWrapper>
+    )
   )
 }

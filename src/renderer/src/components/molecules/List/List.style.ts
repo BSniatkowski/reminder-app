@@ -3,14 +3,15 @@ import { EListDirections, IListWrapper } from './List.types'
 
 export const ListWrapper = styled.div<IListWrapper>`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.normal}rem;
+  padding: 1rem;
+  gap: 1rem;
 
   ${({ $direction }) =>
     $direction === EListDirections.column
       ? css`
           flex-direction: column;
           & > *:last-of-type {
-            margin-bottom: ${({ theme }) => theme.spacing.normal}rem;
+            margin-bottom: 1rem;
           }
         `
       : css`

@@ -5,14 +5,23 @@ import { getStoreAtMain } from '../utils/synchronizeStore'
 
 // Custom APIs for renderer
 const api = {
-  openPopup: (id: string) => {
-    ipcRenderer.send('open-popup', id)
-  },
   synchronizeReminders: (args: TSyncMethodsArgs) => {
     ipcRenderer.send('synchronize-reminders', args)
   },
   handleSynchronizeReminders: (callback: (args: TSyncMethodsArgs) => void) => {
     ipcRenderer.on('synchronize-reminders', (_, args) => callback(args))
+  },
+  askForState: () => {
+    ipcRenderer.send('ask-for-state')
+  },
+  handleAskForState: (callback: (args: boolean) => void) => {
+    ipcRenderer.on('ask-for-state', (_, args) => callback(args))
+  },
+  toggleMaximizeWindow: () => {
+    ipcRenderer.send('toggle-maximize-window')
+  },
+  minimizeWindow: () => {
+    ipcRenderer.send('minimize-window')
   },
   closeWindow: () => {
     ipcRenderer.send('close-window')

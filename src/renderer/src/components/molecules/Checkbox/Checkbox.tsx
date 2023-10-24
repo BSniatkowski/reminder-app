@@ -4,7 +4,11 @@ import { ICheckboxProps } from './Checkbox.types'
 import { Label } from '@renderer/components/atoms/Label/Label'
 import { useCallback } from 'react'
 
-export const Checkbox = <T extends FieldValues>({ label, ...props }: ICheckboxProps<T>) => {
+export const Checkbox = <T extends FieldValues>({
+  label,
+  isVisible,
+  ...props
+}: ICheckboxProps<T>) => {
   const { field } = useController(props)
 
   const { setValue } = useFormContext()
@@ -16,9 +20,15 @@ export const Checkbox = <T extends FieldValues>({ label, ...props }: ICheckboxPr
   )
 
   return (
-    <S.CheckboxWrapper $isActive={field.value} $disabled={field.disabled} onClick={toggleCheckbox}>
-      {label && <Label asPlaceholder label={label} />}
-      <S.CheckboxTile />
-    </S.CheckboxWrapper>
+    isVisible && (
+      <S.CheckboxWrapper
+        $isActive={field.value}
+        $disabled={field.disabled}
+        onClick={toggleCheckbox}
+      >
+        <S.CheckboxTile />
+        {label && <Label asPlaceholder label={label} />}
+      </S.CheckboxWrapper>
+    )
   )
 }

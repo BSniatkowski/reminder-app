@@ -3,10 +3,12 @@ import * as S from './Form.style'
 import { TextInput } from '@renderer/components/molecules/TextInput/TextInput'
 import { Textarea } from '@renderer/components/molecules/Textarea/Textarea'
 import { Button } from '@renderer/components/atoms/Button/Button'
-import { Tile } from '@renderer/components/atoms/Tile/Tile'
-import { EFieldType, IFormProps } from './Form.types'
+import { EFieldType, EStyleVariants, IFormProps } from './Form.types'
 import { DatePicker } from '@renderer/components/organisms/DatePicker/DatePicker'
 import { Checkbox } from '@renderer/components/molecules/Checkbox/Checkbox'
+import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
+import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
+import { useEffect, useMemo } from 'react'
 
 const fieldsComponentsMap = {
   [EFieldType.text]: TextInput,
@@ -16,31 +18,94 @@ const fieldsComponentsMap = {
 }
 
 export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
+  styleVariant = EStyleVariants.edit,
   fields,
-  onSubmit
+  onDelete,
+  onSubmit,
+  submitOnChange
 }: IFormProps<FormValues>): React.ReactNode => {
-  const defaultValues = Object.fromEntries(
-    fields.map(({ name, defaultValue }) => [name, defaultValue])
+  const defaultValues = useMemo(
+    () => Object.fromEntries(fields.map(({ name, defaultValue }) => [name, defaultValue])),
+    [fields]
   ) as DefaultValues<FormValues>
 
-  const { control, reset, handleSubmit, ...methods } = useForm<FormValues>({
+  const { control, handleSubmit, watch, setValue, ...methods } = useForm<FormValues>({
     defaultValues
   })
 
-  return (
-    <FormProvider control={control} reset={reset} handleSubmit={handleSubmit} {...methods}>
-      <S.FormWrapper>
-        {fields.map(({ name, type, label }) => {
-          const FieldComponent = fieldsComponentsMap[type] ?? TextInput
+  const watchAllFields = watch()
 
-          return (
-            <FieldComponent<FormValues> key={name} name={name} label={label} control={control} />
-          )
-        })}
-        <Tile transparent>
-          <Button onClick={reset} text="Reset" />
-          <Button onClick={handleSubmit(onSubmit)} text="Submit" />
-        </Tile>
+  const visibleFields = useMemo(() => {
+    const fieldsWithoutConditions = fields
+      .filter(({ visibilityConditions }) => !visibilityConditions)
+      .map(({ name }) => name)
+
+    const fieldsWithCheckedConditions = fields
+      .filter(({ visibilityConditions }) => {
+        if (!visibilityConditions) return
+
+        for (const { fieldName, condtion } of visibilityConditions) {
+          if (!condtion(watchAllFields?.[fieldName])) {
+            return
+          }
+        }
+
+        return true
+      })
+      .map(({ name }) => name)
+
+    return [...fieldsWithoutConditions, ...fieldsWithCheckedConditions]
+  }, [fields, watchAllFields])
+
+  useEffect(() => {
+    if (!submitOnChange) return
+
+    const subscription = watch(() => handleSubmit(onSubmit)())
+
+    return () => subscription.unsubscribe()
+  }, [handleSubmit, onSubmit, submitOnChange, watch])
+
+  return (
+    <FormProvider
+      control={control}
+      watch={watch}
+      setValue={setValue}
+      handleSubmit={handleSubmit}
+      {...methods}
+    >
+      <S.FormWrapper>
+        <S.FormInsideWrapper $styleVariant={styleVariant}>
+          {fields.map(({ name, type, label }) => {
+            const FieldComponent = fieldsComponentsMap[type] ?? TextInput
+
+            return (
+              <FieldComponent<FormValues>
+                key={name}
+                name={name}
+                label={label}
+                control={control}
+                isVisible={visibleFields.includes(name)}
+              />
+            )
+          })}
+        </S.FormInsideWrapper>
+        {!submitOnChange && (
+          <S.ActionButtonsContainer>
+            {onDelete && (
+              <Button
+                onClick={onDelete}
+                variant={EButtonVariants.remove}
+                size={EButtonSizes.big}
+                iconVariant={EIconVariants.DELETE}
+              />
+            )}
+            <Button
+              size={EButtonSizes.big}
+              onClick={handleSubmit(onSubmit)}
+              iconVariant={EIconVariants.DONE}
+            />
+          </S.ActionButtonsContainer>
+        )}
       </S.FormWrapper>
     </FormProvider>
   )

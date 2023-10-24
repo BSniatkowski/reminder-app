@@ -1,17 +1,16 @@
-import { Tile } from '@renderer/components/atoms/Tile/Tile'
 import * as S from './Popup.styles'
 import { TPopupProps } from './Popup.types'
 import { Text } from '@renderer/components/atoms/Text/Text'
 import { findAndReplaceLinks } from '@renderer/utils/findAndReplaceLinks'
 import { Button } from '@renderer/components/atoms/Button/Button'
-import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
-import { useTheme } from 'styled-components'
-import { EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
-import { ETileContentDirections, ETileSizes } from '@renderer/components/atoms/Tile/Tile.types'
-import { Decoration } from '@renderer/components/atoms/Decoration/Decoration'
-import { Dialog } from '@renderer/components/molecules/Dialog/Dialog'
+import { EIconSizes, EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
+import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { Link } from '@renderer/components/atoms/Link/Link'
 import { YTPlayer } from '@renderer/components/organisms/YTPlayer/YTPlayer'
+import { Icon } from '@renderer/components/atoms/Icon/Icon'
+import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
+import { textPreview } from '@renderer/utils/textPreview'
+import { useMemo } from 'react'
 
 export const Popup: React.FC<TPopupProps> = ({
   title,
@@ -19,80 +18,41 @@ export const Popup: React.FC<TPopupProps> = ({
   link,
   videoId,
   autoPlay,
-  isPostponeDialogVisible,
-  postponeDialogMainText,
   onDone,
   onPostpone,
-  onPostponeDialogCancel,
-  onPostponeDialogAccept,
-  isRemoveReminderDialogVisible,
-  removeDialogMainText,
-  onRemove,
-  onRemoveDialogCancel,
-  onRemoveDialogAccept
+  onRemove
 }) => {
-  const {
-    palette: { primary, secondary, white }
-  } = useTheme()
-
   const descriptionNodes = findAndReplaceLinks({ text: description })
 
+  const isSmall = useMemo(() => !description && !link, [description, link])
+
   return (
-    <>
-      <Dialog
-        isVisible={isPostponeDialogVisible}
-        mainText={postponeDialogMainText}
-        cancelText="Cancel"
-        acceptText="Postpone"
-        onCancel={onPostponeDialogCancel}
-        onAccept={onPostponeDialogAccept}
-      />
-      <Dialog
-        isVisible={isRemoveReminderDialogVisible}
-        mainText={removeDialogMainText}
-        cancelText="Cancel"
-        acceptText="Delete"
-        onCancel={onRemoveDialogCancel}
-        onAccept={onRemoveDialogAccept}
-      />
-      <S.PopupWrapper
-        $size={ETileSizes.full}
-        $contentDirection={ETileContentDirections.column}
-        $justifyContent="space-between"
-        $alignItems="flex-end"
-        $nowrap
-      >
-        <Decoration animate />
-        {videoId && <YTPlayer videoId={videoId} autoPlay={autoPlay} />}
-        <Tile size={ETileSizes.full}>
-          <Text>{title}</Text>
-        </Tile>
-        {link && <Link text={'Open associated link'} linkRef={link} />}
-        {descriptionNodes}
-        <Tile transparent nowrap>
-          <Button
-            variant={EButtonVariants.light}
-            iconColor={primary}
-            iconActiveColor={secondary}
-            iconVariant={EIconVariants.DONE}
-            onClick={onDone}
-          />
-          <Button
-            variant={EButtonVariants.light}
-            iconColor={primary}
-            iconActiveColor={secondary}
-            iconVariant={EIconVariants.POSTPONE}
-            onClick={onPostpone}
-          />
-          <Button
-            variant={EButtonVariants.remove}
-            iconColor={white}
-            iconActiveColor={white}
-            iconVariant={EIconVariants.DELETE}
-            onClick={onRemove}
-          />
-        </Tile>
-      </S.PopupWrapper>
-    </>
+    <S.PopupWrapper $withVideo={!!videoId} $isSmall={isSmall}>
+      {videoId && <YTPlayer videoId={videoId} autoPlay={autoPlay} />}
+      <S.TitleWithIcon>
+        <Icon variant={EIconVariants.NOTIFICATION} size={EIconSizes.normal} />
+        <Text as={ETextTags.h4}>{title}</Text>
+      </S.TitleWithIcon>
+      {link && <Link text={textPreview({ text: link, maxLength: 70 })} linkRef={link} />}
+      {descriptionNodes}
+      <S.ButtonsContainer $isSmall={isSmall}>
+        <Button
+          size={isSmall ? EButtonSizes.small : EButtonSizes.big}
+          variant={EButtonVariants.remove}
+          iconVariant={EIconVariants.DELETE}
+          onClick={onRemove}
+        />
+        <Button
+          size={isSmall ? EButtonSizes.small : EButtonSizes.big}
+          iconVariant={EIconVariants.POSTPONE}
+          onClick={onPostpone}
+        />
+        <Button
+          size={isSmall ? EButtonSizes.small : EButtonSizes.big}
+          iconVariant={EIconVariants.DONE}
+          onClick={onDone}
+        />
+      </S.ButtonsContainer>
+    </S.PopupWrapper>
   )
 }
