@@ -20,8 +20,19 @@ export interface IFieldItem<FormValues> extends IBasicFieldProps {
 }
 
 export type TOnSubmit<FormValues extends FieldValues> = SubmitHandler<FormValues>
+
+export enum EStyleVariants {
+  edit,
+  search
+}
 export interface IFormProps<FormValues extends FieldValues> {
+  styleVariant?: EStyleVariants
   fields: Array<IFieldItem<FormValues>>
   onDelete?: false | (() => void)
   onSubmit: TOnSubmit<FormValues>
+  submitOnChange?: boolean
+}
+
+export interface IFormInsideWrapperProps {
+  $styleVariant: EStyleVariants
 }

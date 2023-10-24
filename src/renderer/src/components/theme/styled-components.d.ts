@@ -28,6 +28,9 @@ declare module 'styled-components' {
       primary: number
       secondary: number
     }
-    boxShadow: string
+    boxShadow: {
+      primary: string
+      secondary: string
+    }
   }
 }

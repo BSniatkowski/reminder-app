@@ -1,6 +1,6 @@
 export enum EReminderSections {
-  archive,
-  today,
-  tomorrow,
-  future
+  archive = 'archive',
+  today = 'today',
+  tomorrow = 'tomorrow',
+  future = 'future'
 }

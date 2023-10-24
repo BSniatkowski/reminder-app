@@ -22,7 +22,7 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
         `
       : css`
           background-color: ${({ theme }) => theme.palette.simple.primary};
-          box-shadow: ${({ theme }) => theme.boxShadow};
+          box-shadow: ${({ theme }) => theme.boxShadow.primary};
         `}
 
   ${({ $size = EButtonSizes.normal }) =>

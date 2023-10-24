@@ -1,6 +1,6 @@
 import { Main } from '@renderer/components/templates/Main/Main'
 import { selectAllReminders } from '@renderer/store/storeSlices/reminderSlice/remindersSlice.selectors'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { EReminderSections } from './MainPage.types'
 import { textPreview } from '@renderer/utils/textPreview'
@@ -13,6 +13,7 @@ import {
   updateReminder
 } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 import { IReminderItemBody } from '@globalTypes/reminders.types'
+import { RemindersSearchForm } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm'
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch()
@@ -20,40 +21,48 @@ export const MainPage: React.FC = () => {
   const reminders = useSelector(selectAllReminders)
 
   const [actualReminderId, setActualReminderId] = useState<null | string>(null)
-  const [isFormVisible, setIsFormVisible] = useState(false)
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false)
+  const [isSearchFormVisible, setIsSearchFormVisible] = useState(false)
+  const [actualDate, setActualDate] = useState(new Date())
 
   const reminder = useMemo(
     () => reminders.find(({ id }) => id === actualReminderId),
     [actualReminderId, reminders]
   )
 
-  const assignSection = (date: string) => {
-    const formattedDate = twoWayDateFormat(date)
+  const assignSection = useCallback(
+    (date: string) => {
+      const formattedDate = twoWayDateFormat(date)
 
-    const actualDate = new Date()
+      if (isBefore(formattedDate, actualDate)) return EReminderSections.archive
 
-    if (isBefore(formattedDate, actualDate)) return EReminderSections.archive
+      if (isToday(formattedDate)) return EReminderSections.today
 
-    if (isToday(formattedDate)) return EReminderSections.today
+      if (isSameDay(formattedDate, addDays(actualDate, 1))) return EReminderSections.tomorrow
 
-    if (isSameDay(formattedDate, addDays(actualDate, 1))) return EReminderSections.tomorrow
+      if (isAfter(addDays(formattedDate, 1), actualDate)) return EReminderSections.future
 
-    if (isAfter(addDays(formattedDate, 1), actualDate)) return EReminderSections.future
+      return EReminderSections.archive
+    },
+    [actualDate]
+  )
 
-    return EReminderSections.archive
-  }
-
-  const [actualFilters] = useState<Array<EReminderSections>>([
-    EReminderSections.archive,
+  const [actualFilters, setActualFilters] = useState<Array<EReminderSections>>([
     EReminderSections.today,
     EReminderSections.tomorrow,
     EReminderSections.future
   ])
+  const [searchPhrase, setSearchPhrase] = useState('')
 
   const formattedReminders = useMemo(
     () =>
       [...reminders]
-        .filter(({ date }) => actualFilters.includes(assignSection(date)))
+        .filter(({ title, date }) =>
+          searchPhrase.length > 0
+            ? title.toLocaleLowerCase().includes(searchPhrase.toLocaleLowerCase()) &&
+              actualFilters.includes(assignSection(date))
+            : actualFilters.includes(assignSection(date))
+        )
         .sort(
           (itemA, itemB) =>
             twoWayDateFormat(itemA.date).getTime() - twoWayDateFormat(itemB.date).getTime()
@@ -63,20 +72,22 @@ export const MainPage: React.FC = () => {
           title: textPreview({ text: title, maxLength: 14 }),
           date
         })),
-    [actualFilters, reminders]
+    [actualFilters, assignSection, reminders, searchPhrase]
   )
 
   const onAddReminderClick = useCallback(() => {
-    setIsFormVisible(true)
+    setIsEditFormVisible(true)
+    setIsSearchFormVisible(false)
   }, [])
 
   const onReminderClick = useCallback<(id: string) => void>((id) => {
     setActualReminderId(id)
-    setIsFormVisible(true)
+    setIsEditFormVisible(true)
+    setIsSearchFormVisible(false)
   }, [])
 
   const onDelete = useCallback(() => {
-    setIsFormVisible(false)
+    setIsEditFormVisible(false)
     if (!actualReminderId) return
 
     dispatch(removeReminder({ id: actualReminderId }))
@@ -90,11 +101,17 @@ export const MainPage: React.FC = () => {
           ? updateReminder({ id: actualReminderId, ...formValues })
           : addReminder(formValues)
       )
-      setIsFormVisible(false)
+      setIsEditFormVisible(false)
       setActualReminderId(null)
     },
     [actualReminderId, dispatch]
   )
+
+  useEffect(() => {
+    const dateUpdateInterval = setInterval(() => setActualDate(new Date()), 500)
+
+    return () => clearInterval(dateUpdateInterval)
+  }, [])
 
   return (
     <>
@@ -104,10 +121,27 @@ export const MainPage: React.FC = () => {
         onAddReminderClick={onAddReminderClick}
       />
       <ReminderEditForm
-        isFormVisible={isFormVisible}
+        isFormVisible={isEditFormVisible}
         reminder={reminder}
         onDelete={!!actualReminderId && onDelete}
         onSubmit={onSubmit}
+      />
+      <RemindersSearchForm
+        isFormVisible={isSearchFormVisible}
+        toggleFormVisibility={() => {
+          setIsSearchFormVisible(!isSearchFormVisible)
+          setIsEditFormVisible(false)
+        }}
+        onSubmit={(values) => {
+          const { search, ...props } = values
+
+          const filters = Object.entries(props)
+            .map(([filter, isActive]) => isActive && filter)
+            .filter((filter) => filter) as Array<EReminderSections>
+
+          setSearchPhrase(search)
+          setActualFilters(filters)
+        }}
       />
     </>
   )

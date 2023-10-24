@@ -25,9 +25,11 @@ export const CheckboxTile = styled.div`
 export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
   position: relative;
   cursor: pointer;
+  display: flex;
   transition: filter 100ms ease-in;
-  padding: 1.6rem 0.4rem 0.4rem 0.4rem;
+  padding: 2.4rem 0.4rem 0.4rem 0.4rem;
   width: 100%;
+  user-select: none;
   --size: 2rem;
 
   ${({ $disabled }) =>
@@ -37,7 +39,10 @@ export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
     `}
 
   & > ${SLabel} {
-    transform: translate(calc(var(--size) + 0.4rem), -1.2rem);
+    position: relative;
+    line-height: 1em;
+    top: 0;
+    left: 0;
   }
 
   & > ${CheckboxTile} {

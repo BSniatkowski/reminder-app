@@ -26,8 +26,8 @@ export const Checkbox = <T extends FieldValues>({
         $disabled={field.disabled}
         onClick={toggleCheckbox}
       >
-        {label && <Label asPlaceholder label={label} />}
         <S.CheckboxTile />
+        {label && <Label asPlaceholder label={label} />}
       </S.CheckboxWrapper>
     )
   )

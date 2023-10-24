@@ -21,6 +21,15 @@ export const ReminderEditFormModal = styled.div<IReminderEditFormModalProps>`
   border-top-left-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   border-bottom-left-radius: ${({ theme }) => theme.borderRadius.primary}rem;
 `
+export const ModalHide = styled.div`
+  position: fixed;
+  z-index: 9999;
+  right: 0;
+  bottom: 1rem;
+  height: calc(100% - 2rem - 3rem);
+  width: 1rem;
+  background: ${({ theme }) => theme.palette.background.primary};
+`
 
 export const ReminderEditFormModalOverlay = styled.div`
   position: fixed;

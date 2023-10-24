@@ -70,6 +70,7 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
           />
         )}
       </S.ReminderEditFormModal>
+      <S.ModalHide />
     </>
   )
 }

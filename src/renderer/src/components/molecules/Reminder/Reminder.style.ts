@@ -9,7 +9,7 @@ export const ReminderInsideWrapper = styled.div`
   overflow: hidden;
   background-color: ${({ theme }) => theme.palette.simple.secondary};
   border-radius: ${({ theme }) => theme.borderRadius.secondary}rem;
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  box-shadow: ${({ theme }) => theme.boxShadow.primary};
   cursor: pointer;
   transition: transform 100ms ease-in;
 `
@@ -32,7 +32,7 @@ export const ReminderIconTileWrapper = styled.div`
   height: 100%;
   aspect-ratio: 1;
   background: ${({ theme }) => theme.palette.simple.primary};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  box-shadow: ${({ theme }) => theme.boxShadow.primary};
 
   & > ${IconOverrideWrapper} {
     transform: rotate(20deg);

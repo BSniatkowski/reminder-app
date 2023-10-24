@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
 export const TextInputWrapper = styled.div`
   position: relative;
+  min-width: 30rem;
   width: 100%;
   padding-top: 2.4rem;
 `

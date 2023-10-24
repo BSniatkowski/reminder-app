@@ -69,7 +69,7 @@ export const DayElement = styled.div<{ $isSelected: boolean; $disabled: boolean 
           background-color: ${theme.palette.simple.disabled};
         `
       : css`
-          box-shadow: ${({ theme }) => theme.boxShadow};
+          box-shadow: ${({ theme }) => theme.boxShadow.primary};
           cursor: pointer;
 
           &:hover {

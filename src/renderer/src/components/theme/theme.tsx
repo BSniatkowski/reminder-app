@@ -29,7 +29,10 @@ const theme: DefaultTheme = {
     primary: 1,
     secondary: 0.5
   },
-  boxShadow: '2px 4px 8px 0px rgba(0, 0, 0, 0.25)'
+  boxShadow: {
+    primary: '2px 4px 8px 0px rgba(0, 0, 0, 0.25)',
+    secondary: '0 0 8px 0px rgba(0, 0, 0, 0.25)'
+  }
 }
 
 const ThemeProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => (

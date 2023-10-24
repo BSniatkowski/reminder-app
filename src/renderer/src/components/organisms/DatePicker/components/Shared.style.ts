@@ -11,6 +11,6 @@ export const DateWidgetWrapper = styled.div<IDateWidgetWrapperProps>`
   padding: 1rem;
   background-color: ${({ theme }) => theme.palette.simple.primary};
   border-radius: ${({ theme }) => theme.borderRadius.secondary}rem;
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  box-shadow: ${({ theme }) => theme.boxShadow.primary};
   color: ${({ theme }) => theme.palette.simple.text};
 `
