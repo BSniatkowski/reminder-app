@@ -15,7 +15,7 @@ export const PopupWrapper = styled.div<IPopupWrapperProps>`
   padding: 1rem;
   border-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   background-color: ${({ theme }) => theme.palette.simple.white};
-  animation: 300ms ${fadeIn} linear;
+  animation: 200ms ${fadeIn} linear;
   gap: 1rem;
 
   ${({ $isSmall, $withVideo }) =>
