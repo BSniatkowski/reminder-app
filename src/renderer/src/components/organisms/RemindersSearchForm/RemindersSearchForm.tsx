@@ -9,35 +9,44 @@ import * as S from './RemindersSearchForm.style'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
 import { EIconSizes, EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { EReminderSections } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
+import { useIntl } from 'react-intl'
+import messages from './RemindersSearchForm.messages'
 
 export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
   isFormVisible,
   toggleFormVisibility,
   onSubmit
 }) => {
+  const intl = useIntl()
+
   const fields: Array<IFieldItem<IRemindersSearchFormValues>> = [
-    { name: 'search', label: 'Search', type: EFieldType.text, defaultValue: '' },
+    {
+      name: 'search',
+      label: intl.formatMessage(messages.searchLabel),
+      type: EFieldType.text,
+      defaultValue: ''
+    },
     {
       name: EReminderSections.archive,
-      label: 'Archive reminders',
+      label: intl.formatMessage(messages.archiveLabel),
       type: EFieldType.checkbox,
       defaultValue: false
     },
     {
       name: EReminderSections.today,
-      label: 'Today reminders',
+      label: intl.formatMessage(messages.todayLabel),
       type: EFieldType.checkbox,
       defaultValue: true
     },
     {
       name: EReminderSections.tomorrow,
-      label: 'Tomorrow reminders',
+      label: intl.formatMessage(messages.tomorrowLabel),
       type: EFieldType.checkbox,
       defaultValue: true
     },
     {
       name: EReminderSections.future,
-      label: 'Future reminders',
+      label: intl.formatMessage(messages.futureLabel),
       type: EFieldType.checkbox,
       defaultValue: true
     }

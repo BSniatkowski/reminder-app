@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { ELanguages } from './settingsSlice.types'
-
-export interface ISettingsState {
-  locale: ELanguages
-}
+import { ELocales, ISettingsState, TSetLocaleAction } from './settingsSlice.types'
 
 const initialState: ISettingsState = {
-  locale: ELanguages.en
+  locale: ELocales.en
 }
 
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
-  reducers: {}
+  reducers: {
+    setLocale: (state, action: TSetLocaleAction) => {
+      state.locale = action.payload
+    }
+  }
 })
 
-// export const {} = remindersSlice.actions
+export const { setLocale } = settingsSlice.actions
 
 export const settingsReducer = settingsSlice.reducer

@@ -5,13 +5,16 @@ import { store } from './store/store'
 import ThemeProvider from './components/theme/theme'
 import { router } from './router/router'
 import { RouterProvider } from 'react-router-dom'
+import { IntlProvider } from './providers/IntlProvider/IntlProvider'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <StoreProvider store={store}>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <IntlProvider>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </IntlProvider>
     </StoreProvider>
   </React.StrictMode>
 )

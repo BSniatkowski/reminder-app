@@ -7,6 +7,8 @@ import { EIconSizes, EIconVariants } from '@renderer/components/atoms/Icon/Icon.
 import { Text } from '@renderer/components/atoms/Text/Text'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
+import { FormattedMessage } from 'react-intl'
+import messages from './Main.messages'
 
 export const Main: React.FC<IMainProps> = ({ reminders, onReminderClick, onAddReminderClick }) => {
   return (
@@ -20,11 +22,17 @@ export const Main: React.FC<IMainProps> = ({ reminders, onReminderClick, onAddRe
       ) : (
         <S.EncourageWrapper>
           <S.EncourageTop>
-            <Text as={ETextTags.h2}>There are no reminders to show</Text>
+            <Text as={ETextTags.h2}>
+              <FormattedMessage {...messages.noReminders} />
+            </Text>
             <Icon size={EIconSizes.large} variant={EIconVariants.NOTIFICATION} />
           </S.EncourageTop>
           <Button
-            text={<Text as={ETextTags.h2}>Remind me about...</Text>}
+            text={
+              <Text as={ETextTags.h2}>
+                <FormattedMessage {...messages.noRemindersButton} />
+              </Text>
+            }
             size={EButtonSizes.big}
             iconVariant={EIconVariants.ADD}
             onClick={onAddReminderClick}
