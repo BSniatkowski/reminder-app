@@ -12,17 +12,21 @@ export const RemindersSearchFormModal = styled.div<IRemindersSearchFormModalProp
   background: ${({ theme }) => theme.palette.simple.secondary};
   border-top-left-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   border-top-right-radius: ${({ theme }) => theme.borderRadius.primary}rem;
-  box-shadow: ${({ theme }) => theme.boxShadow.secondary};
-  transition: transform 300ms ease-out;
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out;
   transform: translateY(${({ $isFormVisible }) => ($isFormVisible ? 0 : 'calc(100%)')});
+  box-shadow: ${({ theme, $isFormVisible }) =>
+    $isFormVisible ? theme.boxShadow.secondary : 'none'};
 `
 
 export const ModalHide = styled.div`
   position: fixed;
   z-index: 9999;
   bottom: 0;
+  left: 0;
   height: 1rem;
-  width: calc(100% - 14rem - 4rem - 1rem);
+  width: 100%;
   background: ${({ theme }) => theme.palette.background.primary};
 `
 
