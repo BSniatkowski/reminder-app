@@ -45,6 +45,15 @@ export const ButtonWrapper = styled.div<IButtonWrapperProps>`
   ${({ $variant = EButtonVariants.normal }) =>
     ({
       [EButtonVariants.normal]: css``,
+      [EButtonVariants.transparent]: css`
+        background: none;
+        box-shadow: none;
+        width: fit-content;
+
+        &:hover {
+          background: none;
+        }
+      `,
       [EButtonVariants.remove]: css`
         background-color: ${({ theme }) => theme.palette.simple.delete};
       `

@@ -24,7 +24,7 @@ export const FormInsideWrapper = styled.div<IFormInsideWrapperProps>`
         align-items: flex-start;
         flex-direction: column;
         gap: 2rem;
-        height: calc(100% - 10rem);
+        height: calc(100% - 10rem - 5.4rem);
       `,
       [EStyleVariants.search]: css`
         align-items: center;
