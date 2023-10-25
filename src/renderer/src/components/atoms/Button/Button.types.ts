@@ -2,6 +2,7 @@ import { EIconVariants } from '../Icon/Icon.types'
 
 export enum EButtonVariants {
   normal,
+  transparent,
   remove
 }
 

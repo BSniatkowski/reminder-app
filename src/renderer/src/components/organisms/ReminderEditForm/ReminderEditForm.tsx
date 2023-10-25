@@ -4,9 +4,13 @@ import { IReminderEditFormProps } from './ReminderEditForm.types'
 import { Form } from '../Form/Form'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import * as S from './ReminderEditForm.style'
+import { Button } from '@renderer/components/atoms/Button/Button'
+import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
+import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 
 export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
   isFormVisible,
+  hideForm,
   reminder,
   onDelete,
   onSubmit
@@ -62,6 +66,12 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
     <>
       {isFormVisible && <S.ReminderEditFormModalOverlay />}
       <S.ReminderEditFormModal $isFormVisible={isFormVisible}>
+        <Button
+          variant={EButtonVariants.transparent}
+          size={EButtonSizes.small}
+          iconVariant={EIconVariants.CLOSE}
+          onClick={hideForm}
+        />
         {isFormVisible && (
           <Form<IReminderItem>
             fields={fields}

@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 import { IReminderEditFormModalProps } from './ReminderEditForm.types'
+import { ButtonWrapper } from '@renderer/components/atoms/Button/Button.style'
 
 const fadeIn = keyframes`
 0% {
@@ -20,6 +21,11 @@ export const ReminderEditFormModal = styled.div<IReminderEditFormModalProps>`
   transition: right 200ms ease-out;
   border-top-left-radius: ${({ theme }) => theme.borderRadius.primary}rem;
   border-bottom-left-radius: ${({ theme }) => theme.borderRadius.primary}rem;
+
+  & > ${ButtonWrapper} {
+    margin-left: auto;
+    padding: 1rem;
+  }
 `
 export const ModalHide = styled.div`
   position: fixed;
