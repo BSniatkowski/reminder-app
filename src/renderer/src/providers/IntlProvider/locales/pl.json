@@ -1,0 +1,41 @@
+{
+  "archiveLabel": {
+    "defaultMessage": "Archiwalne przypomnienia"
+  },
+  "autoOpenLinkLabel": {
+    "defaultMessage": "Otwórz link wraz z przypomnieniem"
+  },
+  "autoPlayLabel": {
+    "defaultMessage": "Odtwórz załączony film z youtube"
+  },
+  "dateLabel": {
+    "defaultMessage": "Data"
+  },
+  "descriptionLabel": {
+    "defaultMessage": "Opis"
+  },
+  "futureLabel": {
+    "defaultMessage": "Przyszłe przypomnienia"
+  },
+  "linkLabel": {
+    "defaultMessage": "Link"
+  },
+  "noReminders": {
+    "defaultMessage": "Brak przypomnień do pokazania"
+  },
+  "noRemindersButton": {
+    "defaultMessage": "Przypomnij mi o..."
+  },
+  "searchLabel": {
+    "defaultMessage": "Szukaj"
+  },
+  "titleLabel": {
+    "defaultMessage": "Tytuł"
+  },
+  "todayLabel": {
+    "defaultMessage": "Dzisiejsze przypomnienia"
+  },
+  "tomorrowLabel": {
+    "defaultMessage": "Jutrzejsze przypomnienia"
+  }
+}

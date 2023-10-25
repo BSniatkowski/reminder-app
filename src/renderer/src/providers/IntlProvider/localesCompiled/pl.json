@@ -1,0 +1,80 @@
+{
+  "archiveLabel": [
+    {
+      "type": 0,
+      "value": "Archiwalne przypomnienia"
+    }
+  ],
+  "autoOpenLinkLabel": [
+    {
+      "type": 0,
+      "value": "Otwórz link wraz z przypomnieniem"
+    }
+  ],
+  "autoPlayLabel": [
+    {
+      "type": 0,
+      "value": "Odtwórz załączony film z youtube"
+    }
+  ],
+  "dateLabel": [
+    {
+      "type": 0,
+      "value": "Data"
+    }
+  ],
+  "descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Opis"
+    }
+  ],
+  "futureLabel": [
+    {
+      "type": 0,
+      "value": "Przyszłe przypomnienia"
+    }
+  ],
+  "linkLabel": [
+    {
+      "type": 0,
+      "value": "Link"
+    }
+  ],
+  "noReminders": [
+    {
+      "type": 0,
+      "value": "Brak przypomnień do pokazania"
+    }
+  ],
+  "noRemindersButton": [
+    {
+      "type": 0,
+      "value": "Przypomnij mi o..."
+    }
+  ],
+  "searchLabel": [
+    {
+      "type": 0,
+      "value": "Szukaj"
+    }
+  ],
+  "titleLabel": [
+    {
+      "type": 0,
+      "value": "Tytuł"
+    }
+  ],
+  "todayLabel": [
+    {
+      "type": 0,
+      "value": "Dzisiejsze przypomnienia"
+    }
+  ],
+  "tomorrowLabel": [
+    {
+      "type": 0,
+      "value": "Jutrzejsze przypomnienia"
+    }
+  ]
+}

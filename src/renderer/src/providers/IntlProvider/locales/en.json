@@ -1,0 +1,41 @@
+{
+  "archiveLabel": {
+    "defaultMessage": "Archive reminders"
+  },
+  "autoOpenLinkLabel": {
+    "defaultMessage": "Open link with reminder show"
+  },
+  "autoPlayLabel": {
+    "defaultMessage": "Autoplay attached youtube video"
+  },
+  "dateLabel": {
+    "defaultMessage": "Date"
+  },
+  "descriptionLabel": {
+    "defaultMessage": "Description"
+  },
+  "futureLabel": {
+    "defaultMessage": "Future reminders"
+  },
+  "linkLabel": {
+    "defaultMessage": "Link"
+  },
+  "noReminders": {
+    "defaultMessage": "There are no reminders to show"
+  },
+  "noRemindersButton": {
+    "defaultMessage": "Remind me about..."
+  },
+  "searchLabel": {
+    "defaultMessage": "Search"
+  },
+  "titleLabel": {
+    "defaultMessage": "Title"
+  },
+  "todayLabel": {
+    "defaultMessage": "Today reminders"
+  },
+  "tomorrowLabel": {
+    "defaultMessage": "Tomorrow reminders"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "archiveLabel": [
+    {
+      "type": 0,
+      "value": "Archive reminders"
+    }
+  ],
+  "autoOpenLinkLabel": [
+    {
+      "type": 0,
+      "value": "Open link with reminder show"
+    }
+  ],
+  "autoPlayLabel": [
+    {
+      "type": 0,
+      "value": "Autoplay attached youtube video"
+    }
+  ],
+  "dateLabel": [
+    {
+      "type": 0,
+      "value": "Date"
+    }
+  ],
+  "descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "futureLabel": [
+    {
+      "type": 0,
+      "value": "Future reminders"
+    }
+  ],
+  "linkLabel": [
+    {
+      "type": 0,
+      "value": "Link"
+    }
+  ],
+  "noReminders": [
+    {
+      "type": 0,
+      "value": "There are no reminders to show"
+    }
+  ],
+  "noRemindersButton": [
+    {
+      "type": 0,
+      "value": "Remind me about..."
+    }
+  ],
+  "searchLabel": [
+    {
+      "type": 0,
+      "value": "Search"
+    }
+  ],
+  "titleLabel": [
+    {
+      "type": 0,
+      "value": "Title"
+    }
+  ],
+  "todayLabel": [
+    {
+      "type": 0,
+      "value": "Today reminders"
+    }
+  ],
+  "tomorrowLabel": [
+    {
+      "type": 0,
+      "value": "Tomorrow reminders"
+    }
+  ]
+}

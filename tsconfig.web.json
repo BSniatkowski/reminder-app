@@ -8,9 +8,12 @@
     "src/renderer/src/components/styled-components.d.ts",
     "src/globalTypes/*.ts", 
     "src/utils/*.ts",
-    "src/enums/*.ts"
+    "src/enums/*.ts",
+    "src/renderer/**/*.json"
   ],
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "noImplicitAny": true,
     "composite": true,
     "jsx": "react-jsx",

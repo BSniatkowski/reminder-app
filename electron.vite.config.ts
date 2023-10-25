@@ -26,6 +26,22 @@ export default defineConfig({
         '@enums': resolve('src/enums')
       }
     },
-    plugins: [react(), eslint(), svgr()]
+    plugins: [
+      react({
+        babel: {
+          plugins: [
+            [
+              'formatjs',
+              {
+                idInterpolationPattern: '[sha512:contenthash:base64:6]',
+                ast: true
+              }
+            ]
+          ]
+        }
+      }),
+      eslint(),
+      svgr()
+    ]
   }
 })

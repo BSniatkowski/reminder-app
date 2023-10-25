@@ -7,6 +7,8 @@ import * as S from './ReminderEditForm.style'
 import { Button } from '@renderer/components/atoms/Button/Button'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
+import { useIntl } from 'react-intl'
+import messages from './ReminderEditForm.messages'
 
 export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
   isFormVisible,
@@ -15,6 +17,8 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
   onDelete,
   onSubmit
 }) => {
+  const intl = useIntl()
+
   const { title, description, link, autoOpenLink, autoPlay, date } = reminder || {
     title: '',
     description: '',
@@ -25,17 +29,22 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
   }
 
   const fields: Array<IFieldItem<IReminderItem>> = [
-    { name: 'title', label: 'Title', type: EFieldType.text, defaultValue: title },
+    {
+      name: 'title',
+      label: intl.formatMessage(messages.titleLabel),
+      type: EFieldType.text,
+      defaultValue: title
+    },
     {
       name: 'description',
-      label: 'Description',
+      label: intl.formatMessage(messages.descriptionLabel),
       type: EFieldType.textarea,
       defaultValue: description
     },
     { name: 'link', label: 'Link', type: EFieldType.text, defaultValue: link },
     {
       name: 'autoOpenLink',
-      label: 'Open link at reminder show',
+      label: intl.formatMessage(messages.autoOpenLinkLabel),
       visibilityConditions: [
         { fieldName: 'link', condtion: (value) => typeof value === 'string' && value?.length > 0 }
       ],
@@ -44,7 +53,7 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
     },
     {
       name: 'autoPlay',
-      label: 'Autoplay video',
+      label: intl.formatMessage(messages.autoPlayLabel),
       visibilityConditions: [
         {
           fieldName: 'link',
@@ -59,7 +68,12 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
       type: EFieldType.checkbox,
       defaultValue: autoPlay
     },
-    { name: 'date', label: 'Date', type: EFieldType.date, defaultValue: date }
+    {
+      name: 'date',
+      label: intl.formatMessage(messages.dateLabel),
+      type: EFieldType.date,
+      defaultValue: date
+    }
   ]
 
   return (
