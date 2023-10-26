@@ -58,14 +58,12 @@ export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
   }, [fields, watchAllFields])
 
   useEffect(() => {
-    console.log('rerender', styleVariant)
-
     if (!submitOnChange) return
 
     const subscription = watch(() => handleSubmit(onSubmit)())
 
     return () => subscription.unsubscribe()
-  }, [handleSubmit, onSubmit, styleVariant, submitOnChange, watch])
+  }, [handleSubmit, onSubmit, submitOnChange, watch])
 
   return (
     <FormProvider
