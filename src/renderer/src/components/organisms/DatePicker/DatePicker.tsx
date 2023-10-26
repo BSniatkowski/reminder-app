@@ -11,11 +11,12 @@ import { Clock } from './components/Clock/Clock'
 import { EButtonSizes } from '@renderer/components/atoms/Button/Button.types'
 
 export const DatePicker = <T extends FieldValues>({
+  name,
+  control,
   label,
-  isVisible,
-  ...props
+  isVisible
 }: IDatePickerProps<T>) => {
-  const { field } = useController(props)
+  const { field } = useController({ name, control })
 
   const [isCalendarVisible, setIsCalendarVisible] = useState(false)
   const [isClockVisible, setIsClockVisible] = useState(false)

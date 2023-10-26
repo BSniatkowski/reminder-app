@@ -4,11 +4,12 @@ import { FieldValues, useController } from 'react-hook-form'
 import { ITextareaProps } from './Textarea.types'
 
 export const Textarea = <T extends FieldValues>({
+  name,
+  control,
   label,
-  isVisible,
-  ...props
+  isVisible
 }: ITextareaProps<T>) => {
-  const { field } = useController(props)
+  const { field } = useController({ name, control })
 
   return (
     isVisible && (

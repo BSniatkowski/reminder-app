@@ -14,6 +14,7 @@ import {
 } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
 import { IReminderItemBody } from '@globalTypes/reminders.types'
 import { RemindersSearchForm } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm'
+import { IRemindersSearchFormValues } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm.types'
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch()
@@ -107,6 +108,20 @@ export const MainPage: React.FC = () => {
     [actualReminderId, dispatch]
   )
 
+  const onSearchSubmit = useCallback<(formValues: IRemindersSearchFormValues) => void>(
+    (formValues) => {
+      const { search, ...props } = formValues
+
+      const filters = Object.entries(props)
+        .map(([filter, isActive]) => isActive && filter)
+        .filter((filter) => filter) as Array<EReminderSections>
+
+      setSearchPhrase(search)
+      setActualFilters(filters)
+    },
+    []
+  )
+
   useEffect(() => {
     const dateUpdateInterval = setInterval(() => setActualDate(new Date()), 500)
 
@@ -133,16 +148,7 @@ export const MainPage: React.FC = () => {
           setIsSearchFormVisible(!isSearchFormVisible)
           setIsEditFormVisible(false)
         }}
-        onSubmit={(values) => {
-          const { search, ...props } = values
-
-          const filters = Object.entries(props)
-            .map(([filter, isActive]) => isActive && filter)
-            .filter((filter) => filter) as Array<EReminderSections>
-
-          setSearchPhrase(search)
-          setActualFilters(filters)
-        }}
+        onSubmit={onSearchSubmit}
       />
     </>
   )
