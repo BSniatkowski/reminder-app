@@ -5,11 +5,12 @@ import { Label } from '@renderer/components/atoms/Label/Label'
 import { useCallback } from 'react'
 
 export const Checkbox = <T extends FieldValues>({
+  name,
+  control,
   label,
-  isVisible,
-  ...props
+  isVisible
 }: ICheckboxProps<T>) => {
-  const { field } = useController(props)
+  const { field } = useController({ name, control })
 
   const { setValue } = useFormContext()
 
