@@ -1,5 +1,5 @@
 import { IReminderItem } from '@globalTypes/reminders.types'
-import { IFieldItem, EFieldType } from '@renderer/components/organisms/Form/Form.types'
+import { IFieldItem, EFieldTypes } from '@renderer/components/organisms/Form/Form.types'
 import { IReminderEditFormProps } from './ReminderEditForm.types'
 import { Form } from '../Form/Form'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
@@ -32,23 +32,23 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
     {
       name: 'title',
       label: intl.formatMessage(messages.titleLabel),
-      type: EFieldType.text,
+      type: EFieldTypes.text,
       defaultValue: title
     },
     {
       name: 'description',
       label: intl.formatMessage(messages.descriptionLabel),
-      type: EFieldType.textarea,
+      type: EFieldTypes.textarea,
       defaultValue: description
     },
-    { name: 'link', label: 'Link', type: EFieldType.text, defaultValue: link },
+    { name: 'link', label: 'Link', type: EFieldTypes.text, defaultValue: link },
     {
       name: 'autoOpenLink',
       label: intl.formatMessage(messages.autoOpenLinkLabel),
       visibilityConditions: [
         { fieldName: 'link', condtion: (value) => typeof value === 'string' && value?.length > 0 }
       ],
-      type: EFieldType.checkbox,
+      type: EFieldTypes.checkbox,
       defaultValue: autoOpenLink
     },
     {
@@ -65,13 +65,13 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
             )
         }
       ],
-      type: EFieldType.checkbox,
+      type: EFieldTypes.checkbox,
       defaultValue: autoPlay
     },
     {
       name: 'date',
       label: intl.formatMessage(messages.dateLabel),
-      type: EFieldType.date,
+      type: EFieldTypes.date,
       defaultValue: date
     }
   ]

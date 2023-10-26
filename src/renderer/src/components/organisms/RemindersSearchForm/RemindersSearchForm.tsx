@@ -1,6 +1,6 @@
 import {
   IFieldItem,
-  EFieldType,
+  EFieldTypes,
   EStyleVariants
 } from '@renderer/components/organisms/Form/Form.types'
 import { IRemindersSearchFormProps, IRemindersSearchFormValues } from './RemindersSearchForm.types'
@@ -23,31 +23,42 @@ export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
     {
       name: 'search',
       label: intl.formatMessage(messages.searchLabel),
-      type: EFieldType.text,
+      type: EFieldTypes.text,
+      defaultValue: ''
+    },
+    {
+      name: 'sortBy',
+      label: intl.formatMessage(messages.sortByLabel),
+      type: EFieldTypes.select,
+      options: [
+        { id: 'newest', label: intl.formatMessage(messages.sortByNewestLabel) },
+        { id: 'oldest', label: intl.formatMessage(messages.sortByOldestLabel) },
+        { id: 'alphabethical', label: intl.formatMessage(messages.sortByTitleLabel) }
+      ],
       defaultValue: ''
     },
     {
       name: EReminderSections.archive,
       label: intl.formatMessage(messages.archiveLabel),
-      type: EFieldType.checkbox,
+      type: EFieldTypes.checkbox,
       defaultValue: false
     },
     {
       name: EReminderSections.today,
       label: intl.formatMessage(messages.todayLabel),
-      type: EFieldType.checkbox,
+      type: EFieldTypes.checkbox,
       defaultValue: true
     },
     {
       name: EReminderSections.tomorrow,
       label: intl.formatMessage(messages.tomorrowLabel),
-      type: EFieldType.checkbox,
+      type: EFieldTypes.checkbox,
       defaultValue: true
     },
     {
       name: EReminderSections.future,
       label: intl.formatMessage(messages.futureLabel),
-      type: EFieldType.checkbox,
+      type: EFieldTypes.checkbox,
       defaultValue: true
     }
   ]

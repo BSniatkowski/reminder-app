@@ -3,19 +3,13 @@ import * as S from './Form.style'
 import { TextInput } from '@renderer/components/molecules/TextInput/TextInput'
 import { Textarea } from '@renderer/components/molecules/Textarea/Textarea'
 import { Button } from '@renderer/components/atoms/Button/Button'
-import { EFieldType, EStyleVariants, IFormProps } from './Form.types'
+import { EFieldTypes, EStyleVariants, IFormProps } from './Form.types'
 import { DatePicker } from '@renderer/components/organisms/DatePicker/DatePicker'
 import { Checkbox } from '@renderer/components/molecules/Checkbox/Checkbox'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { useEffect, useMemo } from 'react'
-
-const fieldsComponentsMap = {
-  [EFieldType.text]: TextInput,
-  [EFieldType.textarea]: Textarea,
-  [EFieldType.checkbox]: Checkbox,
-  [EFieldType.date]: DatePicker
-}
+import { SelectInput } from '../SelectInput/SelectInput'
 
 export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
   styleVariant = EStyleVariants.edit,
@@ -75,18 +69,62 @@ export const Form = <FormValues extends FieldValues = Record<string, unknown>>({
     >
       <S.FormWrapper>
         <S.FormInsideWrapper $styleVariant={styleVariant}>
-          {fields.map(({ name, type, label }) => {
-            const FieldComponent = fieldsComponentsMap[type] ?? TextInput
-
-            return (
-              <FieldComponent<FormValues>
-                key={name}
-                name={name}
-                label={label}
-                control={control}
-                isVisible={visibleFields.includes(name)}
-              />
-            )
+          {fields.map((field) => {
+            switch (field.type) {
+              case EFieldTypes.text:
+                return (
+                  <TextInput<FormValues>
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    control={control}
+                    isVisible={visibleFields.includes(field.name)}
+                  />
+                )
+              case EFieldTypes.textarea:
+                return (
+                  <Textarea<FormValues>
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    control={control}
+                    isVisible={visibleFields.includes(field.name)}
+                  />
+                )
+              case EFieldTypes.select:
+                return (
+                  <SelectInput<FormValues>
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    options={field.options}
+                    control={control}
+                    isVisible={visibleFields.includes(field.name)}
+                  />
+                )
+              case EFieldTypes.checkbox:
+                return (
+                  <Checkbox<FormValues>
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    control={control}
+                    isVisible={visibleFields.includes(field.name)}
+                  />
+                )
+              case EFieldTypes.date:
+                return (
+                  <DatePicker<FormValues>
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    control={control}
+                    isVisible={visibleFields.includes(field.name)}
+                  />
+                )
+              default:
+                return
+            }
           })}
         </S.FormInsideWrapper>
         {!submitOnChange && (

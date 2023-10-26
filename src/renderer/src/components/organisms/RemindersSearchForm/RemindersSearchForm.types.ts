@@ -4,6 +4,7 @@ type TSectionsKeys = keyof typeof EReminderSections
 
 export interface IRemindersSearchFormValues extends Record<TSectionsKeys, boolean> {
   search: string
+  sortBy: string
 }
 
 export interface IRemindersSearchFormProps {
