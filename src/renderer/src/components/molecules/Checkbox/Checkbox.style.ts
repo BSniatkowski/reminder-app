@@ -5,6 +5,7 @@ import { SLabel } from '@renderer/components/atoms/Label/Label.style'
 export const CheckboxTile = styled.div`
   position: relative;
   margin: calc(var(--size) * 0.2);
+  margin-left: 0;
   height: calc(var(--size) * 0.8);
   width: calc(var(--size) * 0.8);
   border: solid 2px ${({ theme }) => theme.palette.simple.text};
@@ -27,7 +28,7 @@ export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
   cursor: pointer;
   display: flex;
   transition: filter 100ms ease-in;
-  padding: 2.4rem 0.4rem 0.4rem 0.4rem;
+  padding: 2.4rem 0.4rem 0.4rem 0;
   width: 100%;
   user-select: none;
   --size: 2rem;

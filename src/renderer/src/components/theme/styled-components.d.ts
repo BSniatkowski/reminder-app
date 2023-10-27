@@ -9,6 +9,7 @@ declare module 'styled-components' {
         disabled: string
         hover: string
         text: string
+        textDark: string
         delete: string
         blue: string
         white: string

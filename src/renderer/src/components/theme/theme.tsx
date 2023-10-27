@@ -9,6 +9,7 @@ const theme: DefaultTheme = {
       disabled: '#9ECAEA',
       hover: '#9CC1DC',
       text: '#E3E3E3',
+      textDark: '#6C6C6C',
       delete: '#ED574E',
       blue: '#24B0FF',
       white: '#fff',

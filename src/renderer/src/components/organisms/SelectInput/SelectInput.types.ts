@@ -6,3 +6,7 @@ export interface ISelectInputProps<T extends FieldValues>
     IBasicFieldProps {
   options: Array<{ id: string; label: string }>
 }
+
+export interface ISelectedItemProps {
+  $isCollapsed: boolean
+}

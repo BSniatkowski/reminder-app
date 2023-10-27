@@ -3,6 +3,7 @@ import * as S from './SelectInput.style'
 import { ISelectInputProps } from './SelectInput.types'
 import { Label } from '@renderer/components/atoms/Label/Label'
 import { useCallback, useMemo, useState } from 'react'
+import { VisibilityChecker } from '@renderer/components/atoms/VisibilityChecker/VisibilityChecker'
 
 export const SelectInput = <T extends FieldValues>({
   name,
@@ -29,18 +30,24 @@ export const SelectInput = <T extends FieldValues>({
     [field.name, setValue]
   )
 
+  const toggleIsCollapsed = useCallback(() => setIsCollapsed(!isCollapsed), [isCollapsed])
+
   return (
     isVisible && (
       <S.SelectInputWrapper>
         {label && <Label asPlaceholder={!field.value} label={label} />}
-        <S.SelectedItem onClick={() => setIsCollapsed(false)}>{selectedItemLabel}</S.SelectedItem>
-        <S.Options $isCollapsed={isCollapsed}>
-          {options.map(({ id, label }) => (
-            <S.OptionItem onClick={() => onOptionItemClick(id)} key={id}>
-              {label}
-            </S.OptionItem>
-          ))}
-        </S.Options>
+        <S.SelectedItem $isCollapsed={isCollapsed} onClick={toggleIsCollapsed}>
+          {selectedItemLabel}
+        </S.SelectedItem>
+        <VisibilityChecker>
+          <S.Options $isCollapsed={isCollapsed} onMouseLeave={() => setIsCollapsed(true)}>
+            {options.map(({ id, label }) => (
+              <S.OptionItem onClick={() => onOptionItemClick(id as PathValue<T, Path<T>>)} key={id}>
+                {label}
+              </S.OptionItem>
+            ))}
+          </S.Options>
+        </VisibilityChecker>
       </S.SelectInputWrapper>
     )
   )
