@@ -3,7 +3,11 @@ import {
   EFieldTypes,
   EStyleVariants
 } from '@renderer/components/organisms/Form/Form.types'
-import { IRemindersSearchFormProps, IRemindersSearchFormValues } from './RemindersSearchForm.types'
+import {
+  ESortBy,
+  IRemindersSearchFormProps,
+  IRemindersSearchFormValues
+} from './RemindersSearchForm.types'
 import { Form } from '../Form/Form'
 import * as S from './RemindersSearchForm.style'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
@@ -31,11 +35,11 @@ export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
       label: intl.formatMessage(messages.sortByLabel),
       type: EFieldTypes.select,
       options: [
-        { id: 'newest', label: intl.formatMessage(messages.sortByNewestLabel) },
-        { id: 'oldest', label: intl.formatMessage(messages.sortByOldestLabel) },
-        { id: 'alphabethical', label: intl.formatMessage(messages.sortByTitleLabel) }
+        { id: ESortBy.alphabetically, label: intl.formatMessage(messages.sortByTitleLabel) },
+        { id: ESortBy.closest, label: intl.formatMessage(messages.sortByClosestLabel) },
+        { id: ESortBy.furthest, label: intl.formatMessage(messages.sortByFurthestLabel) }
       ],
-      defaultValue: ''
+      defaultValue: ESortBy.alphabetically
     },
     {
       name: EReminderSections.archive,

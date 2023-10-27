@@ -2,9 +2,15 @@ import { EReminderSections } from '@renderer/components/pages/MainPage.tsx/MainP
 
 type TSectionsKeys = keyof typeof EReminderSections
 
+export enum ESortBy {
+  alphabetically = 'alphabetically',
+  closest = 'closest',
+  furthest = 'furthest'
+}
+
 export interface IRemindersSearchFormValues extends Record<TSectionsKeys, boolean> {
   search: string
-  sortBy: string
+  sortBy: ESortBy
 }
 
 export interface IRemindersSearchFormProps {

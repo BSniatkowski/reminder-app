@@ -20,11 +20,11 @@ export interface IBasicFieldProps {
 }
 
 export type IFieldItem<FormValues extends FieldValues> =
-  | (ITextInputProps<FormValues> & { type: EFieldTypes.text })
-  | (ITextareaProps<FormValues> & { type: EFieldTypes.textarea })
-  | (ICheckboxProps<FormValues> & { type: EFieldTypes.checkbox })
-  | (IDatePickerProps<FormValues> & { type: EFieldTypes.date })
-  | (ISelectInputProps<FormValues> & { type: EFieldTypes.select })
+  | (ITextInputProps<FormValues> & { type: EFieldTypes.text; defaultValue: string })
+  | (ITextareaProps<FormValues> & { type: EFieldTypes.textarea; defaultValue: string })
+  | (ICheckboxProps<FormValues> & { type: EFieldTypes.checkbox; defaultValue: boolean })
+  | (IDatePickerProps<FormValues> & { type: EFieldTypes.date; defaultValue: string })
+  | (ISelectInputProps<FormValues> & { type: EFieldTypes.select; defaultValue: string })
 
 export type TOnSubmit<FormValues extends FieldValues> = SubmitHandler<FormValues>
 

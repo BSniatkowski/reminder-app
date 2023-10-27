@@ -9,17 +9,17 @@ export default defineMessages({
     id: 'sortByLabel',
     defaultMessage: 'Sort By'
   },
-  sortByNewestLabel: {
-    id: 'sortByNewestLabel',
-    defaultMessage: 'From newest'
+  sortByClosestLabel: {
+    id: 'sortByClosestLabel',
+    defaultMessage: 'From the closest'
   },
-  sortByOldestLabel: {
-    id: 'sortByOldestLabel',
-    defaultMessage: 'From oldest'
+  sortByFurthestLabel: {
+    id: 'sortByFurthestLabel',
+    defaultMessage: 'From the furthest'
   },
   sortByTitleLabel: {
     id: 'sortByNameLabel',
-    defaultMessage: 'Alfphabethical by title'
+    defaultMessage: 'Alfphabetically by title'
   },
   archiveLabel: {
     id: 'archiveLabel',
