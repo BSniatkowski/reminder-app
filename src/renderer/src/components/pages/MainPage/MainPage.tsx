@@ -18,11 +18,13 @@ import {
   ESortBy,
   IRemindersSearchFormValues
 } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm.types'
+import { selectDefaultFiltersAndSort } from '@renderer/store/storeSlices/settingsSlice/settingsSlice.selectors'
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch()
 
   const reminders = useSelector(selectAllReminders)
+  const defaultFiltersAndSort = useSelector(selectDefaultFiltersAndSort)
 
   const [actualReminderId, setActualReminderId] = useState<null | string>(null)
   const [isEditFormVisible, setIsEditFormVisible] = useState(false)
@@ -51,11 +53,9 @@ export const MainPage: React.FC = () => {
     [actualDate]
   )
 
-  const [actualFilters, setActualFilters] = useState<Array<EReminderSections>>([
-    EReminderSections.today,
-    EReminderSections.tomorrow,
-    EReminderSections.future
-  ])
+  const [actualFilters, setActualFilters] = useState<Array<EReminderSections>>(
+    Object.keys(defaultFiltersAndSort) as Array<EReminderSections>
+  )
   const [searchPhrase, setSearchPhrase] = useState('')
   const [sortBy, setSortBy] = useState<string>(ESortBy.furthest)
 
@@ -161,6 +161,7 @@ export const MainPage: React.FC = () => {
         onSubmit={onSubmit}
       />
       <RemindersSearchForm
+        defaultFiltersAndSort={defaultFiltersAndSort}
         isFormVisible={isSearchFormVisible}
         toggleFormVisibility={() => {
           setIsSearchFormVisible(!isSearchFormVisible)

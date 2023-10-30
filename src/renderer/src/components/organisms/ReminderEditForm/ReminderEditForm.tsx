@@ -9,6 +9,11 @@ import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { EButtonSizes, EButtonVariants } from '@renderer/components/atoms/Button/Button.types'
 import { useIntl } from 'react-intl'
 import messages from './ReminderEditForm.messages'
+import { useSelector } from 'react-redux'
+import {
+  selectDefaultAutoOpen,
+  selectDefaultAutoPlay
+} from '@renderer/store/storeSlices/settingsSlice/settingsSlice.selectors'
 
 export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
   isFormVisible,
@@ -19,12 +24,15 @@ export const ReminderEditForm: React.FC<IReminderEditFormProps> = ({
 }) => {
   const intl = useIntl()
 
+  const defaultAutoOpen = useSelector(selectDefaultAutoOpen)
+  const defaultAutoPlay = useSelector(selectDefaultAutoPlay)
+
   const { title, description, link, autoOpenLink, autoPlay, date } = reminder || {
     title: '',
     description: '',
     link: '',
-    autoOpenLink: false,
-    autoPlay: false,
+    autoOpenLink: defaultAutoOpen,
+    autoPlay: defaultAutoPlay,
     date: twoWayDateFormat(new Date())
   }
 

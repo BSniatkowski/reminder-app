@@ -17,6 +17,7 @@ import { useIntl } from 'react-intl'
 import messages from './RemindersSearchForm.messages'
 
 export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
+  defaultFiltersAndSort,
   isFormVisible,
   toggleFormVisibility,
   onSubmit
@@ -39,31 +40,31 @@ export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
         { id: ESortBy.closest, label: intl.formatMessage(messages.sortByClosestLabel) },
         { id: ESortBy.furthest, label: intl.formatMessage(messages.sortByFurthestLabel) }
       ],
-      defaultValue: ESortBy.alphabetically
+      defaultValue: defaultFiltersAndSort.sortBy
     },
     {
       name: EReminderSections.archive,
       label: intl.formatMessage(messages.archiveLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: false
+      defaultValue: defaultFiltersAndSort[EReminderSections.archive]
     },
     {
       name: EReminderSections.today,
       label: intl.formatMessage(messages.todayLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: true
+      defaultValue: defaultFiltersAndSort[EReminderSections.today]
     },
     {
       name: EReminderSections.tomorrow,
       label: intl.formatMessage(messages.tomorrowLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: true
+      defaultValue: defaultFiltersAndSort[EReminderSections.tomorrow]
     },
     {
       name: EReminderSections.future,
       label: intl.formatMessage(messages.futureLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: true
+      defaultValue: defaultFiltersAndSort[EReminderSections.future]
     }
   ]
 

@@ -32,7 +32,7 @@ export const SettingsForm: React.FC<ISettingsFormProps> = ({ initialSettings, on
         { id: EThemes.light, label: intl.formatMessage(messages.lightThemeLabel) },
         { id: EThemes.dark, label: intl.formatMessage(messages.darkThemeLabel) }
       ],
-      defaultValue: initialSettings.theme
+      defaultValue: initialSettings.global.theme
     },
     {
       name: 'locale',
@@ -42,13 +42,13 @@ export const SettingsForm: React.FC<ISettingsFormProps> = ({ initialSettings, on
         { id: ELocales.en, label: intl.formatMessage(messages.localeENLabel) },
         { id: ELocales.pl, label: intl.formatMessage(messages.localePLLabel) }
       ],
-      defaultValue: initialSettings.locale
+      defaultValue: initialSettings.global.locale
     },
     {
       name: 'muteApp',
       label: intl.formatMessage(messages.muteAppLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings.muteApp
+      defaultValue: initialSettings.global.muteApp
     }
   ]
 
@@ -62,31 +62,31 @@ export const SettingsForm: React.FC<ISettingsFormProps> = ({ initialSettings, on
         { id: ESortBy.closest, label: intl.formatMessage(searchMessages.sortByClosestLabel) },
         { id: ESortBy.furthest, label: intl.formatMessage(searchMessages.sortByFurthestLabel) }
       ],
-      defaultValue: initialSettings.sortBy
+      defaultValue: initialSettings.dashboard.sortBy
     },
     {
       name: EReminderSections.archive,
       label: intl.formatMessage(searchMessages.archiveLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings[EReminderSections.archive]
+      defaultValue: initialSettings.dashboard[EReminderSections.archive]
     },
     {
       name: EReminderSections.today,
       label: intl.formatMessage(searchMessages.todayLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings[EReminderSections.today]
+      defaultValue: initialSettings.dashboard[EReminderSections.today]
     },
     {
       name: EReminderSections.tomorrow,
       label: intl.formatMessage(searchMessages.tomorrowLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings[EReminderSections.tomorrow]
+      defaultValue: initialSettings.dashboard[EReminderSections.tomorrow]
     },
     {
       name: EReminderSections.future,
       label: intl.formatMessage(searchMessages.futureLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings[EReminderSections.future]
+      defaultValue: initialSettings.dashboard[EReminderSections.future]
     }
   ]
 
@@ -95,13 +95,13 @@ export const SettingsForm: React.FC<ISettingsFormProps> = ({ initialSettings, on
       name: 'autoOpenLink',
       label: intl.formatMessage(reminderMessages.autoOpenLinkLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings.autoOpenLink
+      defaultValue: initialSettings.reminder.autoOpenLink
     },
     {
       name: 'autoPlay',
       label: intl.formatMessage(reminderMessages.autoPlayLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: initialSettings.autoPlay
+      defaultValue: initialSettings.reminder.autoPlay
     }
   ]
 

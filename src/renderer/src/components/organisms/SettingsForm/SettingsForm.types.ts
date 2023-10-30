@@ -32,6 +32,10 @@ export type TSettingsFormValues =
   | (IReminderSettingsFields & { part: ESettingsParts.reminder })
 
 export interface ISettingsFormProps {
-  initialSettings: IGlobalSettingsFields & IDashboardSettingsFields & IReminderSettingsFields
+  initialSettings: {
+    global: IGlobalSettingsFields
+    dashboard: IDashboardSettingsFields
+    reminder: IReminderSettingsFields
+  }
   onSubmit: (formValues: TSettingsFormValues) => void
 }
