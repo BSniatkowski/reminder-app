@@ -3,10 +3,12 @@ import { Form } from '../Form/Form'
 import { EFieldTypes, EStyleVariants, IFieldItem } from '../Form/Form.types'
 import * as S from './SettingsForm.style'
 import {
+  ESettingsParts,
   EThemes,
   IDashboardSettingsFields,
   IGlobalSettingsFields,
-  IReminderSettingsFields
+  IReminderSettingsFields,
+  ISettingsFormProps
 } from './SettingsForm.types'
 import { ETextTags } from '@renderer/components/atoms/Text/Text.types'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -17,7 +19,7 @@ import messages from './SettingsForm.messages'
 import searchMessages from '../RemindersSearchForm/RemindersSearchForm.messages'
 import reminderMessages from '../ReminderEditForm/ReminderEditForm.messages'
 
-export const SettingsForm = () => {
+export const SettingsForm: React.FC<ISettingsFormProps> = ({ initialSettings, onSubmit }) => {
   const intl = useIntl()
 
   const globalSettingsFields: Array<IFieldItem<IGlobalSettingsFields>> = [
@@ -30,7 +32,7 @@ export const SettingsForm = () => {
         { id: EThemes.light, label: intl.formatMessage(messages.lightThemeLabel) },
         { id: EThemes.dark, label: intl.formatMessage(messages.darkThemeLabel) }
       ],
-      defaultValue: EThemes.system
+      defaultValue: initialSettings.theme
     },
     {
       name: 'locale',
@@ -40,13 +42,13 @@ export const SettingsForm = () => {
         { id: ELocales.en, label: intl.formatMessage(messages.localeENLabel) },
         { id: ELocales.pl, label: intl.formatMessage(messages.localePLLabel) }
       ],
-      defaultValue: ELocales.en
+      defaultValue: initialSettings.locale
     },
     {
       name: 'muteApp',
       label: intl.formatMessage(messages.muteAppLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: false
+      defaultValue: initialSettings.muteApp
     }
   ]
 
@@ -60,31 +62,31 @@ export const SettingsForm = () => {
         { id: ESortBy.closest, label: intl.formatMessage(searchMessages.sortByClosestLabel) },
         { id: ESortBy.furthest, label: intl.formatMessage(searchMessages.sortByFurthestLabel) }
       ],
-      defaultValue: ESortBy.alphabetically
+      defaultValue: initialSettings.sortBy
     },
     {
       name: EReminderSections.archive,
       label: intl.formatMessage(searchMessages.archiveLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: false
+      defaultValue: initialSettings[EReminderSections.archive]
     },
     {
       name: EReminderSections.today,
       label: intl.formatMessage(searchMessages.todayLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: true
+      defaultValue: initialSettings[EReminderSections.today]
     },
     {
       name: EReminderSections.tomorrow,
       label: intl.formatMessage(searchMessages.tomorrowLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: true
+      defaultValue: initialSettings[EReminderSections.tomorrow]
     },
     {
       name: EReminderSections.future,
       label: intl.formatMessage(searchMessages.futureLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: true
+      defaultValue: initialSettings[EReminderSections.future]
     }
   ]
 
@@ -93,13 +95,13 @@ export const SettingsForm = () => {
       name: 'autoOpenLink',
       label: intl.formatMessage(reminderMessages.autoOpenLinkLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: false
+      defaultValue: initialSettings.autoOpenLink
     },
     {
       name: 'autoPlay',
       label: intl.formatMessage(reminderMessages.autoPlayLabel),
       type: EFieldTypes.checkbox,
-      defaultValue: false
+      defaultValue: initialSettings.autoPlay
     }
   ]
 
@@ -116,7 +118,7 @@ export const SettingsForm = () => {
           fields={globalSettingsFields}
           submitOnChange
           onSubmit={(values) => {
-            console.log(values)
+            onSubmit({ ...values, part: ESettingsParts.global })
           }}
           styleVariant={EStyleVariants.settings}
         />
@@ -132,7 +134,7 @@ export const SettingsForm = () => {
           fields={dashboardSettingsFields}
           submitOnChange
           onSubmit={(values) => {
-            console.log(values)
+            onSubmit({ ...values, part: ESettingsParts.dashboard })
           }}
           styleVariant={EStyleVariants.settings}
         />
@@ -148,7 +150,7 @@ export const SettingsForm = () => {
           fields={reminderSettingsFields}
           submitOnChange
           onSubmit={(values) => {
-            console.log(values)
+            onSubmit({ ...values, part: ESettingsParts.reminder })
           }}
           styleVariant={EStyleVariants.settings}
         />

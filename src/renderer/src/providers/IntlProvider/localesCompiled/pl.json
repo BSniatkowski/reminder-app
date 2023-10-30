@@ -17,6 +17,18 @@
       "value": "Odtwórz załączony film z youtube"
     }
   ],
+  "darkThemeLabel": [
+    {
+      "type": 0,
+      "value": "Ciemny"
+    }
+  ],
+  "dashboardSettingsTitle": [
+    {
+      "type": 0,
+      "value": "Ustawienia panelu"
+    }
+  ],
   "dateLabel": [
     {
       "type": 0,
@@ -35,10 +47,46 @@
       "value": "Przyszłe przypomnienia"
     }
   ],
+  "globalSettingsTitle": [
+    {
+      "type": 0,
+      "value": "Globalne ustawienia"
+    }
+  ],
+  "lightThemeLabel": [
+    {
+      "type": 0,
+      "value": "Jasny"
+    }
+  ],
   "linkLabel": [
     {
       "type": 0,
       "value": "Link"
+    }
+  ],
+  "localeENLabel": [
+    {
+      "type": 0,
+      "value": "Angielski"
+    }
+  ],
+  "localeLabel": [
+    {
+      "type": 0,
+      "value": "Język interfejsu"
+    }
+  ],
+  "localePLLabel": [
+    {
+      "type": 0,
+      "value": "Polski"
+    }
+  ],
+  "muteAppLabel": [
+    {
+      "type": 0,
+      "value": "Wycisz dźwięki aplikacji"
     }
   ],
   "noReminders": [
@@ -53,10 +101,52 @@
       "value": "Przypomnij mi o..."
     }
   ],
+  "reminderSettingsTitle": [
+    {
+      "type": 0,
+      "value": "Bazowe ustawienia przypomnienia"
+    }
+  ],
   "searchLabel": [
     {
       "type": 0,
       "value": "Szukaj"
+    }
+  ],
+  "sortByClosestLabel": [
+    {
+      "type": 0,
+      "value": "Od najbliższych"
+    }
+  ],
+  "sortByFurthestLabel": [
+    {
+      "type": 0,
+      "value": "Od najdalszych"
+    }
+  ],
+  "sortByLabel": [
+    {
+      "type": 0,
+      "value": "Sortowanie"
+    }
+  ],
+  "sortByNameLabel": [
+    {
+      "type": 0,
+      "value": "Alfabetycznie pod tytule"
+    }
+  ],
+  "systemThemeLabel": [
+    {
+      "type": 0,
+      "value": "Motyw systemu"
+    }
+  ],
+  "themeLabel": [
+    {
+      "type": 0,
+      "value": "Motym aplikacji"
     }
   ],
   "titleLabel": [

@@ -8,6 +8,12 @@
   "autoPlayLabel": {
     "defaultMessage": "Autoplay attached youtube video"
   },
+  "darkThemeLabel": {
+    "defaultMessage": "Dark"
+  },
+  "dashboardSettingsTitle": {
+    "defaultMessage": "Dashboard settings"
+  },
   "dateLabel": {
     "defaultMessage": "Date"
   },
@@ -17,8 +23,26 @@
   "futureLabel": {
     "defaultMessage": "Future reminders"
   },
+  "globalSettingsTitle": {
+    "defaultMessage": "Global settings"
+  },
+  "lightThemeLabel": {
+    "defaultMessage": "Light"
+  },
   "linkLabel": {
     "defaultMessage": "Link"
+  },
+  "localeENLabel": {
+    "defaultMessage": "English"
+  },
+  "localeLabel": {
+    "defaultMessage": "Interface language"
+  },
+  "localePLLabel": {
+    "defaultMessage": "Polish"
+  },
+  "muteAppLabel": {
+    "defaultMessage": "Mute app sounds"
   },
   "noReminders": {
     "defaultMessage": "There are no reminders to show"
@@ -26,8 +50,29 @@
   "noRemindersButton": {
     "defaultMessage": "Remind me about..."
   },
+  "reminderSettingsTitle": {
+    "defaultMessage": "Default reminder item"
+  },
   "searchLabel": {
     "defaultMessage": "Search"
+  },
+  "sortByClosestLabel": {
+    "defaultMessage": "From the closest"
+  },
+  "sortByFurthestLabel": {
+    "defaultMessage": "From the furthest"
+  },
+  "sortByLabel": {
+    "defaultMessage": "Sort By"
+  },
+  "sortByNameLabel": {
+    "defaultMessage": "Alfphabetically by title"
+  },
+  "systemThemeLabel": {
+    "defaultMessage": "System theme"
+  },
+  "themeLabel": {
+    "defaultMessage": "App theme"
   },
   "titleLabel": {
     "defaultMessage": "Title"

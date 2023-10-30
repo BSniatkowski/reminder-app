@@ -19,3 +19,19 @@ export interface IReminderSettingsFields {
   autoOpenLink: boolean
   autoPlay: boolean
 }
+
+export enum ESettingsParts {
+  global,
+  dashboard,
+  reminder
+}
+
+export type TSettingsFormValues =
+  | (IGlobalSettingsFields & { part: ESettingsParts.global })
+  | (IDashboardSettingsFields & { part: ESettingsParts.dashboard })
+  | (IReminderSettingsFields & { part: ESettingsParts.reminder })
+
+export interface ISettingsFormProps {
+  initialSettings: IGlobalSettingsFields & IDashboardSettingsFields & IReminderSettingsFields
+  onSubmit: (formValues: TSettingsFormValues) => void
+}

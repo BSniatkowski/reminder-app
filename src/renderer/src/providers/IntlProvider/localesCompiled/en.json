@@ -17,6 +17,18 @@
       "value": "Autoplay attached youtube video"
     }
   ],
+  "darkThemeLabel": [
+    {
+      "type": 0,
+      "value": "Dark"
+    }
+  ],
+  "dashboardSettingsTitle": [
+    {
+      "type": 0,
+      "value": "Dashboard settings"
+    }
+  ],
   "dateLabel": [
     {
       "type": 0,
@@ -35,10 +47,46 @@
       "value": "Future reminders"
     }
   ],
+  "globalSettingsTitle": [
+    {
+      "type": 0,
+      "value": "Global settings"
+    }
+  ],
+  "lightThemeLabel": [
+    {
+      "type": 0,
+      "value": "Light"
+    }
+  ],
   "linkLabel": [
     {
       "type": 0,
       "value": "Link"
+    }
+  ],
+  "localeENLabel": [
+    {
+      "type": 0,
+      "value": "English"
+    }
+  ],
+  "localeLabel": [
+    {
+      "type": 0,
+      "value": "Interface language"
+    }
+  ],
+  "localePLLabel": [
+    {
+      "type": 0,
+      "value": "Polish"
+    }
+  ],
+  "muteAppLabel": [
+    {
+      "type": 0,
+      "value": "Mute app sounds"
     }
   ],
   "noReminders": [
@@ -53,10 +101,52 @@
       "value": "Remind me about..."
     }
   ],
+  "reminderSettingsTitle": [
+    {
+      "type": 0,
+      "value": "Default reminder item"
+    }
+  ],
   "searchLabel": [
     {
       "type": 0,
       "value": "Search"
+    }
+  ],
+  "sortByClosestLabel": [
+    {
+      "type": 0,
+      "value": "From the closest"
+    }
+  ],
+  "sortByFurthestLabel": [
+    {
+      "type": 0,
+      "value": "From the furthest"
+    }
+  ],
+  "sortByLabel": [
+    {
+      "type": 0,
+      "value": "Sort By"
+    }
+  ],
+  "sortByNameLabel": [
+    {
+      "type": 0,
+      "value": "Alfphabetically by title"
+    }
+  ],
+  "systemThemeLabel": [
+    {
+      "type": 0,
+      "value": "System theme"
+    }
+  ],
+  "themeLabel": [
+    {
+      "type": 0,
+      "value": "App theme"
     }
   ],
   "titleLabel": [
