@@ -11,7 +11,6 @@ export const typographyCSS = css`
   }
 
   h1 {
-    font-size: 3.2rem;
   }
 
   h2 {

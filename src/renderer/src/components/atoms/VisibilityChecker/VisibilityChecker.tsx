@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as S from './VisibilityChecker.style'
 
 export const VisibilityChecker: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
   const [windowSizes, setWindowSizes] = useState<{ height: number; width: number }>({
     height: 0,
     width: 0

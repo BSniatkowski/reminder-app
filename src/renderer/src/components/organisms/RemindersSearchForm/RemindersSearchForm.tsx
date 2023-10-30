@@ -12,7 +12,7 @@ import { Form } from '../Form/Form'
 import * as S from './RemindersSearchForm.style'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
 import { EIconSizes, EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
-import { EReminderSections } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
+import { EReminderSections } from '@renderer/components/pages/MainPage/MainPage.types'
 import { useIntl } from 'react-intl'
 import messages from './RemindersSearchForm.messages'
 

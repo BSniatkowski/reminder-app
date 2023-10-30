@@ -1,6 +1,6 @@
-import { EReminderSections } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
+import { EReminderSections } from '@renderer/components/pages/MainPage/MainPage.types'
 
-type TSectionsKeys = keyof typeof EReminderSections
+export type TSectionsKeys = keyof typeof EReminderSections
 
 export enum ESortBy {
   alphabetically = 'alphabetically',

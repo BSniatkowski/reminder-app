@@ -30,7 +30,8 @@ export type TOnSubmit<FormValues extends FieldValues> = SubmitHandler<FormValues
 
 export enum EStyleVariants {
   edit,
-  search
+  search,
+  settings
 }
 export interface IFormProps<FormValues extends FieldValues> {
   styleVariant?: EStyleVariants
