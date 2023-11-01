@@ -5,6 +5,22 @@ export default defineMessages({
     id: 'searchLabel',
     defaultMessage: 'Search'
   },
+  sortByLabel: {
+    id: 'sortByLabel',
+    defaultMessage: 'Sort By'
+  },
+  sortByClosestLabel: {
+    id: 'sortByClosestLabel',
+    defaultMessage: 'From the closest'
+  },
+  sortByFurthestLabel: {
+    id: 'sortByFurthestLabel',
+    defaultMessage: 'From the furthest'
+  },
+  sortByTitleLabel: {
+    id: 'sortByNameLabel',
+    defaultMessage: 'Alfphabetically by title'
+  },
   archiveLabel: {
     id: 'archiveLabel',
     defaultMessage: 'Archive reminders'

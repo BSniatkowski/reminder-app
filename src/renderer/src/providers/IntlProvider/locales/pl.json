@@ -8,6 +8,12 @@
   "autoPlayLabel": {
     "defaultMessage": "Odtwórz załączony film z youtube"
   },
+  "darkThemeLabel": {
+    "defaultMessage": "Ciemny"
+  },
+  "dashboardSettingsTitle": {
+    "defaultMessage": "Ustawienia panelu"
+  },
   "dateLabel": {
     "defaultMessage": "Data"
   },
@@ -17,8 +23,26 @@
   "futureLabel": {
     "defaultMessage": "Przyszłe przypomnienia"
   },
+  "globalSettingsTitle": {
+    "defaultMessage": "Globalne ustawienia"
+  },
+  "lightThemeLabel": {
+    "defaultMessage": "Jasny"
+  },
   "linkLabel": {
     "defaultMessage": "Link"
+  },
+  "localeENLabel": {
+    "defaultMessage": "Angielski"
+  },
+  "localeLabel": {
+    "defaultMessage": "Język interfejsu"
+  },
+  "localePLLabel": {
+    "defaultMessage": "Polski"
+  },
+  "muteAppLabel": {
+    "defaultMessage": "Wycisz dźwięki aplikacji"
   },
   "noReminders": {
     "defaultMessage": "Brak przypomnień do pokazania"
@@ -26,8 +50,29 @@
   "noRemindersButton": {
     "defaultMessage": "Przypomnij mi o..."
   },
+  "reminderSettingsTitle": {
+    "defaultMessage": "Bazowe ustawienia przypomnienia"
+  },
   "searchLabel": {
     "defaultMessage": "Szukaj"
+  },
+  "sortByClosestLabel": {
+    "defaultMessage": "Od najbliższych"
+  },
+  "sortByFurthestLabel": {
+    "defaultMessage": "Od najdalszych"
+  },
+  "sortByLabel": {
+    "defaultMessage": "Sortowanie"
+  },
+  "sortByNameLabel": {
+    "defaultMessage": "Alfabetycznie pod tytule"
+  },
+  "systemThemeLabel": {
+    "defaultMessage": "Motyw systemu"
+  },
+  "themeLabel": {
+    "defaultMessage": "Motym aplikacji"
   },
   "titleLabel": {
     "defaultMessage": "Tytuł"

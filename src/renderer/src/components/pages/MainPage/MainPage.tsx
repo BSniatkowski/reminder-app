@@ -12,14 +12,19 @@ import {
   removeReminder,
   updateReminder
 } from '@renderer/store/storeSlices/reminderSlice/remindersSlice'
-import { IReminderItemBody } from '@globalTypes/reminders.types'
+import { IReminderItem, IReminderItemBody } from '@globalTypes/reminders.types'
 import { RemindersSearchForm } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm'
-import { IRemindersSearchFormValues } from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm.types'
+import {
+  ESortBy,
+  IRemindersSearchFormValues
+} from '@renderer/components/organisms/RemindersSearchForm/RemindersSearchForm.types'
+import { selectDefaultFiltersAndSort } from '@renderer/store/storeSlices/settingsSlice/settingsSlice.selectors'
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch()
 
   const reminders = useSelector(selectAllReminders)
+  const defaultFiltersAndSort = useSelector(selectDefaultFiltersAndSort)
 
   const [actualReminderId, setActualReminderId] = useState<null | string>(null)
   const [isEditFormVisible, setIsEditFormVisible] = useState(false)
@@ -48,12 +53,27 @@ export const MainPage: React.FC = () => {
     [actualDate]
   )
 
-  const [actualFilters, setActualFilters] = useState<Array<EReminderSections>>([
-    EReminderSections.today,
-    EReminderSections.tomorrow,
-    EReminderSections.future
-  ])
+  const [actualFilters, setActualFilters] = useState<Array<EReminderSections>>(
+    Object.keys(defaultFiltersAndSort) as Array<EReminderSections>
+  )
   const [searchPhrase, setSearchPhrase] = useState('')
+  const [sortBy, setSortBy] = useState<string>(ESortBy.furthest)
+
+  const sortingFunction = useMemo(
+    () =>
+      ({
+        [ESortBy.alphabetically]: (itemA: IReminderItem, itemB: IReminderItem) => {
+          if (itemA.title < itemB.title) return -1
+          if (itemA.title > itemB.title) return 1
+          return 0
+        },
+        [ESortBy.closest]: (itemA: IReminderItem, itemB: IReminderItem) =>
+          twoWayDateFormat(itemA.date).getTime() - twoWayDateFormat(itemB.date).getTime(),
+        [ESortBy.furthest]: (itemA: IReminderItem, itemB: IReminderItem) =>
+          twoWayDateFormat(itemB.date).getTime() - twoWayDateFormat(itemA.date).getTime()
+      })[sortBy],
+    [sortBy]
+  )
 
   const formattedReminders = useMemo(
     () =>
@@ -64,16 +84,13 @@ export const MainPage: React.FC = () => {
               actualFilters.includes(assignSection(date))
             : actualFilters.includes(assignSection(date))
         )
-        .sort(
-          (itemA, itemB) =>
-            twoWayDateFormat(itemA.date).getTime() - twoWayDateFormat(itemB.date).getTime()
-        )
+        .sort(sortingFunction)
         .map(({ id, title, date }) => ({
           id,
           title: textPreview({ text: title, maxLength: 14 }),
           date
         })),
-    [actualFilters, assignSection, reminders, searchPhrase]
+    [actualFilters, assignSection, reminders, searchPhrase, sortingFunction]
   )
 
   const onAddReminderClick = useCallback(() => {
@@ -110,13 +127,14 @@ export const MainPage: React.FC = () => {
 
   const onSearchSubmit = useCallback<(formValues: IRemindersSearchFormValues) => void>(
     (formValues) => {
-      const { search, ...props } = formValues
+      const { search, sortBy, ...props } = formValues
 
       const filters = Object.entries(props)
         .map(([filter, isActive]) => isActive && filter)
         .filter((filter) => filter) as Array<EReminderSections>
 
       setSearchPhrase(search)
+      setSortBy(sortBy)
       setActualFilters(filters)
     },
     []
@@ -143,6 +161,7 @@ export const MainPage: React.FC = () => {
         onSubmit={onSubmit}
       />
       <RemindersSearchForm
+        defaultFiltersAndSort={defaultFiltersAndSort}
         isFormVisible={isSearchFormVisible}
         toggleFormVisibility={() => {
           setIsSearchFormVisible(!isSearchFormVisible)

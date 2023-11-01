@@ -1,18 +1,23 @@
 import {
   IFieldItem,
-  EFieldType,
+  EFieldTypes,
   EStyleVariants
 } from '@renderer/components/organisms/Form/Form.types'
-import { IRemindersSearchFormProps, IRemindersSearchFormValues } from './RemindersSearchForm.types'
+import {
+  ESortBy,
+  IRemindersSearchFormProps,
+  IRemindersSearchFormValues
+} from './RemindersSearchForm.types'
 import { Form } from '../Form/Form'
 import * as S from './RemindersSearchForm.style'
 import { Icon } from '@renderer/components/atoms/Icon/Icon'
 import { EIconSizes, EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
-import { EReminderSections } from '@renderer/components/pages/MainPage.tsx/MainPage.types'
+import { EReminderSections } from '@renderer/components/pages/MainPage/MainPage.types'
 import { useIntl } from 'react-intl'
 import messages from './RemindersSearchForm.messages'
 
 export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
+  defaultFiltersAndSort,
   isFormVisible,
   toggleFormVisibility,
   onSubmit
@@ -23,32 +28,43 @@ export const RemindersSearchForm: React.FC<IRemindersSearchFormProps> = ({
     {
       name: 'search',
       label: intl.formatMessage(messages.searchLabel),
-      type: EFieldType.text,
+      type: EFieldTypes.text,
       defaultValue: ''
+    },
+    {
+      name: 'sortBy',
+      label: intl.formatMessage(messages.sortByLabel),
+      type: EFieldTypes.select,
+      options: [
+        { id: ESortBy.alphabetically, label: intl.formatMessage(messages.sortByTitleLabel) },
+        { id: ESortBy.closest, label: intl.formatMessage(messages.sortByClosestLabel) },
+        { id: ESortBy.furthest, label: intl.formatMessage(messages.sortByFurthestLabel) }
+      ],
+      defaultValue: defaultFiltersAndSort.sortBy
     },
     {
       name: EReminderSections.archive,
       label: intl.formatMessage(messages.archiveLabel),
-      type: EFieldType.checkbox,
-      defaultValue: false
+      type: EFieldTypes.checkbox,
+      defaultValue: defaultFiltersAndSort[EReminderSections.archive]
     },
     {
       name: EReminderSections.today,
       label: intl.formatMessage(messages.todayLabel),
-      type: EFieldType.checkbox,
-      defaultValue: true
+      type: EFieldTypes.checkbox,
+      defaultValue: defaultFiltersAndSort[EReminderSections.today]
     },
     {
       name: EReminderSections.tomorrow,
       label: intl.formatMessage(messages.tomorrowLabel),
-      type: EFieldType.checkbox,
-      defaultValue: true
+      type: EFieldTypes.checkbox,
+      defaultValue: defaultFiltersAndSort[EReminderSections.tomorrow]
     },
     {
       name: EReminderSections.future,
       label: intl.formatMessage(messages.futureLabel),
-      type: EFieldType.checkbox,
-      defaultValue: true
+      type: EFieldTypes.checkbox,
+      defaultValue: defaultFiltersAndSort[EReminderSections.future]
     }
   ]
 

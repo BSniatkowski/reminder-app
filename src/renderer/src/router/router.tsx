@@ -1,8 +1,9 @@
 import { createHashRouter } from 'react-router-dom'
 
-import { MainPage } from '@renderer/components/pages/MainPage.tsx/MainPage'
-import { PopupPage } from '@renderer/components/pages/PopupPage.tsx/PopupPage'
+import { MainPage } from '@renderer/components/pages/MainPage/MainPage'
+import { PopupPage } from '@renderer/components/pages/PopupPage/PopupPage'
 import { Layout } from '@renderer/components/templates/Layout/Layout'
+import { SettingsPage } from '@renderer/components/pages/SettingsPage/SettingsPage'
 
 export const router = createHashRouter([
   {
@@ -14,7 +15,7 @@ export const router = createHashRouter([
       },
       {
         path: '/settings',
-        element: <div>Settings</div>
+        element: <SettingsPage />
       },
       {
         path: '/about',

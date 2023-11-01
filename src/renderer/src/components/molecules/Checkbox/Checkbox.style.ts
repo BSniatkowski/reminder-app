@@ -4,9 +4,10 @@ import { SLabel } from '@renderer/components/atoms/Label/Label.style'
 
 export const CheckboxTile = styled.div`
   position: relative;
-  margin: calc(var(--size) * 0.2);
-  height: calc(var(--size) * 0.8);
-  width: calc(var(--size) * 0.8);
+  margin: 1rem;
+  margin-left: calc(1rem - 4px);
+  height: var(--size);
+  width: var(--size);
   border: solid 2px ${({ theme }) => theme.palette.simple.text};
 
   &::after {
@@ -15,8 +16,8 @@ export const CheckboxTile = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 60%;
-    width: 60%;
+    height: calc(50% + 2px);
+    width: calc(50% + 2px);
     background-color: ${({ theme }) => theme.palette.simple.text};
     transition: opacity 100ms ease-in;
   }
@@ -26,8 +27,9 @@ export const CheckboxWrapper = styled.div<ICheckboxWrapperProps>`
   position: relative;
   cursor: pointer;
   display: flex;
+  align-items: center;
   transition: filter 100ms ease-in;
-  padding: 2.4rem 0.4rem 0.4rem 0.4rem;
+  padding: 2.4rem 0.4rem 0.4rem 0;
   width: 100%;
   user-select: none;
   --size: 2rem;

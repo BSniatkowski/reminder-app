@@ -16,7 +16,8 @@ import {
   startOfMonth,
   getDay
 } from 'date-fns'
-import locale from 'date-fns/esm/locale/en-GB'
+import localeEN from 'date-fns/esm/locale/en-GB'
+import localePL from 'date-fns/esm/locale/pl'
 import { EIconVariants } from '@renderer/components/atoms/Icon/Icon.types'
 import { EDateFormats } from '@enums/date.enums'
 import { twoWayDateFormat } from '@utils/twoWayDateFormat'
@@ -24,12 +25,22 @@ import { twoWayDateFormat } from '@utils/twoWayDateFormat'
 import * as S from './Calendar.style'
 import { IDateWidgetProps } from '../Shared.types'
 import { useFormContext } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import { selectLanguage } from '@renderer/store/storeSlices/settingsSlice/settingsSlice.selectors'
+import { ELocales } from '@renderer/store/storeSlices/settingsSlice/settingsSlice.types'
 
 export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetProps) => {
   const { setValue } = useFormContext()
 
+  const currentLanguage = useSelector(selectLanguage)
+
   const [currentDate, setCurrentDate] = useState(twoWayDateFormat(date))
   const selectedDate = useMemo(() => twoWayDateFormat(date), [date])
+
+  const locale = useMemo(
+    () => ({ [ELocales.en]: localeEN, [ELocales.pl]: localePL })[currentLanguage],
+    [currentLanguage]
+  )
 
   const isSameMonthAsSelected = useMemo(
     () => isSameMonth(currentDate, selectedDate),
@@ -52,7 +63,7 @@ export const Calendar = ({ name, date, isVisible, onMouseLeave }: IDateWidgetPro
     )
 
     return [...rest, first]
-  }, [])
+  }, [locale?.localize])
 
   const emptyDaysElements = useMemo(() => {
     const firstWeekdayOfMonth = getDay(startOfMonth(currentDate))
