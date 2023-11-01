@@ -26,6 +26,7 @@ export const Options = styled.div<{ $isCollapsed: boolean }>`
   position: absolute;
   z-index: 1;
   top: calc(100% + 0.5rem);
+  left: 0;
   display: ${({ $isCollapsed }) => ($isCollapsed ? 'none' : 'flex')};
   flex-direction: column;
   width: 100%;

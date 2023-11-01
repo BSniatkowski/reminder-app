@@ -2,8 +2,7 @@ import { FieldValues, useController, useFormContext, PathValue, Path } from 'rea
 import * as S from './SelectInput.style'
 import { ISelectInputProps } from './SelectInput.types'
 import { Label } from '@renderer/components/atoms/Label/Label'
-import { useCallback, useMemo, useState } from 'react'
-import { VisibilityChecker } from '@renderer/components/atoms/VisibilityChecker/VisibilityChecker'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 export const SelectInput = <T extends FieldValues>({
   name,
@@ -14,6 +13,8 @@ export const SelectInput = <T extends FieldValues>({
 }: ISelectInputProps<T>) => {
   const { setValue } = useFormContext<T>()
   const { field } = useController({ name, control })
+
+  const optionsRef = useRef<null | HTMLDivElement>(null)
 
   const [isCollapsed, setIsCollapsed] = useState(true)
 
@@ -32,6 +33,43 @@ export const SelectInput = <T extends FieldValues>({
 
   const toggleIsCollapsed = useCallback(() => setIsCollapsed(!isCollapsed), [isCollapsed])
 
+  const [dynamicPosition, setDynamicPosition] = useState<React.CSSProperties>({})
+
+  const checkOptionsVisibility = useCallback(() => {
+    if (!optionsRef.current) return
+
+    const { innerHeight, innerWidth } = window
+    const elementSize = {
+      height: optionsRef.current?.clientHeight,
+      width: optionsRef.current?.clientWidth
+    }
+    const elementPosition = {
+      x: optionsRef.current?.getBoundingClientRect()?.left,
+      y: optionsRef.current?.getBoundingClientRect()?.top
+    }
+
+    setDynamicPosition({
+      top:
+        elementPosition.y + elementSize.height < innerHeight
+          ? 'calc(100% + 0.5rem)'
+          : `calc(100% - (${elementPosition.y + elementSize.height - innerHeight}px + 1rem))`,
+      left:
+        elementPosition.x + elementSize.width < innerWidth
+          ? 0
+          : -(elementPosition.x + elementSize.width - innerWidth)
+    })
+  }, [])
+
+  useEffect(() => {
+    checkOptionsVisibility()
+  }, [checkOptionsVisibility, isCollapsed])
+
+  useEffect(() => {
+    window.addEventListener('resize', checkOptionsVisibility)
+
+    return () => window.removeEventListener('resize', checkOptionsVisibility)
+  }, [checkOptionsVisibility])
+
   return (
     isVisible && (
       <S.SelectInputWrapper>
@@ -39,15 +77,18 @@ export const SelectInput = <T extends FieldValues>({
         <S.SelectedItem $isCollapsed={isCollapsed} onClick={toggleIsCollapsed}>
           {selectedItemLabel}
         </S.SelectedItem>
-        <VisibilityChecker>
-          <S.Options $isCollapsed={isCollapsed} onMouseLeave={() => setIsCollapsed(true)}>
-            {options.map(({ id, label }) => (
-              <S.OptionItem onClick={() => onOptionItemClick(id as PathValue<T, Path<T>>)} key={id}>
-                {label}
-              </S.OptionItem>
-            ))}
-          </S.Options>
-        </VisibilityChecker>
+        <S.Options
+          style={dynamicPosition}
+          ref={optionsRef}
+          $isCollapsed={isCollapsed}
+          onMouseLeave={() => setIsCollapsed(true)}
+        >
+          {options.map(({ id, label }) => (
+            <S.OptionItem onClick={() => onOptionItemClick(id as PathValue<T, Path<T>>)} key={id}>
+              {label}
+            </S.OptionItem>
+          ))}
+        </S.Options>
       </S.SelectInputWrapper>
     )
   )
